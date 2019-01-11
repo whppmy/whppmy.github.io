@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[建站小结]]></title>
     <url>%2F2019%2F01%2F06%2F%E5%BB%BA%E7%AB%99%E5%B0%8F%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[纸上得来终觉㳀，绝知此事要躬行]]></content>
+    <content type="text"><![CDATA[搭建工作下载安装 node.js 和 git 默认安装即可安装成功后，右击系统菜单键会多出两项 在系统盘上，找个地方，如D:/github/ 进入到文件夹，右击，点击Git Bash Here 安装Hexo12345npm install hexo-cli -ghexo init blogcd blognpm installhexo server 意思分别为 安装hexo hexo在blog文件夹初始化，不需要手动创建 (blog可以改变，只是一个文件夹名字) 进入blog文件夹 安装扩展插件 开启服务，此时在浏览器输入http://localhost:4000/ 或者 http://127.0.0.1:4000 可以看到相关页面（ctrl+z退出） Hexo常用命令123456hexo generate (hexo g) 编译生成hexo server (hexo s) 启动服务hexo deploy (hexo d) 上传hexo new page &quot;p&quot; 生成一个p页面 hexo new &quot;p&quot; 生成一个标题为p的新文章hexo clean 清除编译生成 Hexo还有很多插件，如果下面使用过程中发现问题，可以百度查找，安装对应的插件创建一个Github代码仓库 如果没有帐号，需要注册一个 点击在网页右上角，选择新建仓库 仓库的Repository name为仓库名，格式有规定，如果你注册的github帐户名为orz，那么这里就要填orz.github.io，其它设置看介绍，创建仓库 添加SSH数据提交这里选择SSH，下面是SSH安装与Github绑定SSH安装1234567ls ~/.ssh检查是否安装了ssh，如果有id_rsa.pub，跳到下面步骤ssh-keygen -t rsa -C &quot;邮箱地址&quot;安装的时候，连续点击三次回车，分别是跳过文件夹和把密码设置为空pwd ~/.ssh查看ssh的安装路径 绑定 找到ssh/id_rsa.pub，打开，复制全部内容 打开github网站，选择SSH and GPG keys New SSH Key标题随便写，将复制的内容写到Key里面，添加 验证是否连通 输入 ssh -T git@github.com如果看到你在github注册的帐号名，即表示成功 ### 纸上得来终觉㳀，绝知此事要躬行]]></content>
       <categories>
         <category>tattle</category>
       </categories>
