@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[QT信号槽]]></title>
+    <url>%2F2019%2F01%2F15%2FQT%E4%BF%A1%E5%8F%B7%E6%A7%BD%2F</url>
+    <content type="text"><![CDATA[个人使用过的信号槽的连接方式有三种，需要产生信号的类需要在类定义中加入Q_OBJECT，并且重新执行qmake 1.QT4信号槽12345678910111213141516171819202122connect(sender,SIGNAL(),receiver,SLOT());分别为发送信号的类，对应的信号，接收信号的类，处理信号的槽关于SIGNAL和SLOT，其实是qt的两个宏定义Q_CORE_EXPORT const char *qFlagLocation(const char *method);#ifndef QT_NO_META_MACROS#ifndef QT_NO_DEBUG# define QLOCATION &quot;\0&quot; __FILE__ &quot;:&quot; QT_STRINGIFY(__LINE__)# ifndef QT_NO_KEYWORDS# define METHOD(a) qFlagLocation(&quot;0&quot;#a QLOCATION)# endif# define SLOT(a) qFlagLocation(&quot;1&quot;#a QLOCATION)# define SIGNAL(a) qFlagLocation(&quot;2&quot;#a QLOCATION)#else# ifndef QT_NO_KEYWORDS# define METHOD(a) &quot;0&quot;#a# endif# define SLOT(a) &quot;1&quot;#a# define SIGNAL(a) &quot;2&quot;#a#endif 2.QT5信号槽1234connect(sender,&amp;senderClassName::functionName,receiver,&amp;receiverClassName::function);因为会进行错误检查，而qt4不会，从上面可以得知，qt4信号槽的参数只是字符串。但是对于信号重载的处理比较麻烦，qt4只需要在signals里面使用()括上参数即可，而qt5需要进行强制转换。static_cast&lt;void (className::*)(parameter)&gt;(&amp;className::functionName) 3.信号与Lamda表达式结合1234567891011connect(sender,&amp;senderClassName::functionName,[=]( //parameter )&#123; //slove &#125;);[] 捕捉列表 [] 不捕获任何值 [var1,var2...] 在函数里，捕获var1,var2的值 [&amp;var1,&amp;var2...] 捕获var1,var2的引用对象 [=] 捕获所有外部变量的值 [&amp;] 捕获所有外部变量的引用() 参数 mutable 可以修改捕捉值，但是值本身不会发生改变&#123;&#125; 处理]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据类型转换]]></title>
+    <url>%2F2019%2F01%2F15%2F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%2F</url>
+    <content type="text"><![CDATA[在使用这一段时间中，数据类型太多了，很多都需要转换。本章为总结。 C++强制转换有四种1234static_cast&lt;&gt;()dynamic_cast&lt;&gt;()const_cast&lt;&gt;()reinterpret_cast&lt;&gt;() static_cast 基本数据的转换、空指针与指针之间的转换 目前使用于信号槽函数强制转换，基于QT5的新特性，在使用connect时，第二第四个参数产生的为&amp;className::functionName，如果函数被重载了，QT无法判断需要使用哪个信号，即使你的槽函数设置对应的参数，这里需要对第二个参数进行强制转换，如下。 static_cast&lt;void (className::*)(parameter)&gt;(&amp;className::functionName)这样可以将函数进行强制转换，解决信号定位的问题。 dynamic_cast&lt;&gt;() 类的下行转换，由基数向派生类转换 目前没有使用过 const_cast&lt;&gt;() 去掉const或者volatile属性 12const char *cstr="rts";char *str=const_cast&lt;char *&gt;(cstr); reinterpret_cast&lt;&gt;() 主要将数据从一种类型转换为另一种类型，二进制的形式重新解释 在使用windows api的时候，需要使用宽字符wcahr_t，而qt里面没有原这样的类型，但是qstring有转换成宽字符的函数，操作如下 12QString str;reinterpret_cast&lt;const wchar_t *&gt;(str.utf16()); 百度百科介绍，static_cast进行类的转换，会进行实际的偏移，而reinterpret_cast不会]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hexo建站小结]]></title>
     <url>%2F2019%2F01%2F06%2FHexo%E5%BB%BA%E7%AB%99%E5%B0%8F%E7%BB%93%2F</url>
     <content type="text"><![CDATA[搭建工作下载安装 node.js 和 git 默认安装即可安装成功后，右击系统菜单键会多出两项 在系统盘上，找个地方，如D:/github/ 进入到文件夹，右击，点击Git Bash Here 安装Hexo12345npm install hexo-cli -ghexo init blogcd blognpm installhexo server 意思分别为 安装hexo hexo在blog文件夹初始化，不需要手动创建 (blog可以改变，只是一个文件夹名字) 进入blog文件夹 安装扩展插件 开启服务，此时在浏览器输入http://localhost:4000/ 或者 http://127.0.0.1:4000 可以看到相关页面（ctrl+c退出） Hexo常用命令123456hexo generate (hexo g) 编译生成hexo server (hexo s) 启动服务hexo deploy (hexo d) 上传hexo new page &quot;p&quot; 生成一个p页面 hexo new &quot;p&quot; 生成一个标题为p的新文章hexo clean 清除编译生成 Hexo还有很多插件，如果下面使用过程中发现问题，可以百度查找，安装对应的插件创建一个Github代码仓库 如果没有帐号，需要注册一个 点击在网页右上角，选择新建仓库 仓库的Repository name为仓库名，格式有规定，如果你注册的github帐户名为orz，那么这里就要填orz.github.io，其它设置看介绍，创建仓库 添加SSH数据提交这里选择SSH，下面是SSH安装与Github绑定SSH安装1234567ls ~/.ssh检查是否安装了ssh，如果有id_rsa.pub，跳过下面步骤ssh-keygen -t rsa -C &quot;邮箱地址&quot;安装的时候，连续点击三次回车，分别是跳过文件夹和把密码设置为空pwd ~/.ssh查看ssh的安装路径 绑定 找到ssh/id_rsa.pub，打开，复制全部内容 打开github网站，选择SSH and GPG keys New SSH Key标题随便写，将复制的内容写到Key里面，添加 验证是否连通 输入 ssh -T git@github.com如果看到你在github注册的帐号名，即表示成功 初始化设置打开D:/github/blog/_config.yml 1234deploy: type: git repo: branch: master rope的值参考下图 点击Clone or download弹出的链接 写入到_config.yml的rope 注意和：有一个空格，不能少 主题设置从网上查找Hexo主题，下载放到D:/github/blog/themes里面。打开D:/github/blog/_config.yml将theme：改为刚刚下载的主题文件夹名。其余设置需要参考主题的介绍 纸上得来终觉㳀，绝知此事要躬行]]></content>
       <categories>
-        <category>tattle</category>
+        <category>IT</category>
       </categories>
       <tags>
         <tag>杂谈</tag>
