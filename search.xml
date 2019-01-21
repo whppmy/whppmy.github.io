@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[构建、qmake、重新构建、清除]]></title>
-    <url>%2F2019%2F01%2F20%2F%E6%9E%84%E5%BB%BA%E3%80%81qmake%E3%80%81%E9%87%8D%E6%96%B0%E6%9E%84%E5%BB%BA%E3%80%81%E6%B8%85%E9%99%A4%2F</url>
+    <url>%2F2019%2F01%2F20%2FQT%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[本章为简单介绍，qmake里面有大学问。 一、qmale 第一步是运行qmake，根据当前的项目工程，生成pro，然后运行qmake生成MakeFile文件（有时候，增加资源文件或者删除后，运行会警告缺失文件，执行一次qmake即可） 命令 qmake project.pro 生成pro 然后 qmake 生成MakeFile 二、构建 构建我理解为是编译，第二次执行只编译变化了的部分，一个一个生成.o和目标文件，最终生成exe 命令 mingw32-make、moc、uic、rcc moc.exe -o mclass.h moc_mclass.cpp 编译继承qt的类 uic.exe -o mclass.ui ui_mclass.h 将ui编译生成类 rcc.exe -o -no-compress my.qrc my.cpp 编译资源文件 重新构建 将所有部分重新编译 三、清除 只留下exe，其它文件都删掉(MakeFile会留下) 四、运行 根据已经存在的MakeFile进行编译，然后打开exe，如果MakeFile不存在才会重新执行qmake。（估计是这样才会导致我之前说的那个问题） （之前查了一下资料，发现QT Create运行程序和在资源管理器上双击打开程序的区别。QT Create上运行使用的库是当前设置好，准备编译该工程的库。而双击运行会去环境变量中找，导致两者使用的库不一致，所以有可能其中一方运行不起来而另外一方可以运行。）]]></content>
       <categories>
         <category>QT</category>
