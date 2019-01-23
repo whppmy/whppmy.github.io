@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[QT共享库与使用]]></title>
+    <url>%2F2019%2F01%2F21%2FQT%E5%85%B1%E4%BA%AB%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[之前因为一些原因，需要将一些widget派生类封装成dll，给其它项目使用。研究了一下，首先，该widget派生类需要与使用类尽量没有关联。（当明有一个共用类，保存各种全局变量，里面有一个变量，与语言选择相关的，共享类也包含了该头文件，可是并没有获取到全局变量的值） 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍​ 需要debug版本的，手动增加 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.*_global.h介绍​ 下图1为_global.h的内容，下图2为实际Q_DECL_EXPORT和Q_DECL_IMPORT**的宏定义 4.主类或函数​ 定义前加上PUBLICSHARED_EXPORT即可，然后做自己想做的控件。 1234567PUBLICSHARED_EXPORT int max(int x,int y); //尽量不要使用这些c++或者qt库中带有的函数名，万不得已经在使用前加:表明命名空间类定义class PUBLICSHARED_EXPORT Public&#123;public: Public();&#125;; 5.编译完成​ 在windows平台下，会成生一个.a文件和一个.dll（我使用的是Mingw5.5.1，MSVC会生成.lib和.dll） 三、库的使用1.新建一个Application项目​ 右击工程，添加库，选择内部库，在库文件中选择.a或者.lib。看图说话- - 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h *_global.h .cpp .a .dll 放到与该工程下（该方法发布的时候不需要把dll一起发布） ​ 3.使用​ 包含.h头文件即可以正常使用函数或者类。 4.注意​ 有一个全局变量Language表示当前界面显示的语言，由程序开启后第一时间读取配置文件，供全局使用。使用了上面的方法，生成共享库的时候在头文件也包含了该类。结果在使用的时候经调试发现，两者的Language为两个互不关联的变量。即数据不共享，通过信号槽或者函数调用可以达到共享。]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[QT工程编译流程]]></title>
     <url>%2F2019%2F01%2F20%2FQT%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[本章为简单介绍，qmake里面有大学问。 一、qmale 第一步是运行qmake，根据当前的项目工程，生成pro，然后运行qmake生成MakeFile文件（有时候，增加资源文件或者删除后，运行会警告缺失文件，执行一次qmake即可） 命令 qmake project.pro 生成pro 然后 qmake 生成MakeFile 二、构建 构建我理解为是编译，第二次执行只编译变化了的部分，一个一个生成.o和目标文件，最终生成exe 命令 mingw32-make、moc、uic、rcc moc.exe -o mclass.h moc_mclass.cpp 编译继承qt的类 uic.exe -o mclass.ui ui_mclass.h 将ui编译生成类 rcc.exe -o -no-compress my.qrc my.cpp 编译资源文件 重新构建 将所有部分重新编译 三、清除 只留下exe，其它文件都删掉(MakeFile会留下) 四、运行 根据已经存在的MakeFile进行编译，然后打开exe，如果MakeFile不存在才会重新执行qmake。（估计是这样才会导致我之前说的那个问题） （之前查了一下资料，发现QT Create运行程序和在资源管理器上双击打开程序的区别。QT Create上运行使用的库是当前设置好，准备编译该工程的库。而双击运行会去环境变量中找，导致两者使用的库不一致，所以有可能其中一方运行不起来而另外一方可以运行。）]]></content>
@@ -47,7 +58,7 @@
   <entry>
     <title><![CDATA[数据类型转换]]></title>
     <url>%2F2019%2F01%2F15%2F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%2F</url>
-    <content type="text"><![CDATA[在使用这一段时间中，数据类型太多了，很多都需要转换。本章为总结。 C++强制转换有四种1234static_cast&lt;&gt;()dynamic_cast&lt;&gt;()const_cast&lt;&gt;()reinterpret_cast&lt;&gt;() static_cast 基本数据的转换、空指针与指针之间的转换 目前使用于信号槽函数强制转换，基于QT5的新特性，在使用connect时，第二第四个参数产生的为&amp;className::functionName，如果函数被重载了，QT无法判断需要使用哪个信号，即使你的槽函数设置对应的参数，这里需要对第二个参数进行强制转换，如下。 static_cast&lt;void (className::*)(parameter)&gt;(&amp;className::functionName)这样可以将函数进行强制转换，解决信号定位的问题。 dynamic_cast&lt;&gt;() 类的下行转换，由基数向派生类转换 目前没有使用过 const_cast&lt;&gt;() 去掉const或者volatile属性 12const char *cstr="rts";char *str=const_cast&lt;char *&gt;(cstr); reinterpret_cast&lt;&gt;() 主要将数据从一种类型转换为另一种类型，二进制的形式重新解释 在使用windows api的时候，需要使用宽字符wcahr_t，而qt里面没有原这样的类型，但是qstring有转换成宽字符的函数，操作如下 12QString str;reinterpret_cast&lt;const wchar_t *&gt;(str.utf16()); 百度百科介绍，static_cast进行类的转换，会进行实际的偏移，而reinterpret_cast不会]]></content>
+    <content type="text"><![CDATA[在使用这一段时间中，数据类型太多了，很多都需要转换。本章为总结。 C++强制转换有四种1234static_cast&lt;&gt;()dynamic_cast&lt;&gt;()const_cast&lt;&gt;()reinterpret_cast&lt;&gt;() static_cast 基本数据的转换、空指针与指针之间的转换 目前使用于信号槽函数强制转换，基于QT5的新特性，在使用connect时，第二第四个参数产生的为&amp;className::functionName，如果函数被重载了，QT无法判断需要使用哪个信号，即使你的槽函数设置对应的参数，这里需要对第二个参数进行强制转换，如下。 static_cast&lt;void (className::*)(parameter)&gt;(&amp;className::functionName)这样可以将函数进行强制转换，解决信号定位的问题。 dynamic_cast&lt;&gt;() 类的下行转换，由基数向派生类转换 目前没有使用过 const_cast&lt;&gt;() 去掉const或者volatile属性 12const char *cstr="rts";char *str=const_cast&lt;char *&gt;(cstr); reinterpret_cast&lt;&gt;() 主要将数据从一种类型转换为另一种类型，二进制的形式重新解释 在使用windows api的时候，需要使用宽字符wcahr_t，而qt里面没有原这样的类型，但是qstring有转换成宽字符的函数，操作如下 12QString str;reinterpret_cast&lt;const wchar_t *&gt;(str.utf16()); 百度百科介绍，static_cast进行类的转换，会进行实际的偏移，而reinterpret_cast不会 qobject_cast(QObject *object) 该转换只适用于继承自object的派生类，且类中带有Q_OBJECT宏声明。 用于将一个QObject对象转换为对应的派生类，如果类型不符合，则转换为0； 1]]></content>
       <categories>
         <category>IT</category>
       </categories>
