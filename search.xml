@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[多域名指向GithubPage]]></title>
+    <url>%2F2019%2F01%2F23%2F%E5%A4%9A%E5%9F%9F%E5%90%8D%E6%8C%87%E5%90%91GithubPage%2F</url>
+    <content type="text"><![CDATA[域名1 bugnull.com 域名2 bugnull.cn 一、购买域名​ 如果没有域名都是白瞎！！这两个域名都是通过阿里云购买的，加起来80多块一年。淘到两个好域名，开心。 二、访问*.github.io​ 确保自己的 *.github.io可以访问。 1. 设置第一个域名​ 打开github的仓库，选择自己的github.io，点击设置，拉到下面的GithubPage，修改下面为下图2，因为Github更新的比较快，大家看情况设置。 2.域名解析​ 在Github仓库上，增加一个CNAME的文件，里面的内容为，例如我的，就填bugnull.com，仅此而已，连www也不需要，正是因为CNAME只支持一个域名，所以才有我东找西找的结果。 ​ 添加CNAME和A分别对应github.io和 github.io对应的ip地址 ​ 如果不知道对应的ip地址 使用cmd ping一下就可以看到了 ​ 如果准备做多个域名，在这里，顺便把其它的域名也加上A字段，填上个IP即可 3.第一个域名设置完成​ 此时等个几分钟，就可以使用第一个域名访问了 4.设置第二个或者更多个域名​ 写本文的目的从这里才开始，因为前面那几个网上多的是！ ​ 原理，Github上面每一个仓库都可以设置一个域名！利用这个特性，进行域名转跳！ 5.创建一个新的仓库​ 因为一个帐号只能有一个github.io仓库，所以这个仓库随便建，同样新建的仓库，设置。 6.添加文件​ 在新建的仓库新加404.html里面的内容为，你们的域名填写主域名！ ​ 再新建一个CNAME文件，里面的内容为你的副域名。到这里就设置完了，原理是GithubPage的仓库可独立域名和利用404报错页面进行转跳的。有点神奇吧！ 三、大概流程​ 在GithubPage上，设置域名，仓库上增加CNAME，云解析填上对应的解析。 ​ 多域名，利用404转跳，和Github仓库的强大作用。]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[QT共享库与使用]]></title>
     <url>%2F2019%2F01%2F21%2FQT%E5%85%B1%E4%BA%AB%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[之前因为一些原因，需要将一些widget派生类封装成dll，给其它项目使用。研究了一下，首先，该widget派生类需要与使用类尽量没有关联。（当明有一个共用类，保存各种全局变量，里面有一个变量，与语言选择相关的，共享类也包含了该头文件，可是并没有获取到全局变量的值） 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍​ 需要debug版本的，手动增加 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.*_global.h介绍​ 下图1为_global.h的内容，下图2为实际Q_DECL_EXPORT和Q_DECL_IMPORT**的宏定义 4.主类或函数​ 定义前加上PUBLICSHARED_EXPORT即可，然后做自己想做的控件。 1234567PUBLICSHARED_EXPORT int max(int x,int y); //尽量不要使用这些c++或者qt库中带有的函数名，万不得已经在使用前加:表明命名空间类定义class PUBLICSHARED_EXPORT Public&#123;public: Public();&#125;; 5.编译完成​ 在windows平台下，会成生一个.a文件和一个.dll（我使用的是Mingw5.5.1，MSVC会生成.lib和.dll） 三、库的使用1.新建一个Application项目​ 右击工程，添加库，选择内部库，在库文件中选择.a或者.lib。看图说话- - 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h *_global.h .cpp .a .dll 放到与该工程下（该方法发布的时候不需要把dll一起发布） ​ 3.使用​ 包含.h头文件即可以正常使用函数或者类。 4.注意​ 有一个全局变量Language表示当前界面显示的语言，由程序开启后第一时间读取配置文件，供全局使用。使用了上面的方法，生成共享库的时候在头文件也包含了该类。结果在使用的时候经调试发现，两者的Language为两个互不关联的变量。即数据不共享，通过信号槽或者函数调用可以达到共享。]]></content>
