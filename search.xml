@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[QT静态库与使用]]></title>
+    <url>%2F2019%2F01%2F25%2FQT%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[使用静态库解决了我之前的共享库那篇文章下面那个问题！ 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍需要debug版本的，手动增加，多了一条CONFIG+=staticlib 这里得知，告知编译器将编译出静态库 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.主类或函数​ 可以看出，该类与普通类定义完全一样 5.编译完成​ 在windows平台下，会成生一个.a文件（我使用的是Mingw5.5.1，MSVC会生成.lib） 三、库的使用1.新建一个Application项目​ 右击工程，弹出，添加库，选择.a文件，设置见下图2 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h .a 放到与该工程下（该方法直接发布exe即可） 3.使用​ 包含.h头文件即可以正常使用函数或者类。]]></content>
+      <categories>
+        <category>QT</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[多域名指向GithubPage]]></title>
     <url>%2F2019%2F01%2F23%2F%E5%A4%9A%E5%9F%9F%E5%90%8D%E6%8C%87%E5%90%91GithubPage%2F</url>
     <content type="text"><![CDATA[域名1 bugnull.com 域名2 bugnull.cn 一、购买域名​ 如果没有域名都是白瞎！！这两个域名都是通过阿里云购买的，加起来80多块一年。淘到两个好域名，开心。 二、访问*.github.io​ 确保自己的 *.github.io可以访问。 1. 设置第一个域名​ 打开github的仓库，选择自己的github.io，点击设置，拉到下面的GithubPage，修改下面为下图2，因为Github更新的比较快，大家看情况设置。 2.域名解析​ 在Github仓库上，增加一个CNAME的文件，里面的内容为，例如我的，就填bugnull.com，仅此而已，连www也不需要，正是因为CNAME只支持一个域名，所以才有我东找西找的结果。 ​ 添加CNAME和A分别对应github.io和 github.io对应的ip地址 ​ 如果不知道对应的ip地址 使用cmd ping一下就可以看到了 ​ 如果准备做多个域名，在这里，顺便把其它的域名也加上A字段，填上个IP即可 3.第一个域名设置完成​ 此时等个几分钟，就可以使用第一个域名访问了 4.设置第二个或者更多个域名​ 写本文的目的从这里才开始，因为前面那几个网上多的是！ ​ 原理，Github上面每一个仓库都可以设置一个域名！利用这个特性，进行域名转跳！ 5.创建一个新的仓库​ 因为一个帐号只能有一个github.io仓库，所以这个仓库随便建，同样新建的仓库，设置。 6.添加文件​ 在新建的仓库新加404.html里面的内容为，你们的域名填写主域名！ ​ 再新建一个CNAME文件，里面的内容为你的副域名。到这里就设置完了，原理是GithubPage的仓库可独立域名和利用404报错页面进行转跳的。有点神奇吧！ 三、大概流程​ 在GithubPage上，设置域名，仓库上增加CNAME，云解析填上对应的解析。 ​ 多域名，利用404转跳，和Github仓库的强大作用。]]></content>
@@ -14,7 +25,7 @@
   <entry>
     <title><![CDATA[QT共享库与使用]]></title>
     <url>%2F2019%2F01%2F21%2FQT%E5%85%B1%E4%BA%AB%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[之前因为一些原因，需要将一些widget派生类封装成dll，给其它项目使用。研究了一下，首先，该widget派生类需要与使用类尽量没有关联。（当明有一个共用类，保存各种全局变量，里面有一个变量，与语言选择相关的，共享类也包含了该头文件，可是并没有获取到全局变量的值） 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍​ 需要debug版本的，手动增加 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.*_global.h介绍​ 下图1为_global.h的内容，下图2为实际Q_DECL_EXPORT和Q_DECL_IMPORT**的宏定义 4.主类或函数​ 定义前加上PUBLICSHARED_EXPORT即可，然后做自己想做的控件。 1234567PUBLICSHARED_EXPORT int max(int x,int y); //尽量不要使用这些c++或者qt库中带有的函数名，万不得已经在使用前加:表明命名空间类定义class PUBLICSHARED_EXPORT Public&#123;public: Public();&#125;; 5.编译完成​ 在windows平台下，会成生一个.a文件和一个.dll（我使用的是Mingw5.5.1，MSVC会生成.lib和.dll） 三、库的使用1.新建一个Application项目​ 右击工程，添加库，选择内部库，在库文件中选择.a或者.lib。看图说话- - 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h *_global.h .cpp .a .dll 放到与该工程下（该方法发布的时候不需要把dll一起发布） ​ 3.使用​ 包含.h头文件即可以正常使用函数或者类。 4.注意​ 有一个全局变量Language表示当前界面显示的语言，由程序开启后第一时间读取配置文件，供全局使用。使用了上面的方法，生成共享库的时候在头文件也包含了该类。结果在使用的时候经调试发现，两者的Language为两个互不关联的变量。即数据不共享，通过信号槽或者函数调用可以达到共享。]]></content>
+    <content type="text"><![CDATA[之前因为一些原因，需要将一些widget派生类封装成dll，给其它项目使用。研究了一下，首先，该widget派生类需要与使用类尽量没有关联。（当明有一个共用类，保存各种全局变量，里面有一个变量，与语言选择相关的，共享类也包含了该头文件，可是并没有获取到全局变量的值） 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍​ 需要debug版本的，手动增加 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.*_global.h介绍​ 下图1为_global.h的内容，下图2为实际Q_DECL_EXPORT和Q_DECL_IMPORT**的宏定义 4.主类或函数​ 定义前加上PUBLICSHARED_EXPORT即可，然后做自己想做的控件。 1234567PUBLICSHARED_EXPORT int max(int x,int y); //尽量不要使用这些c++或者qt库中带有的函数名，万不得已经在使用前加:表明命名空间类定义class PUBLICSHARED_EXPORT Public&#123;public: Public();&#125;; 5.编译完成​ 在windows平台下，会成生一个.a文件和一个.dll（我使用的是Mingw5.5.1，MSVC会生成.lib和.dll） 三、库的使用1.新建一个Application项目​ 右击工程，添加库，选择内部库，在库文件中选择.a或者.lib。看图说话- - 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h *_global.h .cpp .a .dll 放到与该工程下（该方法发布的时候需要把dll一起发布） ​ 3.使用​ 包含.h头文件即可以正常使用函数或者类。 4.注意​ 有一个全局变量Language表示当前界面显示的语言，由程序开启后第一时间读取配置文件，供全局使用。使用了上面的方法，生成共享库的时候在头文件也包含了该类。结果在使用的时候经调试发现，两者的Language为两个互不关联的变量。即数据不共享，通过信号槽或者函数调用可以达到共享。]]></content>
       <categories>
         <category>IT</category>
       </categories>
@@ -69,7 +80,7 @@
   <entry>
     <title><![CDATA[数据类型转换]]></title>
     <url>%2F2019%2F01%2F15%2F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%2F</url>
-    <content type="text"><![CDATA[在使用这一段时间中，数据类型太多了，很多都需要转换。本章为总结。 C++强制转换有四种1234static_cast&lt;&gt;()dynamic_cast&lt;&gt;()const_cast&lt;&gt;()reinterpret_cast&lt;&gt;() static_cast 基本数据的转换、空指针与指针之间的转换 目前使用于信号槽函数强制转换，基于QT5的新特性，在使用connect时，第二第四个参数产生的为&amp;className::functionName，如果函数被重载了，QT无法判断需要使用哪个信号，即使你的槽函数设置对应的参数，这里需要对第二个参数进行强制转换，如下。 static_cast&lt;void (className::*)(parameter)&gt;(&amp;className::functionName)这样可以将函数进行强制转换，解决信号定位的问题。 dynamic_cast&lt;&gt;() 类的下行转换，由基数向派生类转换 目前没有使用过 const_cast&lt;&gt;() 去掉const或者volatile属性 12const char *cstr="rts";char *str=const_cast&lt;char *&gt;(cstr); reinterpret_cast&lt;&gt;() 主要将数据从一种类型转换为另一种类型，二进制的形式重新解释 在使用windows api的时候，需要使用宽字符wcahr_t，而qt里面没有原这样的类型，但是qstring有转换成宽字符的函数，操作如下 12QString str;reinterpret_cast&lt;const wchar_t *&gt;(str.utf16()); 百度百科介绍，static_cast进行类的转换，会进行实际的偏移，而reinterpret_cast不会 qobject_cast(QObject *object) 该转换只适用于继承自object的派生类，且类中带有Q_OBJECT宏声明。 用于将一个QObject对象转换为对应的派生类，如果类型不符合，则转换为0； 1qobject_cast&lt;QLabel *&gt;(sender()) //sender为槽对象，默认是QObject类型 在这里，如果有多个不同的信号对应同一个槽，可以根据该转换来判断传递对象的类型，像这里，如果sender是QLabel则会转换成功，否则为空]]></content>
+    <content type="text"><![CDATA[在使用这一段时间中，数据类型太多了，很多都需要转换。本章为总结。 C++强制转换有四种1234static_cast&lt;&gt;()dynamic_cast&lt;&gt;()const_cast&lt;&gt;()reinterpret_cast&lt;&gt;() static_cast 基本数据的转换、空指针与指针之间的转换 目前使用于信号槽函数强制转换，基于QT5的新特性，在使用connect时，第二第四个参数产生的为&amp;className::functionName，如果函数被重载了，QT无法判断需要使用哪个信号，即使你的槽函数设置对应的参数，这里需要对第二个参数进行强制转换，如下。 static_cast&lt;void (className::*)(parameter)&gt;(&amp;className::functionName)这样可以将函数进行强制转换，解决信号定位的问题。 dynamic_cast&lt;&gt;() 类的下行转换，由基数向派生类转换 目前没有使用过 const_cast&lt;&gt;() 去掉const或者volatile属性 12const char *cstr="rts";char *str=const_cast&lt;char *&gt;(cstr); reinterpret_cast&lt;&gt;() 主要将数据从一种类型转换为另一种类型，二进制的形式重新解释 在使用windows api的时候，需要使用宽字符wcahr_t，而qt里面没有原这样的类型，但是qstring有转换成宽字符的函数，操作如下 12QString str;reinterpret_cast&lt;const wchar_t *&gt;(str.utf16()); 百度百科介绍，static_cast进行类的转换，会进行实际的偏移，而reinterpret_cast不会 qobject_cast(QObject *object) 该转换只适用于继承自object的派生类，且类中带有Q_OBJECT宏声明。 用于将一个QObject对象转换为对应的派生类，如果类型不符合，则转换为0； sender为槽对象，默认是QObject类型 在这里，如果有多个不同的信号对应同一个槽，可以根据该转换来判断传递对象的类型，像这里，如果sender是QLabel则会转换成功，否则为空 1qobject_cast&lt;QLabel *&gt;(sender())；]]></content>
       <categories>
         <category>IT</category>
       </categories>
