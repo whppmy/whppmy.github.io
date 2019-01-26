@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[QT添加外部库]]></title>
+    <url>%2F2019%2F01%2F26%2FQT%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%83%A8%E5%BA%93%2F</url>
+    <content type="text"><![CDATA[QT的库虽然已经非常的多，但是还是还是满足不了需求。如音视频库FFMpeg和图纸解析dxflib opendwg等。。。。省略一万字。 一、PRO文件修改​ 增加 123INCLUDEPATH+= 头文件目录LIBS += -L（.lib或者.a的目录） -l（.lib或者.a的名字 不带后缀）#推荐使用 $$PWD/ 表示pro文件当前路径 路径带空格了，可以使用""包括，但是不要把PWD/也包在内！ 常规操作，如果特别的库，看介绍吧。下课！！]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[QLibrary使用动态库]]></title>
     <url>%2F2019%2F01%2F26%2FQLibrary%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E5%BA%93%2F</url>
     <content type="text"><![CDATA[我使用这种方法一般是因为没有.h .a(.lib)文件的支持下，只能使用QLibrary进行手动提取。 一、常用函数12345bool load()；//加载 需要指定了文件名，跟文件的open一样bool unload()；//卸载void setFileName(const QString &amp; fileName)； //设置库名QFunctionPointer resolve(const char * symbol)； //函数名QString errorString() const； //错误信息 二、使用例子1234567891011121314显示调用QLibrary myLib("mylib");typedef void (*MyPrototype)();MyPrototype myFunction = (MyPrototype) myLib.resolve("mysymbol");if (myFunction) myFunction();隐式调用typedef void (*MyPrototype)();MyPrototype myFunction = (MyPrototype) QLibrary::resolve("mylib", "mysymbol");if (myFunction) myFunction();//上面typedef void (*fun)()为指定一个指针fun为指向反回值为void没有参数的函数指针 三、加载类​ 如果调用函数方法，可以通过上面去加载！类呢？类是由编译期就完成的了！无法实时去索引。经搜索，还真发现了可以完成的例子。 ​ 他利用虚表的特性，在运行时可以动态索引。使用一个接口类，对外进行公开，添加创建对象函数，返回类型为接口类型。 12345678910111213141516171819202122232425262728293031class TestInterface&#123;public: virtual ~TestInterface() &#123; &#125; virtual int getValues() = 0;&#125;class TESTDLL_LIBSHARED_EXPORT TestDLL_lib : public TestInterface&#123;public: TestDLL_lib(); virtual ~TestDLL_lib(); int a; int b; int c; int getValues() override; // MSVC may not support "override"&#125;; // return pointer to interface!// TestDLL_lib can and should be completely hidden from the applicationextern "C" TESTDLL_LIBSHARED_EXPORT TestInterface *create_TestDLL_lib()&#123; return new TestDLL_lib();&#125;//https://stackoverflow.com/questions/26234327/qlibrary-import-a-class]]></content>
