@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[QLibrary使用动态库]]></title>
+    <url>%2F2019%2F01%2F26%2FQLibrary%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E5%BA%93%2F</url>
+    <content type="text"><![CDATA[我使用这种方法一般是因为没有.h .a(.lib)文件的支持下，只能使用QLibrary进行手动提取。 一、常用函数12345bool load()；//加载 需要指定了文件名，跟文件的open一样bool unload()；//卸载void setFileName(const QString &amp; fileName)； //设置库名QFunctionPointer resolve(const char * symbol)； //函数名QString errorString() const； //错误信息 二、使用例子1234567891011121314显示调用QLibrary myLib("mylib");typedef void (*MyPrototype)();MyPrototype myFunction = (MyPrototype) myLib.resolve("mysymbol");if (myFunction) myFunction();隐式调用typedef void (*MyPrototype)();MyPrototype myFunction = (MyPrototype) QLibrary::resolve("mylib", "mysymbol");if (myFunction) myFunction();//上面typedef void (*fun)()为指定一个指针fun为指向反回值为void没有参数的函数指针 三、加载类​ 如果调用函数方法，可以通过上面去加载！类呢？类是由编译期就完成的了！无法实时去索引。经搜索，还真发现了可以完成的例子。 ​ 他利用虚表的特性，在运行时可以动态索引。使用一个接口类，对外进行公开，添加创建对象函数，返回类型为接口类型。 12345678910111213141516171819202122232425262728293031class TestInterface&#123;public: virtual ~TestInterface() &#123; &#125; virtual int getValues() = 0;&#125;class TESTDLL_LIBSHARED_EXPORT TestDLL_lib : public TestInterface&#123;public: TestDLL_lib(); virtual ~TestDLL_lib(); int a; int b; int c; int getValues() override; // MSVC may not support "override"&#125;; // return pointer to interface!// TestDLL_lib can and should be completely hidden from the applicationextern "C" TESTDLL_LIBSHARED_EXPORT TestInterface *create_TestDLL_lib()&#123; return new TestDLL_lib();&#125;//https://stackoverflow.com/questions/26234327/qlibrary-import-a-class]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[extern "C"与_cplusplus]]></title>
     <url>%2F2019%2F01%2F26%2Fextern%20%E2%80%9CC%E2%80%9D%E4%B8%8E_cplusplus%2F</url>
     <content type="text"><![CDATA[一、extern”C”​ 百度百科讲得很清楚 ，就是说，c++编译器虽然支持c，但是由于函数重载的存在，编译的时候会把参数也加到编译中，而c却不支持。所以使用该符号，表明使用c的方式去编译这些文件。 extern “C”的主要作用就是为了能够正确实现C++代码调用其他C语言代码。加上extern “C”后，会指示编译器这部分代码按C语言的进行编译，而不是C++的。由于C++支持函数重载，因此编译器编译函数的过程中会将函数的参数类型也加到编译后的代码中，而不仅仅是函数名；而C语言并不支持函数重载，因此编译C语言代码的函数时不会带上函数的参数类型，一般只包括函数名。 二、extern​ extern是计算机语言中的一个关键字，可置于变量或者函数前，以表示变量或者函数的定义在别的文件中。提示编译器遇到此变量或函数时，在其它模块中寻找其定义，另外，extern也可用来进行链接指定。我觉得它是个导出声明符号，达到代码段共享的作用。 ​ 当时我有点不明白，它和static静态全局有什么区别？extern是真全局变量，可以在多个地方进行extern int a这样的声明，仅仅是声明，只可以在一个地方进行定义。只要声明了之后，就可以共享这个变量a。而static为只申请一次，然后一直存在，作用域内的地方可以一直使用它，而且值也不变，不会跟函数结束而被释放。同名会被作用域小的替代。 三、_cplusplus​ 它是个宏定义，表明当前是c++环境。结合使用，效果更佳 12345678&gt; #ifdef __cplusplus /* 如果采用了C++，如下代码使用C编译器 */&gt; extern &quot;C&quot;&#123;/* 如果没有采用C++，顺序预编译 */&gt; #endif&gt; /* 采用C编译器编译的C语言代码段 */&gt; #ifdef __cplusplus /* 结束使用C编译器 */&gt; &#125;&gt; #endif&gt;]]></content>
