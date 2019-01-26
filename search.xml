@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[QString与QStringList]]></title>
+    <url>%2F2019%2F01%2F26%2FQString%E4%B8%8EQStringList%2F</url>
+    <content type="text"><![CDATA[对于我而言，这两者用的频率真的非常高了。 一、QString​ 根据api顺序，把自己现在的经验写下来。 12 二、QStringList​ 其实就是QString的数组 12345678910111213141516171819bool QStringList::contains(const QString &amp; str, Qt::CaseSensitivity cs = Qt::CaseSensitive) const; //是否包含strQStringList QStringList::filter(const QString &amp; str, Qt::CaseSensitivity cs = Qt::CaseSensitive) const; //过虑出包含str的串/* QStringList list; list &lt;&lt; "Bill Murray" &lt;&lt; "John Doe" &lt;&lt; "Bill Clinton"; QStringList result; result = list.filter("Bill"); // result: ["Bill Murray", "Bill Clinton"]*/int QStringList::indexOf(const QRegExp &amp; rx, int from = 0) const; //匹配QStringList &amp; QStringList::replaceInStrings(const QString &amp; before, const QString &amp; after, Qt::CaseSensitivity cs = Qt::CaseSensitive); //替换/* QStringList list; list &lt;&lt; "alpha" &lt;&lt; "beta" &lt;&lt; "gamma" &lt;&lt; "epsilon"; list.replaceInStrings("a", "o"); // list == ["olpho", "beto", "gommo", "epsilon"]*/void QStringList::sort(Qt::CaseSensitivity cs = Qt::CaseSensitive); //排序]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[包罗万象的QVariant]]></title>
+    <url>%2F2019%2F01%2F26%2F%E5%8C%85%E7%BD%97%E4%B8%87%E8%B1%A1%E7%9A%84QVariant%2F</url>
+    <content type="text"><![CDATA[一、概念该类常用于数据库中！类似联合数据类型。 它可以包含QT中各种数据类型，包括一些类。摘抄自QT5.5的文档 二、使用1234567891011121314QVariant QVariant::fromValue(const T &amp; value); //会返回一个QVariant 否则与setValue一样void QVariant::setValue(const T &amp; value);//设定一个值T QVariant::value() const;//返回一个值bool QVariant::canConvert(int targetTypeId) const； //如果支持该类型，返回真bool QVariant::convert(int targetTypeId); //将该类型转成targetTypeId 如果不支持，类型会变，而且值会变成0//其中T为一所介绍的类型//例子QVariant qvar;qvar.setValue("bugnull.com");qDebug()&lt;&lt;qvar.toString();qDebug()&lt;&lt;QVariant::fromValue("bugnull.cn");qDebug()&lt;&lt;qvar.value&lt;QString&gt;();qDebug()&lt;&lt;qvar.canConvert&lt;QString&gt;();qDebug()&lt;&lt;qvar.convert&lt;QString&gt;();]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[QT添加外部库]]></title>
     <url>%2F2019%2F01%2F26%2FQT%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%83%A8%E5%BA%93%2F</url>
     <content type="text"><![CDATA[QT的库虽然已经非常的多，但是还是还是满足不了需求。如音视频库FFMpeg和图纸解析dxflib opendwg等。。。。省略一万字。 一、PRO文件修改​ 增加 123INCLUDEPATH+= 头文件目录LIBS += -L（.lib或者.a的目录） -l（.lib或者.a的名字 不带后缀）#推荐使用 $$PWD/ 表示pro文件当前路径 路径带空格了，可以使用""包括，但是不要把PWD/也包在内！ 常规操作，如果特别的库，看介绍吧。下课！！]]></content>
