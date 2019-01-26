@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[extern "C"与_cplusplus]]></title>
+    <url>%2F2019%2F01%2F26%2Fextern%20%E2%80%9CC%E2%80%9D%E4%B8%8E_cplusplus%2F</url>
+    <content type="text"><![CDATA[百度百科讲得很清楚 extern”C” ，就是说，c++编译器虽然支持c，但是由于函数重载的存在，编译的时代 一、extern”C”​ 百度百科讲得很清楚 ，就是说，c++编译器虽然支持c，但是由于函数重载的存在，编译的时候会把参数也加到编译中，而c却不支持。所以使用该符号，表明使用c的方式去编译这些文件。 extern “C”的主要作用就是为了能够正确实现C++代码调用其他C语言代码。加上extern “C”后，会指示编译器这部分代码按C语言的进行编译，而不是C++的。由于C++支持函数重载，因此编译器编译函数的过程中会将函数的参数类型也加到编译后的代码中，而不仅仅是函数名；而C语言并不支持函数重载，因此编译C语言代码的函数时不会带上函数的参数类型，一般只包括函数名。 二、extern​ extern是计算机语言中的一个关键字，可置于变量或者函数前，以表示变量或者函数的定义在别的文件中。提示编译器遇到此变量或函数时，在其它模块中寻找其定义，另外，extern也可用来进行链接指定。我觉得它是个导出声明符号，达到代码段共享的作用。 ​ 当时我有点不明白，它和static静态全局有什么区别？extern是真全局变量，可以在多个地方进行extern int a这样的声明，仅仅是声明，只可以在一个地方进行定义。只要声明了之后，就可以共享这个变量a。而static为只申请一次，然后一直存在，作用域内的地方可以一直使用它，而且值也不变，不会跟函数结束而被释放。同名会被作用域小的替代。 三、_cplusplus​ 它是个宏定义，表明当前是c++环境。结合使用，效果更佳 12345678&gt; #ifdef __cplusplus /* 如果采用了C++，如下代码使用C编译器 */&gt; extern &quot;C&quot;&#123;/* 如果没有采用C++，顺序预编译 */&gt; #endif&gt; /* 采用C编译器编译的C语言代码段 */&gt; #ifdef __cplusplus /* 结束使用C编译器 */&gt; &#125;&gt; #endif&gt;]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[QT静态库与使用]]></title>
     <url>%2F2019%2F01%2F25%2FQT%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[使用静态库解决了我之前的共享库那篇文章下面那个问题！ 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍需要debug版本的，手动增加，多了一条CONFIG+=staticlib 这里得知，告知编译器将编译出静态库 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.主类或函数​ 可以看出，该类与普通类定义完全一样 5.编译完成​ 在windows平台下，会成生一个.a文件（我使用的是Mingw5.5.1，MSVC会生成.lib） 三、库的使用1.新建一个Application项目​ 右击工程，弹出，添加库，选择.a文件，设置见下图2 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h .a 放到与该工程下（该方法直接发布exe即可） 3.使用​ 包含.h头文件即可以正常使用函数或者类。]]></content>
       <categories>
-        <category>QT</category>
+        <category>IT</category>
       </categories>
       <tags>
-        <tag>IT</tag>
+        <tag>QT</tag>
       </tags>
   </entry>
   <entry>
@@ -25,7 +36,7 @@
   <entry>
     <title><![CDATA[QT共享库与使用]]></title>
     <url>%2F2019%2F01%2F21%2FQT%E5%85%B1%E4%BA%AB%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[之前因为一些原因，需要将一些widget派生类封装成dll，给其它项目使用。研究了一下，首先，该widget派生类需要与使用类尽量没有关联。（当明有一个共用类，保存各种全局变量，里面有一个变量，与语言选择相关的，共享类也包含了该头文件，可是并没有获取到全局变量的值） 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍​ 需要debug版本的，手动增加 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.*_global.h介绍​ 下图1为_global.h的内容，下图2为实际Q_DECL_EXPORT和Q_DECL_IMPORT**的宏定义 4.主类或函数​ 定义前加上PUBLICSHARED_EXPORT即可，然后做自己想做的控件。 1234567PUBLICSHARED_EXPORT int max(int x,int y); //尽量不要使用这些c++或者qt库中带有的函数名，万不得已经在使用前加:表明命名空间类定义class PUBLICSHARED_EXPORT Public&#123;public: Public();&#125;; 5.编译完成​ 在windows平台下，会成生一个.a文件和一个.dll（我使用的是Mingw5.5.1，MSVC会生成.lib和.dll） 三、库的使用1.新建一个Application项目​ 右击工程，添加库，选择内部库，在库文件中选择.a或者.lib。看图说话- - 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h *_global.h .cpp .a .dll 放到与该工程下（该方法发布的时候需要把dll一起发布） ​ 3.使用​ 包含.h头文件即可以正常使用函数或者类。 4.注意​ 有一个全局变量Language表示当前界面显示的语言，由程序开启后第一时间读取配置文件，供全局使用。使用了上面的方法，生成共享库的时候在头文件也包含了该类。结果在使用的时候经调试发现，两者的Language为两个互不关联的变量。即数据不共享，通过信号槽或者函数调用可以达到共享。]]></content>
+    <content type="text"><![CDATA[之前因为一些原因，需要将一些widget派生类封装成dll，给其它项目使用。研究了一下，首先，该widget派生类需要与使用类尽量没有关联。（当明有一个共用类，保存各种全局变量，里面有一个变量，与语言选择相关的，共享类也包含了该头文件，可是并没有获取到全局变量的值） 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍​ 需要debug版本的，手动增加 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.*_global.h介绍​ 下图1为_global.h的内容，下图2为实际Q_DECL_EXPORT和Q_DECL_IMPORT**的宏定义 4.主类或函数​ 定义前加上PUBLICSHARED_EXPORT即可，然后做自己想做的控件。 1234567PUBLICSHARED_EXPORT int max(int x,int y); //尽量不要使用这些c++或者qt库中带有的函数名，万不得已经在使用前加:表明命名空间类定义class PUBLICSHARED_EXPORT Public&#123;public: Public();&#125;; 5.编译完成​ 在windows平台下，会成生一个.a文件和一个.dll（我使用的是Mingw5.5.1，MSVC会生成.lib和.dll） 三、库的使用1.新建一个Application项目​ 右击工程，添加库，选择内部库，在库文件中选择.a或者.lib。看图说话- - 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h *_global.h .a .dll 放到与该工程下（该方法发布的时候需要把dll一起发布） ​ 3.使用​ 包含.h头文件即可以正常使用函数或者类。 4.注意​ 有一个全局变量Language表示当前界面显示的语言，由程序开启后第一时间读取配置文件，供全局使用。使用了上面的方法，生成共享库的时候在头文件也包含了该类。结果在使用的时候经调试发现，两者的Language为两个互不关联的变量。即数据不共享，通过信号槽或者函数调用可以达到共享。]]></content>
       <categories>
         <category>IT</category>
       </categories>
