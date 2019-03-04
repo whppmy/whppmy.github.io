@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[演示四]]></title>
+    <url>%2F2019%2F03%2F04%2F%E6%BC%94%E7%A4%BA%E5%9B%9B%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[演示三]]></title>
+    <url>%2F2019%2F03%2F04%2F%E6%BC%94%E7%A4%BA%E4%B8%89%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[演示二]]></title>
+    <url>%2F2019%2F03%2F04%2F%E6%BC%94%E7%A4%BA%E4%BA%8C%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[演示一]]></title>
+    <url>%2F2019%2F03%2F04%2F%E6%BC%94%E7%A4%BA%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[QT的衣服--样式表]]></title>
     <url>%2F2019%2F03%2F01%2FQT%E7%9A%84%E8%A1%A3%E6%9C%8D-%E6%A0%B7%E5%BC%8F%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[之前一直想找本书，介绍各个控件的样式表与子部件，发现并没有，只能通过官方网站的介绍（甩网址三连）： 样式表的作用 样式表参考 样式表例子 一、设定样式表1231.通过UI设置“改变样式表”,将对应的样式表写进去2.通过代码设置，控件使用setStyleSheet(QString)3.通过文件，读取文本，将文本使用setStyleSheet(QString)写入qApp中 二、指定对象设置样式表123456789101112131415类中有多个按钮，但是需要设置成不同的样子QPushbutton btn1,btn2,btn3;1.btn1.setStyleSheet("");btn2.setStyleSheet("");btn3.setStyleSheet("");2.btn1.setObjectName("btn1");btn2.setObjectName("btn2");btn3.setObjectName("btn3");this.setStyleSheet("QPushbutton#btn1&#123;&#125;QPushbutton#btn2&#123;&#125;QPushbutton#btn3&#123;&#125;");类#类名::子部件:伪状态&#123;&#125; 应该是这个形式了还有一个更复杂的，修改QTabWidget的QTabBar点击下去的属性QTabWidget#tabWidget QTabBar::tab:selected&#123;&#125; 样式表学习可以通过CSS，因为有时候有点迷，找前端的妹子问一下，就可以了~~~两者相似度估计达80% 因为每个控件都有自己独特的样式表，列举不完，而且也比较菜~~~~经验自己总结总结，本人也会总结，看情况再更新这个吧。打个赌，哈哈。2019-03-02 16:38-58]]></content>
-      <categories>
-        <category>IT</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[正则表达式]]></title>
-    <url>%2F2019%2F03%2F01%2F%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%2F</url>
-    <content type="text"></content>
       <categories>
         <category>IT</category>
       </categories>
