@@ -1,9 +1,218 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="个人博客，记录生活"><title>QT布局个人总结 | BugNull</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">QT布局个人总结</h1><a id="logo" href="/.">BugNull</a><p class="description">纸上得来终觉浅，绝知此事要躬行</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">QT布局个人总结</h1><div class="post-meta">Jan 31, 2019<span> | </span><span class="category"><a href="/categories/IT/">IT</a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p>很久很久以前，刚接触QT，发现UI拖控件真爽，做个计算器什么的，一下子就搭出来了！实现起来也很得心应手，后面做的界面越来越复杂后，特别是别人跟你提意见，需要修改的时候，绝望！<strong>打破布局</strong>各种不友好。<br>开始使用代码布局，代码new控件，修改的时候也比较好修改，而且可以实现动态布局！感觉缺点就是样式表没有UI这么友好，实时体现。</p>
 <h3 id="一、布局类"><a href="#一、布局类" class="headerlink" title="一、布局类"></a>一、布局类</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">QLayoutItem</span><br><span class="line">	QLayout(和QObject)</span><br><span class="line">		QBoxLayout</span><br><span class="line">			QHBoxLayout	水平布局</span><br><span class="line">			QVBoxLayout	垂直布局</span><br><span class="line">		QGridLayout	栅栏布局</span><br><span class="line">		QFormLayout	表单布局</span><br><span class="line">		QGraphicsLayout	</span><br><span class="line">		QStackedLayout	堆布局</span><br><span class="line">	QSpacerItem	空白占位（UI上的弹簧）</span><br><span class="line">	QWidgetItem </span><br><span class="line">		QWidgetItemV2</span><br></pre></td></tr></table></figure>
 <p>为什么个人不喜欢用QGridLayout呢？因为QGridLayout很容易被控制改变实际比例，导致出现和预设的比例不同。排问题好麻烦，推荐在行或者列使用相同的控件时使用。（有可能是我太菜了，使用不来）</p>
-<h4 id="QLayout"><a href="#QLayout" class="headerlink" title="QLayout"></a>QLayout</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QWidget *<span class="title">parentWidget</span><span class="params">()</span> <span class="keyword">const</span></span>;	<span class="comment">//返回布局依赖控件</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setContentsMargins</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> top, <span class="keyword">int</span> right, <span class="keyword">int</span> bottom)</span></span>;	<span class="comment">//布局的左上右下边距</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setContentsMargins</span><span class="params">(<span class="keyword">const</span> QMargins &amp;margins)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">getContentsMargins</span><span class="params">(<span class="keyword">int</span> *left, <span class="keyword">int</span> *top, <span class="keyword">int</span> *right, <span class="keyword">int</span> *bottom)</span> <span class="keyword">const</span></span>;</span><br><span class="line">   <span class="function">QMargins <span class="title">contentsMargins</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">   <span class="function">QRect <span class="title">contentsRect</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">addWidget</span><span class="params">(QWidget *w)</span></span>;	<span class="comment">//添加控件</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">addItem</span><span class="params">(QLayoutItem *)</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">removeWidget</span><span class="params">(QWidget *w)</span></span>;	<span class="comment">//移除控件，不生效！下面会讲怎么从布局中去掉控件</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">removeItem</span><span class="params">(QLayoutItem *)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">bool</span>)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">bool</span> <span class="title">isEnabled</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setMargin</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setSpacing</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> QLayoutItem *<span class="title">itemAt</span><span class="params">(<span class="keyword">int</span> index)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> QLayoutItem *<span class="title">takeAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>= <span class="number">0</span>;</span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(QWidget *)</span> <span class="keyword">const</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="QBoxLayout"><a href="#QBoxLayout" class="headerlink" title="QBoxLayout"></a>QBoxLayout</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addSpacing</span><span class="params">(<span class="keyword">int</span> size)</span></span>;	<span class="comment">//添加指定大小的占位</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addStretch</span><span class="params">(<span class="keyword">int</span> stretch = <span class="number">0</span>)</span></span>;	<span class="comment">//添加指定比例的占位</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addSpacerItem</span><span class="params">(QSpacerItem *spacerItem)</span></span>;	<span class="comment">//添加一个弹簧</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addWidget</span><span class="params">(QWidget *, <span class="keyword">int</span> stretch = <span class="number">0</span>, Qt::Alignment alignment = <span class="number">0</span>)</span></span>;	<span class="comment">//添加一个布局</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addLayout</span><span class="params">(QLayout *layout, <span class="keyword">int</span> stretch = <span class="number">0</span>)</span></span>;	<span class="comment">//添加一个布局</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addStrut</span><span class="params">(<span class="keyword">int</span>)</span></span>;	<span class="comment">//Limits the perpendicular dimension of the box (e.g. height if the box is LeftToRight) to a minimum of size. Other constraints may increase the limit.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addItem</span><span class="params">(QLayoutItem *)</span> Q_DECL_OVERRIDE</span>;	<span class="comment">//继承自QLayoutItem 纯虚函数</span></span><br><span class="line">还有对应的insert插入操作</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setSpacing</span><span class="params">(<span class="keyword">int</span> spacing)</span></span>;	<span class="comment">//设定控件之间的距离</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">setStretchFactor</span><span class="params">(QWidget *w, <span class="keyword">int</span> stretch)</span></span>;	<span class="comment">//更改该控件的比例</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">setStretchFactor</span><span class="params">(QLayout *l, <span class="keyword">int</span> stretch)</span></span>;	<span class="comment">//更改该布局的比例</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setStretch</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> stretch)</span></span>;	<span class="comment">//更改第index项的比例</span></span><br></pre></td></tr></table></figure>
-<h4 id="QGridLayout"><a href="#QGridLayout" class="headerlink" title="QGridLayout"></a>QGridLayout</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setHorizontalSpacing</span><span class="params">(<span class="keyword">int</span> spacing)</span></span>;	<span class="comment">//控件间距</span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">horizontalSpacing</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setVerticalSpacing</span><span class="params">(<span class="keyword">int</span> spacing)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">verticalSpacing</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setSpacing</span><span class="params">(<span class="keyword">int</span> spacing)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">spacing</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setRowStretch</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> stretch)</span></span>;	<span class="comment">//行列比例</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setColumnStretch</span><span class="params">(<span class="keyword">int</span> column, <span class="keyword">int</span> stretch)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">rowStretch</span><span class="params">(<span class="keyword">int</span> row)</span> <span class="keyword">const</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">columnStretch</span><span class="params">(<span class="keyword">int</span> column)</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">columnCount</span><span class="params">()</span> <span class="keyword">const</span></span>;	<span class="comment">//行列数量</span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">rowCount</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addWidget</span><span class="params">(QWidget *w)</span> </span>&#123; QLayout::addWidget(w); &#125;	<span class="comment">//插入控件</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">addWidget</span><span class="params">(QWidget *, <span class="keyword">int</span> row, <span class="keyword">int</span> column, Qt::Alignment = <span class="number">0</span>)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">addWidget</span><span class="params">(QWidget *, <span class="keyword">int</span> row, <span class="keyword">int</span> column, <span class="keyword">int</span> rowSpan, <span class="keyword">int</span> columnSpan, Qt::Alignment = <span class="number">0</span>)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">addLayout</span><span class="params">(QLayout *, <span class="keyword">int</span> row, <span class="keyword">int</span> column, Qt::Alignment = <span class="number">0</span>)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">addLayout</span><span class="params">(QLayout *, <span class="keyword">int</span> row, <span class="keyword">int</span> column, <span class="keyword">int</span> rowSpan, <span class="keyword">int</span> columnSpan, Qt::Alignment = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="QLayout"><a href="#QLayout" class="headerlink" title="QLayout"></a>QLayout</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QWidget *parentWidget() const;</td>
+<td>返回布局依赖控件</td>
+</tr>
+<tr>
+<td>void setContentsMargins(int left, int top, int right, int bottom);</td>
+<td>布局的左上右下边距</td>
+</tr>
+<tr>
+<td>void setContentsMargins(const QMargins &amp;margins);</td>
+<td></td>
+</tr>
+<tr>
+<td>void getContentsMargins(int <em>left, int </em>top, int <em>right, int </em>bottom) const;</td>
+<td></td>
+</tr>
+<tr>
+<td>QMargins contentsMargins() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>QRect contentsRect() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>void addWidget(QWidget *w);</td>
+<td>添加控件</td>
+</tr>
+<tr>
+<td>virtual void addItem(QLayoutItem *) = 0;</td>
+<td></td>
+</tr>
+<tr>
+<td>void removeWidget(QWidget *w);</td>
+<td>移除控件，不生效！下面会讲怎么从布局中去掉控件</td>
+</tr>
+<tr>
+<td>void removeItem(QLayoutItem *);</td>
+<td></td>
+</tr>
+<tr>
+<td>void setEnabled(bool);</td>
+<td></td>
+</tr>
+<tr>
+<td>bool isEnabled() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>void setMargin(int);</td>
+<td></td>
+</tr>
+<tr>
+<td>void setSpacing(int);</td>
+<td></td>
+</tr>
+<tr>
+<td>virtual QLayoutItem *itemAt(int index) const = 0;</td>
+<td></td>
+</tr>
+<tr>
+<td>virtual QLayoutItem *takeAt(int index) = 0;</td>
+<td></td>
+</tr>
+<tr>
+<td>virtual int indexOf(QWidget *) const;</td>
+<td></td>
+</tr>
+<tr>
+<td>virtual int count() const = 0;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="QBoxLayout"><a href="#QBoxLayout" class="headerlink" title="QBoxLayout"></a>QBoxLayout</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void addSpacing(int size);</td>
+<td>添加指定大小的占位</td>
+</tr>
+<tr>
+<td>void addStretch(int stretch = 0);</td>
+<td>添加指定比例的占位</td>
+</tr>
+<tr>
+<td>void addSpacerItem(QSpacerItem *spacerItem);</td>
+<td>添加一个弹簧</td>
+</tr>
+<tr>
+<td>void addWidget(QWidget *, int stretch = 0, Qt::Alignment alignment = 0);</td>
+<td>添加一个布局</td>
+</tr>
+<tr>
+<td>void addLayout(QLayout *layout, int stretch = 0);</td>
+<td>添加一个布局</td>
+</tr>
+<tr>
+<td>void addStrut(int);<br>//Limits the perpendicular dimension of the box (e.g. height if the box is LeftToRight) to a minimum of size. Other constraints may increase the limit.</td>
+<td></td>
+</tr>
+<tr>
+<td>void addItem(QLayoutItem *) Q_DECL_OVERRIDE;</td>
+<td>继承自QLayoutItem 纯虚函数还有对应的insert插入操作</td>
+</tr>
+<tr>
+<td>void setSpacing(int spacing);</td>
+<td>设定控件之间的距离</td>
+</tr>
+<tr>
+<td>bool setStretchFactor(QWidget *w, int stretch);</td>
+<td>更改该控件的比例</td>
+</tr>
+<tr>
+<td>bool setStretchFactor(QLayout *l, int stretch);</td>
+<td>更改该布局的比例</td>
+</tr>
+<tr>
+<td>void setStretch(int index, int stretch);</td>
+<td>更改第index项的比例</td>
+</tr>
+</tbody>
+</table>
+<h4 id="QGridLayout"><a href="#QGridLayout" class="headerlink" title="QGridLayout"></a>QGridLayout</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void setHorizontalSpacing(int spacing);</td>
+<td>控件间距</td>
+</tr>
+<tr>
+<td>int horizontalSpacing() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>void setVerticalSpacing(int spacing);</td>
+<td></td>
+</tr>
+<tr>
+<td>int verticalSpacing() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>void setSpacing(int spacing);</td>
+<td></td>
+</tr>
+<tr>
+<td>int spacing() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>void setRowStretch(int row, int stretch);</td>
+<td>行列比例</td>
+</tr>
+<tr>
+<td>void setColumnStretch(int column, int stretch);</td>
+<td></td>
+</tr>
+<tr>
+<td>int rowStretch(int row) const;</td>
+<td></td>
+</tr>
+<tr>
+<td>int columnStretch(int column) const;</td>
+<td></td>
+</tr>
+<tr>
+<td>int columnCount() const;</td>
+<td>行列数量</td>
+</tr>
+<tr>
+<td>int rowCount() const;</td>
+<td></td>
+</tr>
+<tr>
+<td>inline void addWidget(QWidget *w) { QLayout::addWidget(w); }</td>
+<td>插入控件</td>
+</tr>
+<tr>
+<td>void addWidget(QWidget *, int row, int column, Qt::Alignment = 0);</td>
+<td></td>
+</tr>
+<tr>
+<td>void addWidget(QWidget *, int row, int column, int rowSpan, int columnSpan, Qt::Alignment = 0);</td>
+<td></td>
+</tr>
+<tr>
+<td>void addLayout(QLayout *, int row, int column, Qt::Alignment = 0);</td>
+<td></td>
+</tr>
+<tr>
+<td>void addLayout(QLayout *, int row, int column, int rowSpan, int columnSpan, Qt::Alignment = 0);</td>
+</tr>
+</tbody>
+</table>
 <h4 id="QFormLayout"><a href="#QFormLayout" class="headerlink" title="QFormLayout"></a>QFormLayout</h4><p>没用过，类似一个QHBoxLayout，固定一个QLabel和一个等待插入的控件。</p>
 <h4 id="QGraphicsLayout"><a href="#QGraphicsLayout" class="headerlink" title="QGraphicsLayout"></a>QGraphicsLayout</h4><p>没用过，给Graphics View使用。</p>
 <h4 id="QStackedLayout"><a href="#QStackedLayout" class="headerlink" title="QStackedLayout"></a>QStackedLayout</h4><p>跟QStackedWidget一样，方式不一样，QStackedLayout是多个Layout QStackedWidget是多个Widget</p>
@@ -17,7 +226,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clearLayout(mlayout);</span><br><span class="line">mlayout-&gt;addWidget(subWidget1,<span class="number">1</span>);</span><br><span class="line">mlayout-&gt;addwidget(subWidget2,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="五、注意"><a href="#五、注意" class="headerlink" title="五、注意"></a>五、注意</h3><p>设置布局前，控件应该设定好大小策略，限定大小的变化</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">void</span> QWidget::setSizePolicy(QSizePolicy::Policy hor, QSizePolicy::Policy ver);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setSizePolicy</span><span class="params">(QSizePolicy)</span></span>;</span><br><span class="line"><span class="keyword">enum</span> Policy &#123;</span><br><span class="line">       Fixed = <span class="number">0</span>,</span><br><span class="line">       Minimum = GrowFlag,</span><br><span class="line">       Maximum = ShrinkFlag,</span><br><span class="line">       Preferred = GrowFlag | ShrinkFlag,</span><br><span class="line">       MinimumExpanding = GrowFlag | ExpandFlag,</span><br><span class="line">       Expanding = GrowFlag | ShrinkFlag | ExpandFlag,</span><br><span class="line">       Ignored = ShrinkFlag | GrowFlag | IgnoreFlag</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
-</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>whppmy</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2019/01/31/QT布局个人总结/">http://bugnull.com/2019/01/31/QT布局个人总结/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>个人记录，没有获取同意时，禁止转载！！</li></ul></div><br><div class="tags"><a href="/tags/QT/">QT</a></div><div class="post-nav"><a class="pre" href="/2019/02/22/QPainter神奇的画笔/">神奇的QPainter</a><a class="next" href="/2019/01/27/配置文件与注册表/">配置文件与注册表</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><input class="st-default-search-input" placeholder="Search" type="text"></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/杂谈/" style="font-size: 15px;">杂谈</a> <a href="/tags/QT/" style="font-size: 15px;">QT</a> <a href="/tags/C/" style="font-size: 15px;">C++</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示四/">演示四</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示三/">演示三</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示二/">演示二</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示一/">演示一</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/QT的衣服-样式表/">QT的衣服--样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/26/路径的集合QPainterPath/">路径的集合QPainterPath</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/22/QPainter神奇的画笔/">神奇的QPainter</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/31/QT布局个人总结/">QT布局个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/配置文件与注册表/">配置文件与注册表</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/QString与QStringList/">QString与QStringList</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div>Total<span id="busuanzi_container_site_pv"><span> </span><span id="busuanzi_value_site_pv"></span></span><span rel="nofollow">  hits, </span><span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv"></span></span><span rel="nofollow">  visitors.</span></div>© <a href="/." rel="nofollow">BugNull.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script>(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>whppmy</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2019/01/31/QT布局个人总结/">http://bugnull.com/2019/01/31/QT布局个人总结/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>个人记录，没有获取同意时，禁止转载！！</li></ul></div><br><div class="tags"><a href="/tags/QT/">QT</a></div><div class="post-nav"><a class="pre" href="/2019/02/22/QPainter神奇的画笔/">神奇的QPainter</a><a class="next" href="/2019/01/27/配置文件与注册表/">配置文件与注册表</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><input class="st-default-search-input" placeholder="Search" type="text"></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-IP/">TCP/IP</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/QT/" style="font-size: 15px;">QT</a> <a href="/tags/杂谈/" style="font-size: 15px;">杂谈</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/NETWORK/" style="font-size: 15px;">NETWORK</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/域名解析与地址解析/">㳀谈域名解析与地址解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/㳀淡路由转发/">㳀淡路由转发</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/浅谈IPv4寻址/">浅谈IPv4寻址</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/浅谈以太网/">浅谈以太网</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/浅谈TCP-IP与OSI网络模型/">浅谈TCP/IP与OSI网络模型结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示四/">演示四</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示三/">演示三</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示二/">演示二</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/演示一/">演示一</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/QT的衣服-样式表/">QT的衣服--样式表</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div>Total<span id="busuanzi_container_site_pv"><span> </span><span id="busuanzi_value_site_pv"></span></span><span rel="nofollow">  hits, </span><span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv"></span></span><span rel="nofollow">  visitors.</span></div>© <a href="/." rel="nofollow">BugNull.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script>(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
 (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
 e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
 })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
