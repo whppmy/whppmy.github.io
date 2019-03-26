@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[提取HTML信息]]></title>
+    <url>%2F2019%2F03%2F24%2F%E6%8F%90%E5%8F%96HTML%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[前沿 有时候需要从HTML文件上找指定标签上的内容，自己平时用QString的字符串操作，比较麻烦，于是网上找了几个库，记录下来。使用平台是windows QT mingw32 HTMLCXX经过使用，该库符合以下几项要求：使用简单，运行高效。将HTML文件夹和CSS文件夹导入工程即可。使用参考下文。这样已经可以满足我们获取标签上的内容。如果还需要获取CSS，可以看htmlcxx.cc，里面有一个很完整的例子。该库还可以编译成.lib导入工程使用。 手册，找不到原出处，贴上博客：https://blog.csdn.net/ictextr9/article/details/6893085 123456789101112131415161718192021222324252627282930313233343536#include &lt;htmlcxx/html/ParserDom.h&gt; ... using namespace std; using namespace htmlcxx; //Parse some html code string html = "&lt;html&gt;&lt;body&gt;hey&lt;/body&gt;&lt;/html&gt;"; HTML::ParserDom parser; tree&lt;HTML::Node&gt; dom = parser.parseTree(html); //Print whole DOM tree cout &lt;&lt; dom &lt;&lt; endl; //Dump all links in the tree tree&lt;HTML::Node&gt;::iterator it = dom.begin(); tree&lt;HTML::Node&gt;::iterator end = dom.end(); for (; it != end; ++it) &#123; if (strcasecmp(it-&gt;tagName().c_str(), "A") == 0) &#123; it-&gt;parseAttributes(); cout &lt;&lt; it-&gt;attribute("href").second &lt;&lt; endl; &#125; &#125; //Dump all text of the document it = dom.begin(); end = dom.end(); for (; it != end; ++it) &#123; if ((!it-&gt;isTag()) &amp;&amp; (!it-&gt;isComment())) &#123; cout &lt;&lt; it-&gt;text(); &#125; &#125; cout &lt;&lt; endl; GUMBO该库完全由C99编写。另外有C++版本（https://github.com/lazytiger/gumbo-query） 官方设定： 完全符合HTML5规范。 坚固耐用，输入不良。 简单的API，可以很容易地被其他语言包装。 支持源位置和指针返回原始文本。 支持片段解析。 相对轻量级，没有外部依赖性。 传递所有html5lib测试，包括模板标记。 测试了谷歌指数超过25亿页。 根据官方介绍，进行编译，在QT mingw32下，直接导入源文件也能使用。或者编译出.h lib*.a .dll导入工程即可。数据结构大概参考下图，下图省略了很多小标签，结构非常值得参考。 图片转自 12345678910 使用下面两个方式，将html字符串传入，得到GumboOutput*的一个结构体，可以从该结构体中获取到想要的数值。 方式一： GumboOutput* output = gumbo_parse(contents.c_str());//do something gumbo_destroy_output(&amp;kGumboDefaultOptions, output); 方式二： GumboOutput* output = gumbo_parse_with_options( &amp;kGumboDefaultOptions, contents.data(), contents.length());//do something gumbo_destroy_output(&amp;kGumboDefaultOptions, output); 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647官方示例，实际用得不深入，以后还会另开博客写该类。简单介绍下example，为查找A标签的href属性值#include &lt;stdlib.h&gt;#include &lt;fstream&gt;#include &lt;iostream&gt;#include &lt;string&gt;#include "gumbo.h"static void search_for_links(GumboNode* node) &#123; if (node-&gt;type != GUMBO_NODE_ELEMENT) &#123;//不是元素，递归返回 return; &#125; GumboAttribute* href; if (node-&gt;v.element.tag == GUMBO_TAG_A &amp;&amp; (href = gumbo_get_attribute(&amp;node-&gt;v.element.attributes, "href"))) &#123;//是A标签，gumbo_get_attribute查找href属性，如果找到就返回，找不到返回NULL，不区分大小写 std::cout &lt;&lt; href-&gt;value &lt;&lt; std::endl; &#125; GumboVector* children = &amp;node-&gt;v.element.children;//指向子结点 for (unsigned int i = 0; i &lt; children-&gt;length; ++i) &#123; search_for_links(static_cast&lt;GumboNode*&gt;(children-&gt;data[i]));//递归查找 &#125;&#125;int main(int argc, char** argv) &#123; if (argc != 2) &#123; std::cout &lt;&lt; "Usage: find_links &lt;html filename&gt;.\n"; exit(EXIT_FAILURE); &#125; const char* filename = argv[1]; std::ifstream in(filename, std::ios::in | std::ios::binary); if (!in) &#123; std::cout &lt;&lt; "File " &lt;&lt; filename &lt;&lt; " not found!\n"; exit(EXIT_FAILURE); &#125; std::string contents; in.seekg(0, std::ios::end); contents.resize(in.tellg()); in.seekg(0, std::ios::beg); in.read(&amp;contents[0], contents.size()); in.close(); GumboOutput* output = gumbo_parse(contents.c_str());//将从文本读到的html字符串传入，获得GumboOutput结构体 search_for_links(output-&gt;root); gumbo_destroy_output(&amp;kGumboDefaultOptions, output);//析构结构体&#125;]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>LIBARY</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[BIOS与系统引导]]></title>
+    <url>%2F2019%2F03%2F19%2FBIOS%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC%2F</url>
+    <content type="text"><![CDATA[前言从某书上看到，记录下来~~ BIOSBasic Input/Output System，输入输出系统。当CPU的复位引脚被触发，在0xfffffff0处执行一条命令，转跳到ROM中的启动代码，并开始执行，这些代码称为BIOS。 主要作用硬件自检（BIOS自检、上电自检POST），检测系统外围关键设备是否正常。如果自检发现严重故障，直接停机，没有任何提示或者信号，非严重故障，出现提示或者报警信号。 引导设备在BIOS中需要设定一个顺序，在自检完成之后，按顺序将控制权转交给外部设备。 系统引导PC引导（bootloader）分两部分，主引导记录（MBR），引导位于某个分区上的第二部分引导程序，如NTLDR、BOOTMGR、GRUB。主引导主要告诉计算机，硬盘哪个位置找操作系统，1~446字节：调用操作系统的机器码，447~510：分区表，511~512：主引导记录签名（0x55和0xAA） 从BIOS上获取到控制权后，读取该设备的第一扇区（前512字节），如果最后两字节为0x55和0xAA，就表明设备可以启动，否则将控制权移到下一设备。 分区分区表长度64字节，分为4项，每项16字节，所以一个硬盘最多只有4个一级分区（主分区）。第1字节：0x80表示主分区激活，一级分区只能有一个是激活的。2~4字节：主分区第一扇区的物理地址（柱面、磁头、扇区号等）。5：主分区类型。6~8：主分区最后一个扇区的物理位置。9~12：第一个扇区的逻辑地址。13~16：主分区的扇区总数。所以一个分区最大为扇区大小*(2^32)。 系统在激活的主分区：计算机会读取激活分区的第一个扇区，激活分区叫作卷引导记录（VBR），此时会加载操作系统。 系统在逻辑分区：分区表只有四项，因此规定了其中一个区可以定义成扩展分区，在该分区中又有多个逻辑分区。先读取第一个扇区扩展引导记录EBR，里面也包含一张64字节的分区表，分区表分为两项，描述第一个逻辑分区和描述第二个逻辑分区，这样可以完成无限个分区连续。如果要启动这个分区上的系统，需要事先安装好启动管理器，如GRUB，这意味着第二部分代码启动了，在此选择启动系统。]]></content>
+      <categories>
+        <category>IT</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[浅谈HTTP运作]]></title>
     <url>%2F2019%2F03%2F11%2F%E6%B5%85%E8%B0%88HTTP%E8%BF%90%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[HTTP超文本传输协议该协议主要应用于应用层，用于传输两个计算机之间的文件。主要是Web服务器和客户端。 HTTP定义了一个GET方法，如果客户端想要数据，就发送HTTP GET请求，并列出文件名。如果Web决定回应，即返回码200，表示OK和响应内容。404即找不到文件。 网页上的文件称为对象，如文本、图形、动画、音视频等。想要获取这些数据，必须得到第一个文件，才能通过访文件内包含的URL获取更多，即先进入别人的网站才能获取资源。]]></content>
