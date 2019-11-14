@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[演示五]]></title>
+    <url>%2F2019%2F11%2F14%2F%E6%BC%94%E7%A4%BA%E4%BA%94%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[编译QT5.5.1版本OpenCV]]></title>
     <url>%2F2019%2F04%2F21%2F%E7%BC%96%E8%AF%91QT5-5-1%E7%89%88%E6%9C%ACOpenCV%2F</url>
     <content type="text"><![CDATA[前沿因为官方不提供Mingw版本，或者没找到~~~这里选择自己编译一遍。 OpenCV下载 https://opencv.org/releases/ 准备工具CMake与QT5.5.1 本次编译的版本为2.4.13，为目前官方最新版本 编译工作 将下载的OpenCV源码，放于一个文件夹，如下图放于../opencv_2_4_13/sources 创建一个文件夹，用于存放编译完成的文件，下图放于../opencv2_4_13/build_qt 点击Configure弹出对话框，选择MinGW MakeFile和勾选Specify native compilers，点击Next生成makefile 选择QT编译器中的gcc.exe和g++.exe填于对话框中，点击Finish 此时会进行验证 验证通过后，勾选WITH_QT和WITH_OPENGL，其它不动，点击Configure 如果还显示有红色，如下图，再次点击Configure 如果全部都是白色，此时已经配置成功，点击Generate，生成MakeFile 使用CMD打开对应路径，输入mingw32-make make完成 接着进行install 打开生成的目录，include为头文件，x86里面包含lib和dll，收工！！ 编译错误 第一次错误出现在44%的时候，找了半天，需要把源码下的CMakeLists.txt，由ON改成OFF OCV_OPTION(ENABLE_PRECOMPILED_HEADERS “Use precompiled headers” OFF IF (NOT IOS) )]]></content>
@@ -265,7 +270,7 @@
   <entry>
     <title><![CDATA[QT静态库与使用]]></title>
     <url>%2F2019%2F01%2F25%2FQT%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[使用静态库解决了我之前的共享库那篇文章下面那个问题！ 一、新建工程1. 新建Library\C++工程 2.选择共享库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍需要debug版本的，手动增加，多了一条CONFIG+=staticlib 这里得知，告知编译器将编译出静态库 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.主类或函数​ 可以看出，该类与普通类定义完全一样 5.编译完成​ 在windows平台下，会成生一个.a文件（我使用的是Mingw5.5.1，MSVC会生成.lib） 三、库的使用1.新建一个Application项目​ 右击工程，弹出，添加库，选择.a文件，设置见下图2 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h .a 放到与该工程下（该方法直接发布exe即可） 3.使用​ 包含.h头文件即可以正常使用函数或者类。]]></content>
+    <content type="text"><![CDATA[使用静态库解决了我之前的共享库那篇文章下面那个问题！ 一、新建工程1. 新建Library\C++工程 2.选择静态链接库，设定路径 3.选择对应的模块，也可以在pro里面增加 二、工程介绍1.本工程没有main函数，可以归类为库。2.pro文件介绍需要debug版本的，手动增加，多了一条CONFIG+=staticlib 这里得知，告知编译器将编译出静态库 12345CONFIG+=debug_and_releaseCONFIG(debug,debug|release)&#123; unix:TARGET=$$join(TARGET,,,_debug) else:TARGET=$$join(TARGET,,,d)&#125; 3.主类或函数​ 可以看出，该类与普通类定义完全一样 5.编译完成​ 在windows平台下，会成生一个.a文件（我使用的是Mingw5.5.1，MSVC会生成.lib） 三、库的使用1.新建一个Application项目​ 右击工程，弹出，添加库，选择.a文件，设置见下图2 2. pro文件会发生变化​ INCLUDEPATH表示头文件的路径 ​ DEPENDPATH表示编译时依赖文件的路径 ​ 最好把 .h .a 放到与该工程下（该方法直接发布exe即可） 3.使用​ 包含.h头文件即可以正常使用函数或者类。]]></content>
       <categories>
         <category>IT</category>
       </categories>
