@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[跟雷神学音视频-5.YUV与RGB]]></title>
+    <url>%2F2019%2F11%2F26%2F%E8%B7%9F%E9%9B%B7%E7%A5%9E%E5%AD%A6%E9%9F%B3%E8%A7%86%E9%A2%91-5-YUV%E4%B8%8ERGB%2F</url>
+    <content type="text"><![CDATA[RGB先说RGB，人对红绿蓝三种光敏感，可以通过不同的组合达到不同的颜色。需要保存三个数据才能表示一个颜色。忽略RGBA。 YUVY表示明亮度（Luminance或Luma），也就是灰度值，而U和V表示的则是色度（Chrominance或Chroma），作用是描述影像色彩及饱和度，用于指定像素的颜色。主要用于电视系统以及模拟视频领域，它将亮度信息（Y）与色彩信息（UV）分离，没有UV信息一样可以显示完整的图像，只不过是黑白的，这样的设计很好地解决了彩色电视机与黑白电视的兼容问题。 内存占比RGB24一帧的大小size＝width×heigth×3 ByteRGB32一帧的大小size＝width×heigth×4 ByteYUV420一帧的大小size=width×heigth×1.5 Byte 结构分析 来源 详细黑点表示采样该像素点的Y分量，以空心圆圈表示采用该像素点的UV分量 YUV 4:4:4采样，每一个Y对应一组UV分量。 YUV 4:2:2采样，每两个Y共用一组UV分量。 YUV 4:2:0采样，每四个Y共用一组UV分量。 YUYV（属yuv422）：Y’00、Y’01 而言，其Cb、Cr的值均为 Cb00、Cr00 UYVY（属YUV422）：同上，只是顺序不同 YUV422P（属YUV422）：同上上，顺序不同 YV12、YU12（属YUV420）： Y’00、Y’01、Y’10、Y’11共用Cr00、Cb00。I420的Cr和Cb互换了。 NV12、NV21（属YUV420）： Y’00、Y’01、Y’10、Y’11共用Cr00、Cb00 I420: YYYYYYYY UU VV =&gt;YUV420PYV12: YYYYYYYY VV UU =&gt;YUV420PNV12: YYYYYYYY UVUV =&gt;YUV420SPNV21: YYYYYYYY VUVU =&gt;YUV420SP 存储空间 以720*480图像，yuv420 Y分量： (720×480)个字节 U(Cb)分量：(720×480&gt;&gt;2)个字节 V(Cr)分量：(720×480&gt;&gt;2)个字节 422与420相互转换422-&gt;420：Y不变， 将U和V信号值隔行抽样。420-&gt;422：Y不变， 将U和V信号值的每一行分别拷贝一份 。 YUV与RGB相互转换转跳1 转跳2 英文 FFmpeg中的SwsContext yuv420p( planar )与yuv420区别数据在内存中的排布不同： yuv420p: yyyyyyyy uuuu vvvvv 在AVFrame的data[]中 0表示Y、1表示U、2表示V linesize[]中 0表示Y的宽度、1表示U的宽度、2表示V的宽度 yuv420: yuv yuv yuv yuv 保存yuv420p123456789101112131415161718192021void saveYUV420p(const AVFrame * pFrame)&#123; int fWidth=pFrame-&gt;width; int fHeight=pFrame-&gt;height; int yBytes=pFrame-&gt;linesize[0]; int uBytes=pFrame-&gt;linesize[1]; int vBytes=pFrame-&gt;linesize[2]; //QFile.write((char *)pFrame-&gt;data[0],fWidth*fHeight); //QFile.write((char *)pFrame-&gt;data[1],fWidth/2*fHeight/2); //QFile.write((char *)pFrame-&gt;data[2].fWidth/2*fHeight/2); for(int i=0;i&lt;fHeight;i++)&#123; QFile.write((char *)pFrame-&gt;data[0]+i*yBytes,fWidth); &#125; for(int i=0;i&lt;fHeight/2;i++)&#123; QFile.write((char *)pFrame-&gt;data[1]+i*uBytes,fWidth/2); &#125; for(int i=0;i&lt;fHeight/2;i++)&#123; QFile.write((char *)pFrame-&gt;data[2]+i*vBytes,fWidth/2); &#125;&#125;]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>FFmpeg</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跟雷神学音视频-4.网络视频传输的服务质量]]></title>
+    <url>%2F2019%2F11%2F26%2F%E8%B7%9F%E9%9B%B7%E7%A5%9E%E5%AD%A6%E9%9F%B3%E8%A7%86%E9%A2%91-4-%E7%BD%91%E7%BB%9C%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F%2F</url>
+    <content type="text"><![CDATA[QoSQoS（Qualityof Service）服务质量，是网络的一种安全机制, 是用来解决网络延迟和阻塞等问题的一种技术。当网络过载或拥塞时，能确保重要业务量不受延迟或丢弃，同时保证网络的高效运行。主要参数有：传输带宽、传输时延和抖动、丢包率。 传输带宽传输带宽也指的是数据传输的速率。 当传输下载速度小于视频流播放数率，则会出现卡顿，解决方法只有选择低品质、低码流的视频进行传输。 传输时延和抖动传输时延定义为从服务器端发送数据到接受端接收到该数据之间的时间差，它是用来描述网络时延的一个指标。 端到端所产生时延由如下原因：1.信息源媒体采样、压缩编码和打包；2.传输；3.接收端排除和播放缓冲；4.接收端拆包、解码和输出。 时延抖动定义为网络传输延时的变化率。一般采用缓存队列平滑数据报的抖动，但是抖动过大需要使用大的缓存空间，有可能影响体验。 丢包率小的丢包率会造成图像的失真和语音的间歇中断，过高的丢包率甚至可以导致业务的中断。]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>FFmpeg</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跟雷神学音视频-3.音视频压缩编码基本原理]]></title>
+    <url>%2F2019%2F11%2F26%2F%E8%B7%9F%E9%9B%B7%E7%A5%9E%E5%AD%A6%E9%9F%B3%E8%A7%86%E9%A2%91-3-%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%2F</url>
+    <content type="text"><![CDATA[视频编码基本原理 为什么需要编码 记录数字视频的YUV分量格式为例，YUV分别代表亮度与两个色差信号。其中Y采样频率为13.5MHz，色度信号一般为一半或更少，为6.75或3.375MHz。以4：2：2采样频率为例，采样信号以8bit量化，码率为： 13.5 8 + 6.75 8 + 6.75 * 8 = 216Mbit/s，数字量非常的大，因此需要压缩以减少码率。 视频码率就是数据传输时单位时间传送的数据位数，一般我们用的单位是kbps即千位每秒。通俗一点的理解就是取样率，单位时间内取样率越大，精度就越高，处理出来的文件就越接近原始文件。 哪方面入手压缩 数据冗余。 空间冗余、时间冗余、结构冗余、信息熵冗余等，即图像的各像素之间存在着很强的相关性，可以消除。属于无损压缩。 视觉冗余。利用人眼的特性，亮度辨别阈值、视觉阈值，引入适量误差，以一定的失真换取数据压缩。属于有损压缩。 通常使用变换编码来消去除图像的帧内冗余，用运动估计和运动补偿来去除图像的帧间冗余，用熵编码来进一步提高压缩的效率。 压缩编码的方法 变换编码 作用是将空间域描述的图像信号变换到频率域 ，变换到频率域可以实现去相关和能量集中 ，然后对变换后的系数进行编码处理。 常用的正交变换有离散傅里叶变换，离散余弦变换等等。数字视频压缩过程中应用广泛的是离散余弦变换。 离散余弦变换简称为DCT变换。 它可以将L*L的图像块从空间域变换为频率域。 将图像分成互不重叠的图像块再进行DCT变换。 下图是上图中图像块经过DCT变换后的结果。从图中可以看出经过DCT变换后，左上角的低频系数集中了大 量能量，而右下角的高频系数上的能量很小。 量化过程通过对低频区的系数进行细量化，高频区的系数进行粗量化，去除了人眼不敏感的高频信息，从而降低信息传送量，此处是视频压缩中操作的主要原因。 量化的过程可以用下面的公式表示： 其中FQ（u,v）表示经过量化后的DCT系数；F（u,v）表示量化前的DCT系数；Q（u,v）表示量化加权矩阵；q表示量化步长；round表示归整，即将输出的值取为与之最接近的整数值。 DCT系数经过量化之后大部分经变为0，而只有很少一部分系数为非零值，此时只需将这些非0值进行压缩编码即可。 熵编码 熵编码多用可变字长编码（VLC，Variable Length Coding）实现。其基本原理是对信源中出现概率大的符号赋予短码，对于出现概率小的符号赋予长码，从而在统计上获得较短的平均码长。 可变字长编码通常有霍夫曼编码、算术编码、游程编码等。游程编码的压缩效率不高，但编码、解码速度快。 输出直流系数后对紧跟其后的交流系数进行Z型扫描（如图箭头线所示）。Z型扫描将二维的量化系数转换为一维的序列，并在此基础上进行游程编码。最后再对游程编码后的数据进行另一种变长编码，例如霍夫曼编码。通过这种变长编码，进一步提高编码的效率。 运动估计和运动补偿 消除图像序列时间方向相关性的有效手段。 1和2都是消除同帧图像内的像素在空间上的相关系。但是帧和帧的相关信即时间上的相关系由此进行消除，如果两帧之间背景变化不大，那就没必要每一帧单独进行编码，而只对相信帧中变化的部分进行编码。 运动估计：一般将当前的输入图像分割成若干彼此不相重叠的小图像子块，在前或后帧的搜索范围内为每个子块寻找最相似的图像子块。 运动补偿：计算两个子块会得到一个运动矢量。将当前图像的块与参考图像运动矢量所指向的最相似的图像块相减，得到残差图像块；这样可以得到更高的压缩比。 图像帧分为： I（Intra）帧、B（Bidirection prediction）帧、P（Prediction）帧。 I帧只使用本帧内的数据进行编码，在编码过程中它不需要进行运动估计和运动补偿。 P帧在编码过程中使用一个前面的I帧或P帧作为参考图像进行运动补偿，实际上是对当前图像与参考图像的差值进行编码 。 B帧的编码方式与P帧相似，惟一不同的地方是在编码过程中它要使用一个前面的I帧或P帧和一个后面的I帧或P帧进行预测。 综合 图像经过分块，得到的图像块与经过运动补偿的预测图像相减得到差值图像，然后对差值图像进行DCT变换和量化，量化输出的数据有两个去处：1.送给熵编码器编码，编码后的码流输出到缓存器中，等待传送。2.进行反量化和反变化后得到信号，该信号与运动补偿输出的图像块相加得到新的预测图像信号，并将新的预测图像块送至帧存储器。 音频编码基本原理 为什么需要编码 一套双声道数字音频，取样频率为44.1KHz，每样按16bit量化，则其码率为：2 44.1 16 = 1.411 Mbit/s 哪方面入手压缩 去除不能被人耳感知到的信号（20Hz~20KHz），即听觉范围外的音频信号以及被掩蔽掉的音频信号。当同时存在强弱音频时，掩蔽弱音信号。 频谱掩蔽效应 简单来说，人耳对音频有一定的限制，过高或者过底都听不见，同一音频不同的声贝也有可能听不见。因此可以根据这个条件去掉一部份音频。但是如果某音频的音贝提高了，临近的阈值也会提高，所以可以去除掉这一部份的音频。如下图所示： 0.2kHz处出现60dB的声音时，0.1至1kHz的阈值都升高了，虚线以下的声音都需要去除掉，不必传送。 时域掩蔽效应 当强弹音信号同时发出时，还存在时域掩蔽效应。前掩蔽指听到强信号之前短暂时间内，已经存在的弱信号会被掩蔽而听不到。同时掩蔽指同时存在，弱信号会被强信号掩蔽。后掩蔽指强信号消失后，经一段时间才能重新听见弱信号。被掩蔽的弱信号可视为冗余信号。 压缩编码的方法 对于每个音频声道中的音频采样信号，先从时域映射到频域中（子带滤波器）。音频采样块根据心理声学模型计算掩蔽门限值，由此来决定公共比特池中分配给该声道的不同频率域中多少比特数，接着进行量化以及编码工作，最后结合控制参数及辅助数据，产生编码后的数据流。]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>FFmpeg</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跟雷神学音视频-2.主流协议与编码格式]]></title>
+    <url>%2F2019%2F11%2F26%2F%E8%B7%9F%E9%9B%B7%E7%A5%9E%E5%AD%A6%E9%9F%B3%E8%A7%86%E9%A2%91-2-%E4%B8%BB%E6%B5%81%E5%8D%8F%E8%AE%AE%E4%B8%8E%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[流媒体协议服务器与客户端之间通信遵循的规定。目前网上主流的媒体协议如下表： 名称 传输层协议 客户端 RTSP+RTP TCP+UDP VLC，WMP RTMP TCP Flash RTMFP UDP Flash MMS TCP/UDP WMP HTTP TCP Flash RTSP(Real-TimeStream Protocol )是一种基于文本的应用层协议，被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。详细 RTMP协议是一个互联网TCP/IP五层体系结构中应用层的协议。RTMP协议中基本的数据单元称为消息（Message）。当RTMP协议在互联网中传输数据的时候，消息会被拆分成更小的单元，称为消息块（Chunk）。 详细 封装格式音视频码流按某种格式存储在一个文件中。如今流行的封闭格式如下： 名称 流媒体(边下边播) 支持的视频编码 支持的音频编码 AVI NO 几乎所有 几乎所有 MP4 YES MPEG-2, MPEG-4, H.264, H.263等 AAC, MPEG-1 Layers I, II, III, AC-3等 TS YES MPEG-1, MPEG-2, MPEG-4, H.264 MPEG-1 Layers I, II, III, AAC FLV YES Sorenson, VP6, H.264 MP3, ADPCM, Linear PCM, AAC等 MKV YES 几乎所有格式 几乎所有格式 RMVB YES RealVideo 8, 9, 10 AAC, Cook Codec, RealAudio Lossless 视频编码主要作用是将视频像素数据（RGB、YUV等）转换成码流，如果不压缩一部电影可达上百G，因此这一步骤非常的重要。命令行使用方式 视频码流分析工具 名称 推出时间 使用领域 备注 HEVC(H.265) 2013 研发中 HM的使用 H.264 2003 各领域 官方标准JM MPEG4 2001 使用率不高 MPEG2 1994 数字电视 VP9 2013 研发中 VP8 2008 不普及 深入 VC-1 2006 微软 H.264仅仅是一个编码标准，而不是一个具体的编码器。瓶颈与解决方法 VP8与H.264 AVS与H.264 音频编码主要 作用是将采集到的（PCM等）压缩成码流，但是一般数据量远小于视频，使用落后的编码标准数据量不会差距很大，主要是为了更高的音质。 名称 推出时间 使用领域 备注 AAC 1997 各个领域 简介 AC-3 1992 电影 MP3 1993 各个领域 WMA 1999 微软 AAC的音频文件格式有以下两种： ADIF：Audio Data Interchange Format 音频数据交换格式。这种格式的特征是可以确定的找到这个音频数据的开始，不需进行在音频数据流中间开始的解码，即它的解码必须在明确定义的开始处进行。故这种格式常用在磁盘文件中。 ADTS：Audio Data Transport Stream 音频数据传输流。这种格式的特征是它是一个有同步字的比特流，解码可以在这个流中任何位置开始。它的特征类似于mp3数据流格式。这种格式可以用于广播电视。 简言之。ADIF只有一个文件头，ADTS每个包前面有一个文件头。 图中表示出了ADTS一帧的简明结构，其两边的空白矩形表示一帧前后的数据。]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>FFmpeg</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跟雷神学音视频-1.FFmpeg处理流程]]></title>
+    <url>%2F2019%2F11%2F26%2F%E8%B7%9F%E9%9B%B7%E7%A5%9E%E5%AD%A6%E9%9F%B3%E8%A7%86%E9%A2%91-1-FFmpeg%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[简介根据雷神介绍，使用FFmpeg进行音视频处理的步骤分为如下： 解协议，解封装，解码，像素转换，编码，封装，发送。这些步骤又可以分为几个不同的层次，如协议层，封装层，编码层，像素层。 图解 存在某协议的数据，在协议层读取数据（可以从设备中读取Device或者从内存中读取Mem Handler），然后在解封装层进行音视频分离（此时也可进行转换封装格式），得到几个不同的音视频位流。现在可以在解编码层进行解码播放音视频，得到原始数据。此时到了像素层，这里可以进行像素格式转换和添加滤镜等效果，这里还是原始数据，到编码层时，可以进行音视频编码，得到音视频位流，再进行音视频封装或者转换得到封装好的数据，最后进行流推送即可。 协议层（Protocol Layer）：该层处理的数据为符合特定流媒体协议规范的数据，例如http，rtmp，file等。 封装层（Format Layer）：该层处理的数据为符合特定封装格式规范的数据，例如mkv，mp4，flv，mpegts，avi等。 编码层（Codec Layer）：该层处理的数据为符合特定编码标准规范的数据，例如h264，h265，mpeg2，mpeg4等。 像素层（Pixel Layer）：该层处理的数据为符合特定像素格式规范的数据，例如yuv420p，yuv422p，yuv444p，rgb24等。 原文链接：https://blog.csdn.net/leixiaohua1020/article/details/42658139 协议层处理包含以下项目： simplest ffmpeg device：使用FFmpeg读取设备中的媒体数据。 simplest ffmpeg mem handler：使用FFmpeg读取内存中的数据。 simplest ffmpeg streamer：使用FFmpeg发送流媒体数据。 封装层处理包含以下项目： simplest ffmpeg format：使用FFmpeg分离音视频（demux），封装音视频（mux），转换封装格式（remux）。 编码层处理包含以下项目： simplest ffmpeg player：使用FFmpeg解码播放视频数据。 simplest ffmpeg audio player：使用FFmpeg解码播放音频数据。 simplest ffmpeg video encoder：使用FFmpeg编码视频数据。 simplest ffmpeg audio encoder：使用FFmpeg编码音频数据。 simplest ffmpeg picture encoder：使用FFmpeg编码图片。 像素层处理包含以下项目： simplest ffmpeg swscale：使用FFmpeg转换像素格式。 simplest ffmpeg video filter：使用FFmpeg给视频添加滤镜效果。 原文链接：https://blog.csdn.net/leixiaohua1020/article/details/42658139 解协议的作用，就是将流媒体协议的数据，解析为标准的相应的封装格式数据。视音频在网络上传播的时候，常常采用各种流媒体协议，例如HTTP，RTMP，或是MMS等等。这些协议在传输视音频数据的同时，也会传输一些信令数据。这些信令数据包括对播放的控制（播放，暂停，停止），或者对网络状态的描述等。解协议的过程中会去除掉信令数据而只保留视音频数据。例如，采用RTMP协议传输的数据，经过解协议操作后，输出FLV格式的数据。 解封装的作用，就是将输入的封装格式的数据，分离成为音频流压缩编码数据和视频流压缩编码数据。封装格式种类很多，例如MP4，MKV，RMVB，TS，FLV，AVI等等，它的作用就是将已经压缩编码的视频数据和音频数据按照一定的格式放到一起。例如，FLV格式的数据，经过解封装操作后，输出H.264编码的视频码流和AAC编码的音频码流。 解码的作用，就是将视频/音频压缩编码数据，解码成为非压缩的视频/音频原始数据。音频的压缩编码标准包含AAC，MP3，AC-3等等，视频的压缩编码标准则包含H.264，MPEG2，VC-1等等。解码是整个系统中最重要也是最复杂的一个环节。通过解码，压缩编码的视频数据输出成为非压缩的颜色数据，例如YUV420P，RGB等等；压缩编码的音频数据输出成为非压缩的音频抽样数据，例如PCM数据。 视音频同步的作用，就是根据解封装模块处理过程中获取到的参数信息，同步解码出来的视频和音频数据，并将视频音频数据送至系统的显卡和声卡播放出来。 原文链接：https://blog.csdn.net/leixiaohua1020/article/details/18893769]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>FFmpeg</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[演示五]]></title>
     <url>%2F2019%2F11%2F14%2F%E6%BC%94%E7%A4%BA%E4%BA%94%2F</url>
     <content type="text"><![CDATA[]]></content>
@@ -10,7 +65,7 @@
     <url>%2F2019%2F04%2F21%2F%E7%BC%96%E8%AF%91QT5-5-1%E7%89%88%E6%9C%ACOpenCV%2F</url>
     <content type="text"><![CDATA[前沿因为官方不提供Mingw版本，或者没找到~~~这里选择自己编译一遍。 OpenCV下载 https://opencv.org/releases/ 准备工具CMake与QT5.5.1 本次编译的版本为2.4.13，为目前官方最新版本 编译工作 将下载的OpenCV源码，放于一个文件夹，如下图放于../opencv_2_4_13/sources 创建一个文件夹，用于存放编译完成的文件，下图放于../opencv2_4_13/build_qt 点击Configure弹出对话框，选择MinGW MakeFile和勾选Specify native compilers，点击Next生成makefile 选择QT编译器中的gcc.exe和g++.exe填于对话框中，点击Finish 此时会进行验证 验证通过后，勾选WITH_QT和WITH_OPENGL，其它不动，点击Configure 如果还显示有红色，如下图，再次点击Configure 如果全部都是白色，此时已经配置成功，点击Generate，生成MakeFile 使用CMD打开对应路径，输入mingw32-make make完成 接着进行install 打开生成的目录，include为头文件，x86里面包含lib和dll，收工！！ 编译错误 第一次错误出现在44%的时候，找了半天，需要把源码下的CMakeLists.txt，由ON改成OFF OCV_OPTION(ENABLE_PRECOMPILED_HEADERS “Use precompiled headers” OFF IF (NOT IOS) )]]></content>
       <categories>
-        <category>图象处理</category>
+        <category>图像处理</category>
       </categories>
       <tags>
         <tag>OpenCV</tag>
