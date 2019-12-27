@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[16.官方示例解码音视频简析]]></title>
     <url>%2F2019%2F12%2F27%2F16-%E5%AE%98%E6%96%B9%E7%A4%BA%E4%BE%8B%E8%A7%A3%E7%A0%81%E9%9F%B3%E8%A7%86%E9%A2%91%E7%AE%80%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728293031323334static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt, const char *filename)&#123; char buf[1024]; int ret; ret = avcodec_send_packet(dec_ctx, pkt);//将ctx中的一些字段保存到解码器中 去解码pkt if (ret &lt; 0) &#123; exit(1); &#125; while (ret &gt;= 0) &#123; ret = avcodec_receive_frame(dec_ctx, frame);//返回解码后的数据到frame if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) return; else if (ret &lt; 0) &#123; exit(1); &#125; /*video printf("saving frame %3d\n", dec_ctx-&gt;frame_number); fflush(stdout); for (i = 0; i &lt; frame-&gt;height; i++) fwrite(frame-&gt;data[0] + i * frame-&gt;linesize[0], 1, frame-&gt;width, f); */ /*audio: data_size = av_get_bytes_per_sample(dec_ctx-&gt;sample_fmt);//每个样本的字节数 if (data_size &lt; 0) &#123; exit(1); &#125; for (i = 0; i &lt; frame-&gt;nb_samples; i++) for (ch = 0; ch &lt; dec_ctx-&gt;channels; ch++) fwrite(frame-&gt;data[ch] + data_size*i, 1, data_size, f); */ &#125;&#125; 123456789101112131415161718192021222324252627282930313233343536373839404142434445/** * @file * audio decoding with libavcodec API example * * @example decode_audio.c */av_packet_alloc();//分配并初始化pktavcodec_find_decoder();//根据id找一个解码器codecav_parser_init();//根据编码器id返回一个解析器上下文parserctxavcodec_alloc_context3();//根据codec分配ctxavcodec_open2();//用编码器打开上下文data = inbuf;//一个数组data_size = fread(inbuf, 1, AUDIO_INBUF_SIZE, f);while (data_size &gt; 0) &#123; if (!frame) &#123; if (!(frame = av_frame_alloc())) &#123;//分配和初始化完整包 exit(1); &#125; &#125; ret = av_parser_parse2(parser, c, &amp;pkt-&gt;data, &amp;pkt-&gt;size,data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);//从上下文中解析一个压缩包 if (ret &lt; 0) &#123; exit(1); &#125; data += ret;//指针移动 data_size -= ret;//缓存数量减少 if (pkt-&gt;size) decode(c, frame, pkt, outfile);//解码 并写到文件中去 if (data_size &lt; AUDIO_REFILL_THRESH) &#123;//若数据少于AUDIO_REFILL_THRESH，就去文件中读取缺少的部分 直到达到AUDIO_INBUF_SIZE memmove(inbuf, data, data_size);//将inbuf内容变为由data开始 连续data_size data = inbuf; len = fread(data + data_size, 1,AUDIO_INBUF_SIZE - data_size, f); if (len &gt; 0) data_size += len; &#125;&#125;pkt-&gt;data = NULL;pkt-&gt;size = 0;decode(c, frame, pkt, outfile);//有可能文件没解析完avcodec_free_context();//关闭编码器上下文av_parser_close();//关闭解析器av_frame_free();//释放帧av_packet_free();//释放压缩包 1234567891011121314151617181920212223242526272829303132333435/** * @file * video decoding with libavcodec API example * * @example decode_video.c */av_packet_alloc();//初始化pktmemset(inbuf + INBUF_SIZE, 0, AV_INPUT_BUFFER_PADDING_SIZE);//初始化缓存数组 防止越界avcodec_find_decoder();//查找一个解码器 codecav_parser_init();//初始化parseravcodec_alloc_contex3();//初始化ctxav_frame_alloc();//初始化framewhile (!feof(f)) &#123; data_size = fread(inbuf, 1, INBUF_SIZE, f); if (!data_size) break; data = inbuf; while (data_size &gt; 0) &#123; ret = av_parser_parse2(parser, c, &amp;pkt-&gt;data, &amp;pkt-&gt;size, data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);//根据parser拆分一个压缩包 if (ret &lt; 0) &#123; exit(1); &#125; data += ret; data_size -= ret; if (pkt-&gt;size) decode(c, frame, pkt, outfilename); &#125;&#125;decode(c, frame, NULL, outfilename);//缓存av_parser_close();avcodec_free_context();av_frame_free();av_packet_free();]]></content>
+    <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829303132333435363738394041424344/** * @file * audio decoding with libavcodec API example * * @example decode_audio.c */av_packet_alloc();//分配并初始化pktavcodec_find_decoder();//根据id找一个解码器codecav_parser_init();//根据编码器id返回一个解析器上下文parserctxavcodec_alloc_context3();//根据codec分配ctxavcodec_open2();//用编码器打开上下文data = inbuf;//一个数组data_size = fread(inbuf, 1, AUDIO_INBUF_SIZE, f);while (data_size &gt; 0) &#123; if (!frame) &#123; if (!(frame = av_frame_alloc())) &#123;//分配和初始化完整包 exit(1); &#125; &#125; ret = av_parser_parse2(parser, c, &amp;pkt-&gt;data, &amp;pkt-&gt;size,data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);//从上下文中解析一个压缩包 if (ret &lt; 0) &#123; exit(1); &#125; data += ret;//指针移动 data_size -= ret;//缓存数量减少 if (pkt-&gt;size) decode(c, frame, pkt, outfile);//解码 并写到文件中去 if (data_size &lt; AUDIO_REFILL_THRESH) &#123;//若数据少于AUDIO_REFILL_THRESH，就去文件中读取缺少的部分 直到达到AUDIO_INBUF_SIZE memmove(inbuf, data, data_size);//将inbuf内容变为由data开始 连续data_size data = inbuf; len = fread(data + data_size, 1,AUDIO_INBUF_SIZE - data_size, f); if (len &gt; 0) data_size += len; &#125;&#125;pkt-&gt;data = NULL;pkt-&gt;size = 0;decode(c, frame, pkt, outfile);//有可能文件没解析完avcodec_free_context();//关闭编码器上下文av_parser_close();//关闭解析器av_frame_free();//释放帧av_packet_free();//释放压缩包 1234567891011121314151617181920212223242526272829303132333435/** * @file * video decoding with libavcodec API example * * @example decode_video.c */av_packet_alloc();//初始化pktmemset(inbuf + INBUF_SIZE, 0, AV_INPUT_BUFFER_PADDING_SIZE);//初始化缓存数组 防止越界avcodec_find_decoder();//查找一个解码器 codecav_parser_init();//初始化parseravcodec_alloc_contex3();//初始化ctxav_frame_alloc();//初始化framewhile (!feof(f)) &#123; data_size = fread(inbuf, 1, INBUF_SIZE, f); if (!data_size) break; data = inbuf; while (data_size &gt; 0) &#123; ret = av_parser_parse2(parser, c, &amp;pkt-&gt;data, &amp;pkt-&gt;size, data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);//根据parser拆分一个压缩包 if (ret &lt; 0) &#123; exit(1); &#125; data += ret; data_size -= ret; if (pkt-&gt;size) decode(c, frame, pkt, outfilename); &#125;&#125;decode(c, frame, NULL, outfilename);//缓存av_parser_close();avcodec_free_context();av_frame_free();av_packet_free(); 12345678910111213141516171819202122232425262728293031323334static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt, const char *filename)&#123; char buf[1024]; int ret; ret = avcodec_send_packet(dec_ctx, pkt);//将ctx中的一些字段保存到解码器中 去解码pkt if (ret &lt; 0) &#123; exit(1); &#125; while (ret &gt;= 0) &#123; ret = avcodec_receive_frame(dec_ctx, frame);//返回解码后的数据到frame if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) return; else if (ret &lt; 0) &#123; exit(1); &#125; /*video printf("saving frame %3d\n", dec_ctx-&gt;frame_number); fflush(stdout); for (i = 0; i &lt; frame-&gt;height; i++) fwrite(frame-&gt;data[0] + i * frame-&gt;linesize[0], 1, frame-&gt;width, f); */ /*audio: data_size = av_get_bytes_per_sample(dec_ctx-&gt;sample_fmt);//每个样本的字节数 if (data_size &lt; 0) &#123; exit(1); &#125; for (i = 0; i &lt; frame-&gt;nb_samples; i++) for (ch = 0; ch &lt; dec_ctx-&gt;channels; ch++) fwrite(frame-&gt;data[ch] + data_size*i, 1, data_size, f); */ &#125;&#125;]]></content>
       <categories>
         <category>图像处理</category>
       </categories>
@@ -25,7 +25,7 @@
   <entry>
     <title><![CDATA[15.官方示例AVIO读取源码简析]]></title>
     <url>%2F2019%2F12%2F27%2F15-%E5%AE%98%E6%96%B9%E7%A4%BA%E4%BE%8BAVIO%E8%AF%BB%E5%8F%96%E6%BA%90%E7%A0%81%E7%AE%80%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[1234567891011//avio_dir_cmd.cav_log_set_level();//设置日志等级avformat_network_init();//GnuTLS和OpenSSL的线程安全考虑 否则就不需要再使用avpriv_io_move();//移动或者重名avpriv_io_delete();//删除avio_open_dir();//打开目录avio_read_dir();//从目录读取一个条目avio_free_directory_entry();//关闭条目avformat_network_deinit();//有avformat_network_init必须有这个进行关闭 12345678910111213141516171819202122232425262728293031323334353637383940/** * @file * libavformat AVIOContext API example. * * Make libavformat demuxer access media content through a custom * AVIOContext read callback. * @example avio_reading.c */av_file_map();//读取文件到buffer和buffersizeavformat_alloc_context();//分配和初始化封装上下文ctxav_malloc();//申请一块空间得到ctxbuffer//bd结构体 包含buffer和buffersizeavio_alloc_context(ctxbuffer, ctxbuffersize,0, &amp;bd, &amp;read_packet, NULL, NULL);//为比特流上下文申请空间 得到avio_ctxctx-&gt;pb = avio_ctx;avformat_open_input();//打开流avformat_find_stream_info();//读文件流信息av_dump_format();//打印封装上下文avformat_close_input();//关闭封装上下文并指为NULLav_freep();//av_malloc()av_context_free();//关闭比特流上下文av_file_unmap();//av_file_map()static int read_packet(void *opaque, uint8_t *buf, int buf_size)//从opaque中读取buf_size长的数据保存在buf&#123; struct buffer_data *bd = (struct buffer_data *)opaque; buf_size = FFMIN(buf_size, bd-&gt;size); if (!buf_size) return AVERROR_EOF; printf("ptr:%p size:%zu\n", bd-&gt;ptr, bd-&gt;size); /* copy internal buffer data to buf */ memcpy(buf, bd-&gt;ptr, buf_size); bd-&gt;ptr += buf_size; bd-&gt;size -= buf_size; return buf_size;&#125;]]></content>
+    <content type="text"><![CDATA[1234567891011//avio_dir_cmd.cav_log_set_level();//设置日志等级avformat_network_init();//GnuTLS和OpenSSL的线程安全考虑 否则就不需要再使用avpriv_io_move();//移动或者重名avpriv_io_delete();//删除avio_open_dir();//打开目录avio_read_dir();//从目录读取一个条目avio_free_directory_entry();//关闭条目avformat_network_deinit();//有avformat_network_init必须有这个进行关闭 1234567891011121314151617181920212223242526272829303132333435363738/** * @file * libavformat AVIOContext API example. * * Make libavformat demuxer access media content through a custom * AVIOContext read callback. * @example avio_reading.c */av_file_map();//读取文件到buffer和buffersizeavformat_alloc_context();//分配和初始化封装上下文ctxav_malloc();//申请一块空间得到ctxbuffer//bd结构体 包含buffer和buffersizeavio_alloc_context(ctxbuffer, ctxbuffersize,0, &amp;bd, &amp;read_packet, NULL, NULL);//为比特流上下文申请空间 得到avio_ctxctx-&gt;pb = avio_ctx;avformat_open_input();//打开流avformat_find_stream_info();//读文件流信息av_dump_format();//打印封装上下文avformat_close_input();//关闭封装上下文并指为NULLav_freep();//av_malloc()av_context_free();//关闭比特流上下文av_file_unmap();//av_file_map()static int read_packet(void *opaque, uint8_t *buf, int buf_size)//从opaque中读取buf_size长的数据保存在buf&#123; struct buffer_data *bd = (struct buffer_data *)opaque; buf_size = FFMIN(buf_size, bd-&gt;size); if (!buf_size) return AVERROR_EOF; printf("ptr:%p size:%zu\n", bd-&gt;ptr, bd-&gt;size); /* copy internal buffer data to buf */ memcpy(buf, bd-&gt;ptr, buf_size); bd-&gt;ptr += buf_size; bd-&gt;size -= buf_size; return buf_size;&#125;]]></content>
       <categories>
         <category>图像处理</category>
       </categories>
@@ -36,7 +36,7 @@
   <entry>
     <title><![CDATA[14.官方示例编码音视频简析]]></title>
     <url>%2F2019%2F12%2F26%2F14-%E5%AE%98%E6%96%B9%E7%A4%BA%E4%BE%8B%E7%BC%96%E7%A0%81%E9%9F%B3%E8%A7%86%E9%A2%91%E7%AE%80%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[1234567891011121314151617181920212223242526encode(AVCodecContext *enc_ctx, AVFrame *frame, AVPacket *pkt,FILE *outfile)&#123; int ret; /* send the frame to the encoder */ if (frame) printf("Send frame %3"PRId64"\n", frame-&gt;pts); ret = avcodec_send_frame(enc_ctx, frame); if (ret &lt; 0) &#123; fprintf(stderr, "Error sending a frame for encoding\n"); exit(1); &#125; while (ret &gt;= 0) &#123; ret = avcodec_receive_packet(enc_ctx, pkt); if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) return; else if (ret &lt; 0) &#123; fprintf(stderr, "Error during encoding\n"); exit(1); &#125; printf("Write packet %3"PRId64" (size=%5d)\n", pkt-&gt;pts, pkt-&gt;size); fwrite(pkt-&gt;data, 1, pkt-&gt;size, outfile); av_packet_unref(pkt); &#125;&#125; 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849/** * @file * audio encoding with libavcodec API example. * * @example encode_audio.c */avcodec_find_encoder();//查找一个编码器encodecavcodec_alloc_contex3();//根据编码器 申请一个编码上下文ctxctx-&gt;bit_rate;ctx-&gt;sample_fmt;//根据encodec-&gt;sample_fmts查看是否支持ctx-&gt;sample_rate;//根据encodec-&gt;supported_samplerates找一个最适合的ctx-&gt;channel_layout;//根据const uint64_t *p=encodec-&gt;channel_layouts av_get_channel_layout_nb_channels(*p)找最大的通道ctx-&gt;channels;//av_get_channel_layout_nb_channels(ctx-&gt;channel_layout)avcodec_open2();//打开编码器与上下文绑定av_packet_alloc();//分配并初始化一个pktav_frame_alloc();//分配并初始化一个frameframe-&gt;nb_samples=ctx-&gt;frame_size;frame-&gt;format=ctx-&gt;ctx-&gt;sample_fmt;frame-&gt;channel_layout=ctx-&gt;channel_layout;av_frame_get_buffer();//为frame分配buff空间av_frame_make_writable();//确定帧是可写的/ *以每秒110Hz增加频率tincr = 2 * M_PI * 110.0 / c-&gt; sample_rate; tincr2 = 2 * M_PI * 110.0 / c-&gt; sample_rate / c-&gt; sample_rate; 填充一段正弦波*/t = 0;tincr = 2 * M_PI * 440.0 / ctx-&gt;sample_rate;for (i = 0; i &lt; 200; i++) &#123; ret = av_frame_make_writable(frame); if (ret &lt; 0) exit(1); samples = (uint16_t*)frame-&gt;data[0]; for (j = 0; j &lt; c-&gt;frame_size; j++) &#123; samples[2 * j] = (int)(sin(t) * 10000); for (k = 1; k &lt; c-&gt;channels; k++) samples[2 * j + k] = samples[2 * j]; t += tincr; &#125; encode(ctx, frame, pkt, f);//avcodec_send_frame avcodec_receive_packet av_packet_unref&#125;encode(ctx, NULL, pkt, f);av_frame_free();//释放freamav_packet_free();//释放pktavcodec_free_contex();//释放编码上下文 123456789101112131415161718192021222324252627282930313233/*** @file* video encoding with libavcodec API example** @example encode_video.c*/avcodec_find_encoder_by_name();//根据名字查找编码器encodecavcodec_alloc_context3();//根据编码器 申请编码上下文ctxav_packet_alloc();//分配pktctx-&gt;bit_rate;ctx-&gt;width;ctx-&gt;height;ctx-&gt;time_base;//AVRational&#123;1,25&#125; fps25ctx-&gt;framerate;//AVRational&#123;25,1&#125;ctx-&gt;gop_size;//多久一个关键帧ctx-&gt;max_b_frames;//最多b帧ctx-&gt;pix_fmt;//帧格式if (codec-&gt;id == AV_CODEC_ID_H264) av_opt_set(ctx-&gt;priv_data, "preset", "slow", 0);/*AVOption除了可以对常用的结构体AVFormatContext、AVCodecContext等进行设置之外，还可以对它们的私有数据priv_data进行赋值。这些字段里面通常存储了各种编码器特有的结构体。如使用libx264进行编码的时候，通过AVCodecContext的priv_data字段可以对X264Context（libavcodec\libx264.c）结构体中的变量进行赋值，设置preset、profile等*/avcodec_open2();//打开编码器与上下文绑定av_frame_alloc();//初始化frameframe-&gt;format=ctx-&gt;pix_fmt;frame-&gt;width=ctx-&gt;width;frame-&gt;height=ctx-&gt;height;av_frame_get_buffer();//为frame申请内部空间av_frame_make_writable();//确定帧是可写的填满frame-&gt;data;encodec();avcodec_free_context();av_frame_free();av_packet_free();]]></content>
+    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849/** * @file * audio encoding with libavcodec API example. * * @example encode_audio.c */avcodec_find_encoder();//查找一个编码器encodecavcodec_alloc_contex3();//根据编码器 申请一个编码上下文ctxctx-&gt;bit_rate;ctx-&gt;sample_fmt;//根据encodec-&gt;sample_fmts查看是否支持ctx-&gt;sample_rate;//根据encodec-&gt;supported_samplerates找一个最适合的ctx-&gt;channel_layout;//根据const uint64_t *p=encodec-&gt;channel_layouts av_get_channel_layout_nb_channels(*p)找最大的通道ctx-&gt;channels;//av_get_channel_layout_nb_channels(ctx-&gt;channel_layout)avcodec_open2();//打开编码器与上下文绑定av_packet_alloc();//分配并初始化一个pktav_frame_alloc();//分配并初始化一个frameframe-&gt;nb_samples=ctx-&gt;frame_size;frame-&gt;format=ctx-&gt;ctx-&gt;sample_fmt;frame-&gt;channel_layout=ctx-&gt;channel_layout;av_frame_get_buffer();//为frame分配buff空间av_frame_make_writable();//确定帧是可写的/ *以每秒110Hz增加频率tincr = 2 * M_PI * 110.0 / c-&gt; sample_rate; tincr2 = 2 * M_PI * 110.0 / c-&gt; sample_rate / c-&gt; sample_rate; 填充一段正弦波*/t = 0;tincr = 2 * M_PI * 440.0 / ctx-&gt;sample_rate;for (i = 0; i &lt; 200; i++) &#123; ret = av_frame_make_writable(frame); if (ret &lt; 0) exit(1); samples = (uint16_t*)frame-&gt;data[0]; for (j = 0; j &lt; c-&gt;frame_size; j++) &#123; samples[2 * j] = (int)(sin(t) * 10000); for (k = 1; k &lt; c-&gt;channels; k++) samples[2 * j + k] = samples[2 * j]; t += tincr; &#125; encode(ctx, frame, pkt, f);//avcodec_send_frame avcodec_receive_packet av_packet_unref&#125;encode(ctx, NULL, pkt, f);av_frame_free();//释放freamav_packet_free();//释放pktavcodec_free_contex();//释放编码上下文 123456789101112131415161718192021222324252627282930313233/*** @file* video encoding with libavcodec API example** @example encode_video.c*/avcodec_find_encoder_by_name();//根据名字查找编码器encodecavcodec_alloc_context3();//根据编码器 申请编码上下文ctxav_packet_alloc();//分配pktctx-&gt;bit_rate;ctx-&gt;width;ctx-&gt;height;ctx-&gt;time_base;//AVRational&#123;1,25&#125; fps25ctx-&gt;framerate;//AVRational&#123;25,1&#125;ctx-&gt;gop_size;//多久一个关键帧ctx-&gt;max_b_frames;//最多b帧ctx-&gt;pix_fmt;//帧格式if (codec-&gt;id == AV_CODEC_ID_H264) av_opt_set(ctx-&gt;priv_data, "preset", "slow", 0);/*AVOption除了可以对常用的结构体AVFormatContext、AVCodecContext等进行设置之外，还可以对它们的私有数据priv_data进行赋值。这些字段里面通常存储了各种编码器特有的结构体。如使用libx264进行编码的时候，通过AVCodecContext的priv_data字段可以对X264Context（libavcodec\libx264.c）结构体中的变量进行赋值，设置preset、profile等*/avcodec_open2();//打开编码器与上下文绑定av_frame_alloc();//初始化frameframe-&gt;format=ctx-&gt;pix_fmt;frame-&gt;width=ctx-&gt;width;frame-&gt;height=ctx-&gt;height;av_frame_get_buffer();//为frame申请内部空间av_frame_make_writable();//确定帧是可写的填满frame-&gt;data;encodec();avcodec_free_context();av_frame_free();av_packet_free(); 1234567891011121314151617181920212223242526encode(AVCodecContext *enc_ctx, AVFrame *frame, AVPacket *pkt,FILE *outfile)&#123; int ret; /* send the frame to the encoder */ if (frame) printf("Send frame %3"PRId64"\n", frame-&gt;pts); ret = avcodec_send_frame(enc_ctx, frame); if (ret &lt; 0) &#123; fprintf(stderr, "Error sending a frame for encoding\n"); exit(1); &#125; while (ret &gt;= 0) &#123; ret = avcodec_receive_packet(enc_ctx, pkt); if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) return; else if (ret &lt; 0) &#123; fprintf(stderr, "Error during encoding\n"); exit(1); &#125; printf("Write packet %3"PRId64" (size=%5d)\n", pkt-&gt;pts, pkt-&gt;size); fwrite(pkt-&gt;data, 1, pkt-&gt;size, outfile); av_packet_unref(pkt); &#125;&#125;]]></content>
       <categories>
         <category>图像处理</category>
       </categories>
@@ -200,7 +200,7 @@
         <category>IT</category>
       </categories>
       <tags>
-        <tag>LINUX</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -222,7 +222,7 @@
         <category>IT</category>
       </categories>
       <tags>
-        <tag>LIBARY</tag>
+        <tag>Libary</tag>
       </tags>
   </entry>
   <entry>
@@ -244,7 +244,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
@@ -255,7 +255,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
@@ -266,7 +266,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
@@ -277,7 +277,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
@@ -288,7 +288,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
@@ -299,7 +299,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
@@ -310,7 +310,7 @@
         <category>TCP/IP</category>
       </categories>
       <tags>
-        <tag>NETWORK</tag>
+        <tag>NetWork</tag>
       </tags>
   </entry>
   <entry>
