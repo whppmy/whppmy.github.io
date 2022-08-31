@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="个人博客，记录生活"><title>跟雷神学音视频-12FFmepg命令行参数 | BugNull</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">跟雷神学音视频-12FFmepg命令行参数</h1><a id="logo" href="/.">BugNull</a><p class="description">纸上得来终觉浅，绝知此事要躬行</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">跟雷神学音视频-12FFmepg命令行参数</h1><div class="post-meta">2019-12-07<span> | </span><span class="category"><a href="/categories/视频图像/">视频图像</a></span><!--script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)--><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h3 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h3><p><a href="http://ffmpeg.org/ffmpeg.html" target="_blank" rel="noopener">FFmpeg.exe官网详细</a></p>
+<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/15186441" target="_blank" rel="noopener">FFplay.exe雷神</a>  <a href="http://ffmpeg.org/ffplay.html" target="_blank" rel="noopener">官网</a></p>
+<p><a href="http://ffmpeg.org/ffprobe.html" target="_blank" rel="noopener">FFprobe.exe官网</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -h type=name 查看属性的参数 type是下表通用上的，去掉s</span><br><span class="line">例</span><br><span class="line">ffmpeg -h filter=atempo 查看音频播放速率</span><br><span class="line">输出</span><br><span class="line">Filter atempo</span><br><span class="line">  Adjust audio tempo.</span><br><span class="line">    Inputs:</span><br><span class="line">       #<span class="number">0</span>: <span class="keyword">default</span> (audio)</span><br><span class="line">    Outputs:<span class="number">25</span></span><br><span class="line">       #<span class="number">0</span>: <span class="keyword">default</span> (audio)</span><br><span class="line">atempo AVOptions:</span><br><span class="line">  tempo             &lt;<span class="keyword">double</span>&gt;     ..F.A.... <span class="built_in">set</span> tempo scale factor (from <span class="number">0.5</span> to <span class="number">100</span>) (<span class="keyword">default</span> <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-L</td>
+<td>许可证书</td>
+</tr>
+<tr>
+<td>-h -? -help –help</td>
+<td>帮助</td>
+</tr>
+<tr>
+<td>-version</td>
+<td>版本信息</td>
+</tr>
+<tr>
+<td>-buildconf</td>
+<td>编译配置</td>
+</tr>
+<tr>
+<td>-formats</td>
+<td>支持的封装或者解封装格式</td>
+</tr>
+<tr>
+<td>-muxers</td>
+<td>支持的封装格式</td>
+</tr>
+<tr>
+<td>-demuxers</td>
+<td>支持的解封装格式</td>
+</tr>
+<tr>
+<td>-codecs</td>
+<td>编解码器对编解码的支持</td>
+</tr>
+<tr>
+<td>-decoders</td>
+<td>支持解码的格式</td>
+</tr>
+<tr>
+<td>-encoders</td>
+<td>支持编码的格式</td>
+</tr>
+<tr>
+<td>-bsfs</td>
+<td>比特流过虑器</td>
+</tr>
+<tr>
+<td>-protocols</td>
+<td>支持输入和输出的协议</td>
+</tr>
+<tr>
+<td>-filters</td>
+<td>过虑器</td>
+</tr>
+<tr>
+<td>-pix_fmts</td>
+<td>像素格式的支持</td>
+</tr>
+<tr>
+<td>-layouts</td>
+<td>声道布局</td>
+</tr>
+<tr>
+<td>-sample_fmts</td>
+<td>音频采样格式</td>
+</tr>
+<tr>
+<td>-colors</td>
+<td>颜色</td>
+</tr>
+<tr>
+<td>-sources device</td>
+<td>输入设备的源</td>
+</tr>
+<tr>
+<td>-sinks device</td>
+<td>输出设备的源</td>
+</tr>
+<tr>
+<td>-hwaccels</td>
+<td>硬件加速</td>
+</tr>
+</tbody>
+</table>
+<h4 id="文件主选项"><a href="#文件主选项" class="headerlink" title="文件主选项"></a>文件主选项</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-f fmt</td>
+<td>设定输出格式</td>
+</tr>
+<tr>
+<td>-c codec    -codec codec</td>
+<td>设置编码器</td>
+</tr>
+<tr>
+<td>-pre preset</td>
+<td>预置预处理集</td>
+</tr>
+<tr>
+<td>-map_metadata outfile[,metadata]:infile[,metadata]</td>
+<td>设置输出文件的元数据信息</td>
+</tr>
+<tr>
+<td>-t duration</td>
+<td>设置录制或转码的时间 秒</td>
+</tr>
+<tr>
+<td>-to time_stop</td>
+<td>设置录制或转码的停止时间点</td>
+</tr>
+<tr>
+<td>-fs limit_size</td>
+<td>设置文件最大值 byte</td>
+</tr>
+<tr>
+<td>-ss time_off</td>
+<td>设置开始时间点</td>
+</tr>
+<tr>
+<td>-sseof time_off</td>
+<td>设置开始时间点 从结束开始倒数</td>
+</tr>
+<tr>
+<td>-seek_timestamp</td>
+<td>启动或者禁止时间戳对-ss的影响</td>
+</tr>
+<tr>
+<td>-timestamp time</td>
+<td>设置录制的时间戳（now是当前时间）</td>
+</tr>
+<tr>
+<td>-metadata string=string</td>
+<td>添加元数据</td>
+</tr>
+<tr>
+<td>-program title=string:st=number…</td>
+<td>给指定的流添加program</td>
+</tr>
+<tr>
+<td>-target type</td>
+<td>指定目标文件的类型</td>
+</tr>
+<tr>
+<td>-apad</td>
+<td>音频补齐</td>
+</tr>
+<tr>
+<td>-frames number</td>
+<td>设置输出多少帧</td>
+</tr>
+<tr>
+<td>-filter filter_graph</td>
+<td>设置流的滤镜图</td>
+</tr>
+<tr>
+<td>-filter_script filename</td>
+<td>从一个文件中获取滤镜图的描述</td>
+</tr>
+<tr>
+<td>-reinit_filter</td>
+<td>输入参数变化时重新初始化滤镜图</td>
+</tr>
+<tr>
+<td>-discard</td>
+<td>丢弃</td>
+</tr>
+<tr>
+<td>-disposition</td>
+<td>配置</td>
+</tr>
+</tbody>
+</table>
+<h4 id="视频选项"><a href="#视频选项" class="headerlink" title="视频选项"></a>视频选项</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-vframes number</td>
+<td>输出多少帧视频</td>
+</tr>
+<tr>
+<td>-r rate</td>
+<td>设置帧率 HZ</td>
+</tr>
+<tr>
+<td>-s size</td>
+<td>设置帧大小</td>
+</tr>
+<tr>
+<td>-aspect aspect</td>
+<td>设置视频宽高比 w:h或者浮点数</td>
+</tr>
+<tr>
+<td>-bits_per_raw_sample</td>
+<td>设置每个原始样本的比特数</td>
+</tr>
+<tr>
+<td>-vn</td>
+<td>禁止视频</td>
+</tr>
+<tr>
+<td>-vcodec codec</td>
+<td>设置视频编解码（copy复制输入流的）</td>
+</tr>
+<tr>
+<td>-timecode hh:mm:ss[:;.]ff</td>
+<td>设置初始时间码</td>
+</tr>
+<tr>
+<td>-pass n</td>
+<td>选择通道1~3</td>
+</tr>
+<tr>
+<td>-vf filter_graph</td>
+<td>设置视频滤镜</td>
+</tr>
+<tr>
+<td>-ab bitrate</td>
+<td>设置音频比特率 -b:a同样</td>
+</tr>
+<tr>
+<td>-b bitrate</td>
+<td>设置视频比特率 -b:v同样</td>
+</tr>
+<tr>
+<td>-dn</td>
+<td>禁止数据缓存</td>
+</tr>
+</tbody>
+</table>
+<h4 id="音频选项"><a href="#音频选项" class="headerlink" title="音频选项"></a>音频选项</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-aframes number</td>
+<td>设置输出多少帧音频</td>
+</tr>
+<tr>
+<td>-aq quality</td>
+<td>设置音频质量</td>
+</tr>
+<tr>
+<td>-ar rate</td>
+<td>设置音频采样率</td>
+</tr>
+<tr>
+<td>-ac channels</td>
+<td>设置音频通道</td>
+</tr>
+<tr>
+<td>-an</td>
+<td>禁止音频</td>
+</tr>
+<tr>
+<td>-acodec codec</td>
+<td>设置音频编解码</td>
+</tr>
+<tr>
+<td>-vol volume</td>
+<td>改变音量 正常=256</td>
+</tr>
+<tr>
+<td>-af filter_graph</td>
+<td>设置音频滤镜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="字幕选项"><a href="#字幕选项" class="headerlink" title="字幕选项"></a>字幕选项</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-s size</td>
+<td>设置帧大小W*H</td>
+</tr>
+<tr>
+<td>-sn</td>
+<td>禁止字幕</td>
+</tr>
+<tr>
+<td>-scodec codec</td>
+<td>设置字幕的编解码器（copy表示使用输入源）</td>
+</tr>
+<tr>
+<td>-stag fourcc/tag</td>
+<td>设置字幕tag/fourcc</td>
+</tr>
+<tr>
+<td>-fix_sub_duration</td>
+<td>修改字幕的时间</td>
+</tr>
+<tr>
+<td>-canvas_size size</td>
+<td>设置画布大小</td>
+</tr>
+<tr>
+<td>-spre preset</td>
+<td>设置字幕选项的预设</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js?v=1.0.0" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css?v=1.0.0"><p><span>本文标题：</span>跟雷神学音视频-12FFmepg命令行参数</p><p><span>文章作者：</span>whppmy</p><p><span>发布时间：</span>2019-12-07</p><p><span>最后更新：</span>2022-08-28</p><p><span>原始链接：</span><a href="/视频图像/跟雷神学音视频-12ffmepg命令行参数/">http://bugnull.com/视频图像/跟雷神学音视频-12ffmepg命令行参数/</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="http://bugnull.com/视频图像/跟雷神学音视频-12ffmepg命令行参数/"></i></span></p><p><span>版权声明：</span>个人记录，没有获取同意时，禁止转载！！</p></div><br><div class="tags"><a href="/tags/FFmpeg"><i class="fa fa-tag">FFmpeg</i></a></div><div class="post-nav"><a class="pre" href="/视频图像/13-官方示例解复用和解编码-c/">13.官方示例解复用和解编码.c</a><a class="next" href="/视频图像/跟雷神学音视频-11-udp-rtp协议解析/">跟雷神学音视频-11.UDP-RTP协议解析</a></div><div class="recommended_posts"><h3>相关阅读</h3><li><a href="http://bugnull.com/视频图像/14-官方示例编码音视频简析/" target="_blank">14.官方示例编码音视频简析</a></li><li><a href="http://bugnull.com/视频图像/13-官方示例解复用和解编码-c/" target="_blank">13.官方示例解复用和解编码.c</a></li><li><a href="http://bugnull.com/视频图像/跟雷神学音视频-11-udp-rtp协议解析/" target="_blank">跟雷神学音视频-11.UDP-RTP协议解析</a></li><li><a href="http://bugnull.com/视频图像/跟雷神学音视频-10-flv封装格式解析/" target="_blank">跟雷神学音视频-10.FLV封装格式解析</a></li></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"><div id="local-search-result"></div></div></div><!DOCTYPE html><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/QT/">QT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/无处安放/">无处安放</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/视频图像/">视频图像</a></li></ul></div><!-- [ {name:'/qt'} ],  [ {name:'/acm'} ], [ {name:'/about'} ], [ {name:'/archives'} ]--><!DOCTYPE html><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签/ALL /about/index.html</i></div><div class="tagcloud"><a class="tags-list-link" href="/tags/QT基础" title="QT基础" style="font-size :15px;">QT基础</a><a class="tags-list-link" href="/tags/QT库使用" title="QT库使用" style="font-size :15px;">QT库使用</a><a class="tags-list-link" href="/tags/QT编译" title="QT编译" style="font-size :15px;">QT编译</a><a class="tags-list-link" href="/tags/杂谈" title="杂谈" style="font-size :15px;">杂谈</a><a class="tags-list-link" href="/tags/Libary" title="Libary" style="font-size :15px;">Libary</a><a class="tags-list-link" href="/tags/设计模式" title="设计模式" style="font-size :15px;">设计模式</a><a class="tags-list-link" href="/tags/网络知识" title="网络知识" style="font-size :15px;">网络知识</a><a class="tags-list-link" href="/tags/FFmpeg" title="FFmpeg" style="font-size :15px;">FFmpeg</a><a class="tags-list-link" href="/tags/C++基础" title="C++基础" style="font-size :15px;">C++基础</a><a class="tags-list-link" href="/tags/MySQL" title="MySQL" style="font-size :15px;">MySQL</a><a class="tags-list-link" href="/tags/Linux基础" title="Linux基础" style="font-size :15px;">Linux基础</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/C/右值引用与完美转发/">右值引用与完美转发</a></li><li class="post-list-item"><a class="post-list-link" href="/无处安放/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql-tcl事务控制语言/">MySQL TCL事务控制语言</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql-dql数据查询语言/">MySQL DQL数据查询语言</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql-dml数据操作语言/">MySQL DML数据操作语言</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql-ddl数据定义语言/">MySQL DDL数据定义语言</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql数据库概念/">MySQL数据库概念</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql视图/">MySQL视图</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql流量控制/">MySQL流量控制</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mysql存储过程和函数/">MySQL存储过程和函数</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <div>Total<span id="busuanzi_container_site_pv"><span> </span><span id="busuanzi_value_site_pv"></span></span><span rel="nofollow">  hits, </span><span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv"></span></span><span rel="nofollow">  visitors.</span></div>© <a href="/." rel="nofollow">BugNull.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/css/search.css?v=1.0.0"><script type="text/javascript" src="/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+  search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script></div></body></html>
