@@ -1,9 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[什么是微服务架构]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%2F</url>
+    <content type="text"><![CDATA[微服务架构微服务架构是一种架构模式或者架构风格，它提倡将单一应用程序划分成一组小的服务，每个服务运行在其独立的进程中，服务间互相协调、互相配合，为用户提供最终价值。服务间采用轻量级通信机制（通常基于HTTP的RESTful API）。每个服务都围绕着具体业务进行构建，并且能独立部署到生产环境。应尽量避免统一的、集中式的服务管理机制，对具体的服务而言，应根据业务上下文，选择合适的语言、工具对其进行构建，可以有非常轻量的集中式管理来协调这些服务，可以使用不同的语言，也可以使用不同的数据存储。 由All in one，拆分成不同的模块（进程），一个服务做一件事，进行解耦。]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[运输层基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E8%BF%90%E8%BE%93%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[UDP无连接，TCP三次握手、四次挥手TCP规定，即使接收窗口为0，也要接收零窗口探测报文、确认报文、带有紧急数据的报文 慢开始会以2倍数增长拥塞窗口，拥塞避免是线性增加1不等超时，就进行重传，需要接收连续三个确认 不推荐发送窗口前沿收缩，有可能这些数据已经发送了 建立连接前，服务器会先创建传输控制块（TCP连接表、指向发送和接收缓存的指针、指向重传队列的指针、当前的发送和接收序号、。。。），然后进行LISTEN客户端要发起连接时，也先创建传输控制块第三次握手是为了防止多连接，而消耗掉服务器资源SYN=1的报文段不能携带数据，但要消耗一个序号、普通确认报文如果不带数据，则不消耗序号x客户端选择作为初始序号，y为服务端选择的初始序号 FIN=1的报文段不能携带数据，但要消耗一个序号。v等于TCP客户进程之前收到的最后一个字节序号+1。u等于TCP客户进程之前已传送过数据的最后一个字节序号+1。]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[应用层基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E5%BA%94%E7%94%A8%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[请求中会带有《事务ID》，用带确保是自己发出而得到的回应路由器不会转发广播，需要在上面配置DHCP服务器IP，才能进行单播传送 DNS服务器，用于查找域名-&gt;IP 使用UDP 端口53 控制连接会保持打开，数据连接传输完成就关闭 基于TCPSTMP只能传输ASCII，因而引进了MIME，将图片、文件转为ASCII或者将ASCII进行逆转换。MIME同样应用于HTTP]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[网络层基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E7%BD%91%E7%BB%9C%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[32比特的IPV4地址不便阅读、记录、输入，因此采用点分十进制表示方法，8个一组，用.分开 增加子网时候，需要申请新的网络号，等待时间和钱，增加路由路中路由表记录数量，浪费原网络中剩余的IP。此时需要引入子网掩码，通过与运算，取出IPV4地址所在子网的网络地址 定长即使用同一个子网掩码来划分子网，只能划分出2^n个子网，从主机号借用的。容易造成IP地址浪费。使用不同的子网掩码来划分子网，更灵活，按需分配，子网数量可以不同，减少浪费。 路由器收到出错的数据报，丢弃后，向源主机发送ICMP数据报。 产生环路，会使用TTL进行计算，为零时抛弃，或者加入黑洞路由，使用默认路由后，当不知道转发给哪里就会转发到默认路由 在两个自治系统中，内部使用的是IGP或IRP内部网关（路由）协议，之间使用的是EGP或ERP外部网关（路由）协议，仅表示协议，不表示实际使用什么算法路由器会定期发送自己的路由信息 减少信息洪泛，一个区域一般最多200个路由 BGP-4报文封装在TCP报文段中 R1与R2之间类似点对点，也称IP隧道技术]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[集线器与交换机基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[总线型使用大量机械接头和无源电缆并不可靠 可以使用集线器HUB在物理层扩展以太网，将多个碰撞域（冲突域）合并成一个更大的冲突域，在一系中的一台主机要发送给二系中一台主机，该帧信号会传输到整个网络的各个主机。 交换机会把单播帧转发到目的主机（忽略ARP过程，假设交换机的帧交换表已“学习好了”） 集线器一般使用CSMA/CD争取总线资源，只能半双工，而交换机可以进行全双工，同时进行收发工作。 交换机工作在数据链路层（也包括物理层—），集线器工作在物理层，前者性能快 以太网交换机收到帧后，在帧交换表中查找帧的目的MAC地址所对应的接口号，然后通过该接口转发帧。是即插即用设备，刚上电内部帧交换表是空的，随通信进行处学习算法，自动逐渐建立起帧交换表。 盲目泛洪类似广播，登录会在发送方时登记，每条记录都有时效，到期自动删除，MAC与交换机接口关系不是永久性的，更换主机、更换网卡。ARP高速缓存表中IP与MAC对应关系同样会到期自动删除。 使用生成树协议，保证没有环路网络 当交换机以太网足够大时，进行广播会有很大的开销路由器工作在网络层，一般不转发广播，可以将交换机以太网分割成小的广播域 交换机端口类型有以下三种：Access Trunk Hybrid交换机各端口的缺少VLAN ID 思科上称为Native VLAN 即本征VLAN 华为上称Port VLAN ID即端口VLAN ID,PVID]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MAC、IP、ARP基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2Fmac%E3%80%81ip%E3%80%81arp%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[单播：表示只传给指定MAC地址，多播：表示该网络接口所在的多播地址，一个接口可以在多个多播地址，与帧的目的MAC地址符合，即接收该帧，广播：地址为FF:FF:FF:FF:FF:FF，所有人都接收 ARP只能在同一个链路或者同一个网络上使用]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据链路层基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[封装成帧：在链路层会对IP数据报文添加帧头和帧尾 帧头和帧尾包含重要的控制信息 帧头和帧尾作为帧定界，可以通过物理层交付的比特流中提取一个个的帧（PPP帧），并不是所有都包含帧定界标志（以太网V2 MAC帧），而物理层会在传输前增加8字节前导码（前7位是同步码，作为时钟同步，之后一字节作为定界符）再转为电信号发送，以太网规定帧间间隔（96比特时间） 透明传输，指数据链路层对上层交付的传输数据没有任何限制，若数据中存在帧尾字段，链路层会在该位置做字符标记（在前增加esc ascill=27）做比特处理（每5位1后插入1个0）等，以防止在解析时提前结束帧（字符填充或者零比特填充） 差错检测：比特在实际传输过程中可能会产生差错，称为比特差错或误码。一段时间内，传输错误的比特占总传输比特的比率为误码率BER。检错后一般进行重传来纠正传输中的差错或者仅仅是德育检测到差错的帧，取决于是可靠传输还是不可靠传输 在以太网V2 MAC帧中，帧尾包含4字节的帧检验序列FCS字段，检测是否有误码 在PPP帧中，帧尾包含2字节FCS 奇偶校验，在待发送数据后面添加1位奇偶校验，使整个数据（包括校验位）中1的个数为奇数或者偶数，漏检率高 循环冗余校验，约定一个生成多项式，基于数据和多项式计算出冗余码，添加到数据后面一起传输，漏检率非常低，易于硬件实现，广泛用于数据链路层 检测码只能检测出是否出错，不能定位，无法纠正错误，可以使用冗余信息更多的纠错码进行前向纠错，开销较大 可靠传输：根据数据链路层向上层提供的服务类型，其可靠性不一定由数据链路层实现，其它各层均可选择实现可靠传输 不可靠传输服务：仅仅丢弃有误码的帧 可靠传输服务：想办法实现发送端发送什么，接收端就收到什么 有线误码率低，不要求数据链路层向上提供可靠传输。即使出现误码，可靠传输的问题由其上层处理。 无线链路易受干扰，误码率比较高，因此要求数据链路层必须向上层提供可靠传输服务。 传输差错类型，比特差错、分组丢失、分组失序、分组重复，分组表示的是帧 可靠传输实现机制的原理，不仅限于数据链路层 停止-等待协议SW（自动请求重传ARQ） 回退N帧协议GBN（连续ARQ，滑动窗口协议） 制定比特给分组编号，发送窗口尺寸，表示一次发多个组，尺寸不能大于分组号-1，接收窗口尺寸为1，（若发送尺寸==分组数，则会接口窗口检测不到错误，依然把0号放置于0号，认为正确，实际是忽略了一个组），接收窗口只能等于1，只能按序接收，数据分组内出现误码后面的分组都会丢弃。 由停止-等待发送1个改为多个，串行改并行 累积确认，在接收到前N组时，可以直接发送ACKn表示已经接收到N组数据，减少资源占用 当多个到达接收方时，出现误码，不仅会丢弃该帧，还会把序号不匹配的丢弃，重新发送多个已经接收到最大序号的ACKn 选择重传协议SR 对回退N帧进行扩展，发送滑动窗口&gt;=接收窗口&gt;=1，可进行多组分别确认，但是取消累积确认 点对点协议PPP：目前使用最广泛的点对点数据链路层协议，向上不提供可靠传输 实现透明传输，面向字节的异步链路，字节填充法，对特殊字符前插入转义字符，转义字符再插入转义字符。面向比特的同步链路，比特填充法，对于连续5位1的后面插入一个0。 信道复用： 频分复用FDM：根据频带划分出多个了频带（信道），频带间需要有隔离频带 时分复用TDM：将传输带宽资源按时隙轮流分配给不同用户，用户只能在对应的时隙进行通信，周期性出现，一周期就是一个TDM帧 波分复用WDM：即光的频分复用，将每路（1310nm波长，2.5Gb/s）变换到1550~1561.2nm，共8路，相隔1.6nm，在同一根光纤传输，光传输会损失，中间需要掺铒光纤放大器EDFA。 码分复用CDM： 动态接入控制：CSMA-CD适用于有线CSMA/CA适用于无线等待DIFS表示有高优先级让其先传。等待SIFS表示最短帧间间隔，用来分隔属于一次对话的各帧。请求发送RTS:帧包括源地址、目的地址及所需要时间 允许发送CTS:也包括此次通信时间解决A C互为隐蔽站的问题，C通过CTS知道B被占用的时间]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[计算机网络基础]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%2F</url>
+    <content type="text"><![CDATA[三种电路交换优缺点对比：电路交换（比特流直达）优点：通信时延小、有序、没有冲突、适用范围广、实时性强、控制简单缺点：建立连接时间长、线路独占，使用效率低、灵活性差、难以规格化报文交换（整组报文转发）优点：无需建立连接、动态分配线路、线路可靠性、线路利用率高、多目标服务缺点：转发时延、较大存储缓存空间、传输额外的信息量分组交换优点：无需建立连接、线路利用率高、简化存储管理、加速传输、减少出错和重发数据量缺点：转发时延、传输额外的信息量、采用数据报服务时存在失序、丢失或者重复分组的问题；对于虚电路服务，存在呼叫建立、数据传输和虚电路释放三个过程。 时延=发送时延（分组长度/发送数率）+传播时延（信道长度/电磁波传播速率）+处理时延（硬件相关） 时延带宽积=传播时延*带宽 利用率：信道利用率 用来表示信道百分之几的时间是有数据通过网络利用率 全网络的信道利用率的加权平均当前时延=空闲时延/(1-利用率) 当得用率达到50%以上时，则时延会增大，可以考虑扩容，增大线路的带宽。尽量动态控制通信量，保持在合理范围内。 丢包：接口、结点、链路、路径、网络丢包。分组丢失：分组在传输过程中出现误码，被结点丢弃；到达一台队列已满的分组交换机时被丢弃。 OSI体系结构，七层协议物理、数据链路、网络、运输、会话、表示、应用层TCP/IP体系结构、四层协议网络接口 网络接口网际 IP将网络接口互联、向TCP、UDP提供网络互联服务(IP over everythins、Everything over IP)运输 TCP(在IP服务的基础上，向应用层提供可靠性传输服务) UDP(…不可靠传输服务)应用层 HTTP SMTP DNS RTP 原理体系结构（适用教学）应用 解决通过应用进程的交互来实现特定网络应用的问题 应用进程间交互来完成特定的网络应用运输 解决进程之间基于网络的通信问题 解决进程间、传输错误处理网络 解决分组在多个网络上传输（路由）的问题 路由功能，如使用IP数据链路 解决分组在一个网络（或链路）上传输的问题 如使用MAC标记主机物理层 解决使用何种信号来传输比特的问题 硬件如网络网口、传输方式 由应用层向物理层转变 http（报文） -&gt; http+TCP（TCP报文段） -&gt; http+TCP+IP（IP数据报） -&gt; ETH+http+TCP+IP+ETH（帧） -&gt; ….+前导码（比特流） 协议的三要素语法 定义所交换信息的格式语义 定义收发双方所要完成的操作同步 定义收发双方的时序关系 协议数据单元PDU 对等层次之间传送的数据包称为该层的协议数据单元服务数据单元SDU 同一系统内，层与层之间交换的数据包称为服务数据单元多个SDU可以合成一个PDU，一个SDU可以划分为几个PDU]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[物理层基本概念]]></title>
+    <url>%2F%E7%BD%91%E7%BB%9C%2F%E7%89%A9%E7%90%86%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[物理层考虑的是怎样才能在连接各种计算机的传输媒体上传输数据比特流物理层为数据链路层屏蔽了各种传输媒体的差异，使数据链路层只需要考虑如何完成本层的协议和服务，而不必考虑网络具体的传输媒体是什么 物理层协议主要任务：机械特性：指明接口所用接线器的形状和尺寸、引脚数目和排列、固定和锁定装置电气特性：指明在接口电缆的各条线上出现的电压范围功能特性：指明某条线上出现的某一电平的电压表示何种意义过程特性：指明对于不同功能的各种可能事的出现顺序 传输媒体（不同媒体对应不同的物理层协议）：1、导引型：双绞线（网线）、同轴电缆、光纤、电力线2、非导引型：微波通信（2~40GHz)、无线电波、红外线、可见光 传输方式1、串行（远距离传输，如计算机网络）。并行（CPU与内存之间，通过总线进行传输）2、同步：以稳定的比特流传输，字节间没有间隔，接收端在中间时刻进行检测0或1，此时会有时钟累计误差。需要保持时钟同步。外同步：在收发双方间添加一条单独的时钟信号线。内同步：发送端将时钟同步信号编码到发送数据中一起传输（曼彻斯特编码）。异步：以一个字节为单位传输，字节间异步，在字节前后增加头和尾作为判断。3、单工：单向通信（收音机）。半双工：双向交替通信，可以相互通信但不能同时（对讲机）。全双工：双向同时通信（电话） 常用编码：不归零编码（存在同步问题，需要额外传输时钟，不常用），归零编码（自同步，编码效率低，用零电频做隔断），曼彻斯特编码（用码元间跳变表示时钟，又表示数据），差分曼彻斯特编码 频率和相位是相关的，即频率是相位随时间的变化率。所以一次只能调制频率和相位中的一个。相位和振幅可以结合起来一起调制，称为正交振幅调制QAM。 信号在信道中传输会存在失帧的可能，其中因素娄：码元传输速率，信号传输距离，噪声干扰，传输媒体质量。]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>网络知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[设计模式]]></title>
+    <url>%2F%E6%97%A0%E5%A4%84%E5%AE%89%E6%94%BE%2F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[设计模式总结创建型1.简单工厂根据参数，如字符串、枚举等，反回创建的类。不属于Gof所说的。 2.工厂模式抽象一层，选择一个需要的工厂，工厂有一个获取产品的方法，再从工厂取要的东西。 3.抽象工厂对工厂抽象和产品抽象，创建一个产品族工厂，从产品族工厂中取东西。理论上每个工厂都能取到同类型的东西，但是属性不一样。 4.构建者模式抽象一个item做衍生，以此做为产品，里面有公共的方法。使用一个builder，选装Item，把东西存起来。产品可以动态增删。 5.原型模式使用当前已经存在的类，给予一个clone接口，用于克隆一份一样的、独立存在的类。 6.单例模式一个对象，只有一个实例，私有创建的方法。大家共用同一个。懒汉式，在第一次使用时才创建饿汉式，编译构建时就创建,static成员 结构型7.适配器模式由底部根据需求实现匹配，自动返回适应的类型或者执行某些动作。 8.桥接模式根据不同的上层产品，给入不同的内部数据，通过上层产品操作间接使用数据，展示的效果会不一样。 9.组合模式把东西按关系进行划分，构成一棵树级结构。 10.装饰者模式大家都会一个动作，但是又可以相互包装，A会画圆，B会画方，C的画画方法可以是让A、B一起来画，还可以加别的。 11.外观模式使用一个上层包装，把多个具有某个关系的类放到一起。 12.享元模式大家共享某部分数据，在没有的时候进行创建，下次再要这个类型时返回该值，减少创建。 13.代理模式给一个类做一层包装，做一层扩展，做为代理人进行控制。 行为型14.职责链模式根据类关系，构建一条关系链，在上层需要处理数据时，可能需要和下层进行交互，可以达到相互传递，以完成处理。 15.命令模式把需要做的事情包装成一个事件，通过一个中心控制，命令事件执行。 16.解释器模式通过特定的功能分类，拆成一个一个解析器，使用不同的解析器去处理对应的数据，达到整体划分。 17.迭代器模式常见于Stl中，用于高效遍历内容。 18.中介者模式大家根据某个关系，注册在一个中心。然后都可以通过中心给的接口，查询到别人的信息和被别人找到。 19.备忘录模式处理一个事件，在需要的时候保存一下（新建一份数据）存起来，使用者后面可以根据索引去找到这份保存的数据。 20.观察者模式大家往一个地方注册，当发生事件时，注册了的类会收到需要的信息。参考QT信号槽。 21.状态模式给一个物体塑造多个外表，根据需要设置外表，用该外表做为当前的状态，可随时切换。 22.策略模式当前有一组数据，但是可以有多个处理的方法，其方法可能可以进行组合，把方法单独做为策略。组合出需要的场景。 23.模板模式抽象一个模板，模板会有很多动作调用。实体可以选择实现某些动作，不需要的可以空实现。 24.访问者模式每个事物关注同一个东西的角度都不同。通过元素的回调或者访问者主动查看，可以做不同的动作。 以上为Gof(Gang of Four)四人组提出的 25.pimplqt源码实现方式，将成员藏在cpp，不对外暴露。 26.业务代表其中包含client、Delegate、lookup、service。使用者通过代理缓存，查找需要的服务。通过这样将业务进行分层解耦。 27.组合实体模式 组合实体太学术化了，不通俗。组合实体是个对象，是个管理者，管家，掌柜的，经理，它是直接面向客户的。组合实体下面是几个小组，也就是假如说它是个经理的话，那么它下面管理着几个小组长。小组长下面就是组员了呗，也就是真正干活的人了。所以组合实体是个层层管理的机制，并且下层的生命周期决定于上层的生命周期。就这么简单。我想它的作用只不过是简化了每一环的复杂程度而已。 https://www.it610.com/article/1177358433989488640.htm 28.过滤器模式字面意思，通过一个过滤器，把输入的数据过滤掉不合理的，然后得到结果。 29.空模式对于不些不合理的数据，给予一个空的对象，而不是空值。 30.mvcmodel，存数据，更新时告诉C,view将数据做显示，controller作为中间传递数据和中间处理的一方。Qt中是MVD D是代理，包括C的功能，还有告诉V怎么去定制和绘制。 31.数据访问对象模式将一些不好使用的接口包装进来，通过更上一层封装，使用时更便捷。 32.前端控制器模式通过一个前端，把请求进行汇总再分发给特定的处理器。 33.拦截过滤器模式通过实现多个过滤器，在发生事件时，使用注册了的过滤器对事件进行处理，通过后再去做相应的操作，否则拦截。 34.服务定位器模式根据一个中心缓存，去查找或者说定位之前使用过的东西。 35.传输对象模式把对象打包传送与接收。]]></content>
+      <categories>
+        <category>无处安放</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GTest接口测试]]></title>
+    <url>%2F%E6%97%A0%E5%A4%84%E5%AE%89%E6%94%BE%2Fgtest%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[Gtest运行参数可以通过系统环境变量设置GTEST_FLAG，可以通过内部代码testing::GTEST_FLAG(output)=””设定，后设置的生效。 –gtest_list_tests 输出所有用例 –gtest_filter 过滤用例，支持通配符 ?*-:(:”是或) –gtest_repeat=[COUNT] 用例执行次数 -1为一直执行，默认出错依然执行，但是增加 –gtest_color=(yes/no/auto) 输出颜色 –gtest_print_time 打印执行时间 –gtest_output=后缀:路径\文件名 –gtest_break_on_failure 则出错后停止 –gtest_throw_on_failure 失败抛异常 –gtest_catch_exceptions 是否捕捉异常，只在Win有效 Gtest断言ASSERT_系列：如果当前点检测失败则退出当前测试EXPECT_系列：如果当前点检测失败则继续往下执行 *_TRUE(condition) 条件为true则通过 *_FALSE(condition) 条件为false则通过 *_EQ(expected, actual) == *_NE(val1, val2) != *_LT(val1, val2) &lt; *_LE(val1, val2) &lt;= *_GT(val1, val2) &gt; *_GE(val1, val2) &gt;= _STREQ(expected_str, actual_str) == 接收char wchar * *_STRNE(str1, str2) != _STRCASEEQ(expected_str, actual_str) 忽略大小写== ,只接收char _STRCASENE(str1, str2) 忽略大小写!= ,只接收char *_THROW(statement, exception_type) 语句抛出指定类型的异常 *_ANY_THROW(statement) 抛出任何异常 *_NO_THROW(statement) 不抛出 *_FLOAT_EQ(expected, actual) 浮点对比 *_DOUBLE_EQ(expected, actual) *_NEAR(val1, val2, abs_error) 近似对比 *_PRED1(pred1, val1) pred1表示函数名，val1是参数，验证返回值，最多可以到5，传5个参数。 *_PRED_FORMAT1(pred_format1, val1) 错误时可自定义输出，函数返回值 return testing::AssertionFailure(testring::Message()) *_HRESULT_SUCCEEDED(expression) 表达式是成功的 *_HRESULT_FAILED(expression) SUCCEED() 用例成功，不往下走 FAIL() 用例失败，不往下走 ADD_FAILURE() 失败，但是往下走 testing::StaticAssertTypeEq&lt;int, T&gt; 判断模板是否为int _DEATH(statement, regex) 语句crash，其regex匹配stderr中内容，实现其实就是调用了 _EXIT *_DEATH_IF_SUPPORTED 系统不支持则不执行 *_EXIT(statement, predicate, regex) 其中predicate必须是接收int返回bool，可用系统 testing::ExitedWithCode(exit_code)如果程序正常退出并且退出码与exit_code相同则返回true testing::KilledBySignal(signal_number) 被signal_number杀掉则为true _DEBUG_DEATH(statement, regex) 在Debug中 实际是调用 _DEATH，否则只是执行statement 死亡测试注意 可以在main中设置，也可以在用例中设置，用例完成会复原。 testing::FLAGS_gtest_death_test_style = “fast”; testing::FLAGS_gtest_death_test_style = “threadsafe”; 不要在死亡测试用例释放内存，在父进程释放内存，不要在程序中使用内存堆检查 Gtest事件 全局事件 全局事件需要继承testing::Environment类，实现SetUp和TearDown，类似构造与析构，然后在main中使用testing::AddGlobalTestEnvironment进行注册 TestSuite 每一组用例前后 需要继承testing::Test类，实现SetUpTestCase和TearDownTestCase，在该组用例前和结束执行 TestCase 每个用例前后 同上，实现SetUp()和TearDown()即可，在每个用例前后执行 Gtest测试宏TEST(test_suite_name,test_name)宏一个测试特例，套件名和样例名，构成一个测试用例，不能有_,因为会将其设置为专有的类名 TEST_F(test_fixture,test_name)宏结合testing::Test使用 TEST_P宏配合继承testing::TestWithParam的类使用,其中1234567891011121314template&lt;typename T&gt;class TestWithParam:public Test,public WithParamInterface&lt;T&gt;&#123;&#125;;static const T&amp; GetParam()&#123;&#125;//内部的参数由友元类修改，所以Getparam()可以获得新属性template&lt;class TestClass&gt; friend class internal::ParameterizedTestFactor;INSTANTIATE_TEST_CASE_P(test_pre_name,继承TestWithParam的类名,testing::Values());//其中第三个可以使用Range(begin,end[,step])//Values(v1,v2...,vN)//ValuesIn(container) and ValuesIn(begin,end) 从容器或者迭代器取//Bool() true和false//Combine(g1,g2,...,gN) 排列组合传入，参数是Tuple 模板参数化123456789101112template &lt;typename T&gt;class TemplateClass : public testing::Test &#123;&#125;typedef testing::Types&lt;char, int, unsigned int&gt; MyTypes;TYPED_TEST_SUITE(TemplateClass, MyTypes);//验证TemplateClass是否支持MyTypes这些类型TYPED_TEST(TemplateClass,TestName)//或者TYPED_TEST_CASE_P(TemplateClass)TYPED_TEST_P(TemplateClass,TestName)REGISTER_TYPED_TEST_CASE_P(TemplateClass,TestName,...)INSTANTIATE_TYPED_TEST_CASE_P(test_pre_name, TemplateClass, MyTypes)]]></content>
+      <categories>
+        <category>无处安放</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>Library</tag>
+      </tags>
+  </entry>
+  <entry>
     <title></title>
     <url>%2Funcategorized%2F%2F</url>
     <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[CMake小结]]></title>
+    <url>%2F%E6%97%A0%E5%A4%84%E5%AE%89%E6%94%BE%2Fcmake%E5%B0%8F%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899cmake -B build -DCMAKE_BUILD_TYPE=Releasecmake --build build -j4cmake --build build --target install如上设置了-D 当不清除Cache时，下次不加-D，也是Release-G 指定构建系统生成器 在cmake --help里面可以看到动态库链接静态库，需要开启PIC set(CMAKE_POSITION_INDEPENDENT_CODE ON)或者 set_property(TRGET lib PROPERTY POSITION_INDEPENDENT_CODE ON)设定find_package路径，把路径加入CMAKE_MODULE_PATH、查看包搜索路径，如Qt会找Qt5_DIR，把路径放这里也好使、环境变量的Qt5_DIR也行生成器表达式语法：$&lt;$&lt;类型:值&gt;:为真时的表达式&gt;比如 $&lt;$&lt;PLATFORM_ID:Windows,ABC&gt;:MY_NAME="Bill Gates"&gt;在 Windows或者ABC 平台上会变为 MY_NAME="Bill Gates"set(abc HELLO)set(HELLO ccc)if(abc MATCH HELLO) doneif($&#123;abc&#125; MATCH HELLO) no 其会展开为HELLO变量 再变成cccif("$&#123;abc&#125;" MATCH HELLO) done__declspec(dllexport) 导出__declspec(dllimport) 导入aux_source_directory(&lt;dir&gt; &lt;variable&gt;) #搜索dir目录内文件所有源文件，将列表写到var里list() #对列表操作include(&lt;file|module&gt; [OPTIONAL] [RESULT_VARIABLE &lt;var&gt;] [NO_POLICY_SCOPE]) #导入CMake代码。OPTIONAL，文件不存在不报错，RESULT_VARIABLE &lt;var&gt;，var将设置为完整文件名，失败为NOTFOUND。 # 若指定为module则在CMAKE_MODULE_PATH中找&lt;modulename&gt;.cmake，再去CMake模块路径找。除非文件在CMake内置模块路径中。set(&lt;variable&gt; &lt;value&gt;... [PARENT_SCOPE]) #value可以是0或多个，0即unset，多个时使用；分割。PARENT_SCOPE会向上一层传递，当在function中时，会向调用者传递，但是在当前层不生效，不加则会取时生效并向下传递。set(&lt;variable&gt; &lt;value&gt;... CACHE &lt;type&gt; &lt;docstring&gt; [FORCE]) #默认情况下值不会被覆盖，除非使用了FORCE。可以通过GUI界面add entry添加，类似环境变量。 #BOOL复选框、FILEPATH文件选择框、PATH目录选择框、STRING文本框、STRINGS下拉框、INTERNAL不对外呈现，主要用于运行过程存储，该type意味着使用FORCE #docstring文本表示选项摘要 #缓存值是无法覆盖已经存同名的，除非设置了FORCE。如果条目是通过-Dvar=val创建，则会给其指定类型，而set命令会给予类型。若val是相对路径，set会将其转为绝对路径。set(ENV&#123;&lt;variable&gt;&#125; [&lt;value&gt;]) #设置环境变量，只影响当前进程，不修改调用者进程和系统变量。CMake中的 [环境变量](https://cmake.org/cmake/help/latest/manual/cmake-env-variables.7.html) 也可以修改。file(read &lt;filename&gt; &lt;variable&gt; [OFFSET &lt;offset&gt;] [LIMIT &lt;max-in&gt;] [HEX]) #将文件读到var变量中，偏移量、读取长度、16进度读。file(STRINGS &lt;filename&gt; &lt;variable&gt; [&lt;options&gt; ...]) #以ASCII读取到var中，将忽略二进度、回车和\r。LENGTH_MAXMUN &lt;max-len&gt;、LENGTH_MINIMUN &lt;min-len&gt;、LIMIT_COUNT &lt;max-num&gt;限制字符串数量、LIMIT_OUTPUT &lt;max-out&gt;限制var总长度、NEWLINE_CONSUME不忽略换行、NO_HEX_CONVERSION不对16进度转换、REGX &lt;regex&gt;、ENCODING &lt;encoding-type&gt;。file(&lt;HASH&gt; &lt;filename&gt; &lt;variable&gt;) #将文件加密读入到var，HASH支持MD5、SHA!、SHA224、SHA256、SHA384、SHA512、SHA3_224、SHA3_256、SHA3_384、SHA3_512等。file(TIMESTAMP &lt;filename&gt; &lt;variable&gt; [&lt;format&gt;] [UTC]) #读取文件最后修改时间搓，format指定格式。file(WRITE &lt;filename&gt; &lt;content&gt; ... ) #可创建，覆盖定入file(APPEND &lt;filename&gt; &lt;content&gt; ... ) #可创建，追加file(TOUCH [&lt;files&gt; ...]) #创建空白文件，文件存在只刷新修改时间file(TOUCH_NOCREATE [&lt;files&gt; ...]) #文件不存在，不创建file（GENERATE OUTPUT output-file &lt;INPUT input-file|CONTENT content&gt; [CONDITION expression]) #在构建时将信息写到文件中，保证是本次构建的内容，仅当CONDITION &lt;expression&gt;为true时，才输出到文件 file(GLOB &lt;variable&gt; [LIST_DIRECTORIES true|false] [RELATIVE &lt;path&gt;] [&lt;globbing-expressions&gt;...]) #将当前目录内符合expressions的写到var里，LIST_D...表示是否输出文件夹名，RELATIVE &lt;path&gt;表示是否以相对path为相对路径输出file(GLOB_RECURSE &lt;variable&gt; [FOLLOW_SYMLINKS] [LIST_DIRECTORIES true|false] [RELATIVE &lt;path&gt;] [&lt;globbing-expressions&gt;...]) #FOLLOW_SYMLINKS设定和LIST_DIRECTORIES为true可以遍历子文件夹file(RENAME &lt;oldname&gt; &lt;newname&gt; [RESULT &lt;result&gt;] [NO_REPLACE]) #重命名file(REMOVE [&lt;files&gt;...]) #删除文件file(REMOVE_RECURSE [&lt;files&gt;...]) #会删除指定的文件及子目录，包括非空文件夹file(MAKE_DIRECTORY [&lt;directories&gt; ...]) #创建目录file(COPY_FILE &lt;oldname&gt; &lt;newname&gt; [RESULT &lt;result&gt;] [ONLY_IF_DIFFERENT])file(&lt;COPY|INSTALL&gt; &lt;files&gt;... DESTINATION &lt;dir&gt; [FILE_PERMISSIONS &lt;permissions&gt;...] [DIRECTORY_PERMISSIONS &lt;permissions&gt;...] [NO_SOURCE_PERMISSIONS] [USE_SOURCE_PERMISSIONS] [FILES_MATCHING] [[PATTERN &lt;pattern&gt; | REGEX &lt;regex&gt;] [EXCLUDE] [PERMISSIONS &lt;permissions&gt;...]] [...]) #OWNER_READO、WNER_WRITE、OWNER_EXECUTE、GROUP_READ、GROUP_WRITE、GROUP_EXECUTE、WORLD_READ、WORLD_WRITE、WORLD_EXECUTEfile(SIZE &lt;filename&gt; &lt;variable&gt;)file(READ_SYMLINK &lt;linkname&gt; &lt;variable&gt;) #获取符号文件的路径file(CREATE_LINK &lt;original&gt; &lt;linkname&gt; [RESULT &lt;result&gt;] [COPY_ON_ERROR] [SYMBOLIC]) #创建符号链接，默认是硬连接file(CHMOD|CHMOD_RECURSE &lt;files&gt;... &lt;directories&gt;... [PERMISSIONS &lt;permissions&gt;...] [FILE_PERMISSIONS &lt;permissions&gt;...] [DIRECTORY_PERMISSIONS &lt;permissions&gt;...]) #设置权限file(REAL_PATH &lt;path&gt; &lt;out-var&gt; [BASE_DIRECTORY &lt;dir&gt;] [EXPAND_TILDE]) #计算已解析符号链接的现有文件或目录的绝对路径file(RELATIVE_PATH &lt;variable&gt; &lt;directory&gt; &lt;file&gt;) #根据file推出相对dir的相对路径file(TO_CMAKE_PATH "&lt;path&gt;" &lt;variable&gt;) #转为CMake格式的路径file(TO_NATIVE_PATH "&lt;path&gt;" &lt;variable&gt;) #转换为特定平台格式的路径file(DOWNLOAD &lt;url&gt; [&lt;file&gt;] [&lt;options&gt;...]) #从指定URL下载文件file(UPLOAD &lt;file&gt; &lt;url&gt; [&lt;options&gt;...]) #上传file(LOCK &lt;path&gt; [DIRECTORY] [RELEASE] [GUARD &lt;FUNCTION|FILE|PROCESS&gt;] [RESULT_VARIABLE &lt;variable&gt;] [TIMEOUT &lt;seconds&gt;]) #对指定文件上锁file(ARCHIVE_CREATE OUTPUT &lt;archive&gt; PATHS &lt;paths&gt;... [FORMAT &lt;format&gt;] [COMPRESSION &lt;compression&gt; [COMPRESSION_LEVEL &lt;compression-level&gt;]] [MTIME &lt;mtime&gt;] [VERBOSE]) #根据 &lt;paths&gt; 中的文件或目录 创建归档文件 &lt;archive&gt;。FORMAT 指定归档格式，支持的值为 7zip、gnutar、pax、paxr、raw 和 zip，默认格式为 paxrfile(ARCHIVE_EXTRACT INPUT &lt;archive&gt; [DESTINATION &lt;dir&gt;] [PATTERNS &lt;patterns&gt;...] [LIST_ONLY] [VERBOSE] [TOUCH]) #提取归档文件 &lt;archive&gt;，并输出到 DESTINATION 目录中，如果目录不存在，它将被创建，默认情况下输出目录为 CMAKE_CURRENT_BINARY_DIR 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182add_library(&lt;name&gt; [STATIC | SHARED | MODULE] [EXCLUED_FROM_ALL] [&lt;source&gt;...]) #使用指定的source生成对应平台的库。static、shared、module则表示类型，module则是在使用时使用dlopen动态加载的模块。add_library(&lt;name&gt; OBJECT [&lt;source&gt;...]) #添加OBJECT库，可以使用$&lt;TARGET_OBJECTS:objlib&gt;方式使用，感觉就是一个集合add_library(&lt;name&gt; INTERFACE) #其不编译也不生成东西，一般用于携带属性传递add_library(&lt;name&gt; &lt;type&gt; IMPORTED [GLOBAL]) #导入一个已经存在的库，type为STATIC, SHARED, MODULE, UNKNOWN其一，通过IMPORTED导入的类，其属性以IMPORTED_开头，否则为INTERFACE_开头。IMPORTED_LOCATION标明library硬盘位置，可加DEBUG/RELEASE进行具体；IMPORTED_OBJECTS标明对象Library在硬盘的位置，也可加...。PUBLIC_HEADER保存install头文件目录add_library(&lt;name&gt; ALIAS &lt;target&gt;) #设置别名add_executable(&lt;name&gt; [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] [source1] [source2 ...]) #WIN32将WIN32_EXECUTABLE设置为true，其会创建一个使用WinMain()入口的GUI可执行文件，而不是控制台应用程序。MACOSX_BUNDLE将在macOS或者iOS设置为true，使其可以在Finder启动GUI可执行文件。EXCLUDE_FORM_ALL表示可执行文件会排除在alltarget列表外，当执行默认的make或者nmake时，不会编译，需要make name手动指明才会编译。add_executable(&lt;name&gt; IMPORTED [GLOBAL]) #从外部导入可执行文件，不指定GLOBAL则只向下传递，其属性IMPORTED会设置为true。add_executable(&lt;name&gt; ALIAS &lt;target&gt;)target_sources(&lt;target&gt; &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #给target添加编译文件 按执行顺序添加文件target_sources(&lt;target&gt; [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [FILE_SET &lt;set&gt; [TYPE &lt;type&gt;] [BASE_DIRS &lt;dirs&gt;...] [FILES &lt;files&gt;...]]... ]...) #每个target有多个文件集，文件集有自己的属性。会给PRIVATE和PUBLIC的文件设置为源文件，HEADERS文件设置HEADER_FILE_ONLY为true。FILE_SET &lt;set&gt;，文件集名，有预留的是HEADERS，然后不能以_和大写字母开头。TYPE &lt;type&gt;，若为HEADERS则可省，否则加。BASE_DIRS &lt;dirs&gt;...，文件集目录列表，首次创建可填CMAKE_CURRENT_SOURCE_DIR。FILES &lt;files&gt;...，文件列表，文件要位于目录列表中。target_compile_definitions(&lt;target&gt; &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #给target添加编译定义target_include_directories(&lt;target&gt; [SYSTEM] [AFTER|BEFORE] &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #AFTER、BEFORE 添加到列表的前面或者后面，默认后面，CMAKE_INCLUDE_DIRECTORIES_BEFORE可以修改默认值；SYSTEM则表示指定目录为系统目录，仅当前CMakeList.txt生效 #INTERFACE、PUBLIC填充INTERFACE_INCLUDE_DIRECTORIES属性，而PRIVATE和PUBLIC填充填充INCLUDE_DIRECTORIES属性include_directories([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...]) #添加头文件搜索目录 相当于-l 从当前文件开始向下传递link_directories([AFTER|BEFORE] directory1 [directory2 ...]) #添加库搜索目录 相当于-L 用在add_executable之前link_libraries([item1 [item2 [...]]] [[debug|optimized|general] &lt;item&gt;] ...) #添加库文件路径 全路径包括库名target_link_libraries(&lt;target&gt; ... &lt;item&gt;... ...) #用在add_executable之后#item 可能是library target name、full path to a library file、plain library name、link flag、generator expression、A debug, optimized, or general keyword immediately followed by another &lt;item&gt;。 ex: hello libhello.a libhello.so -lhelloget_filename_component(&lt;var&gt; &lt;FileName&gt; &lt;mode&gt; [CACHE]) #根据mode获取文件路径中指定项到var中 3.20以后被cmake_path取代option(&lt;variable&gt; "&lt;help_text&gt;" [value]) #提供用户可选的布尔选项，若var已经定义或者在CACHE里，则不生效configure_file(&lt;input&gt; &lt;output&gt; [NO_SOURCE_PERMISSIONS | USE_SOURCE_PERMISSIONS | FILE_PERMISSIONS &lt;permissions&gt;...] [COPYONLY] [ESCAPE_QUOTES] [@ONLY] [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF] ]) 将文件复制到其它位置并修改内容，将input文件中@var@或者$&#123;var&#125;替换为cmake指定的值，#cmakedefine var关键字替换成#define var或者#undef var，取决是否定义了var；input，一定是要文件；output，可以是路径，那就会使用intput的名字；COPYONLY，直接拷贝，啥也不干；ESCAPE_QUOTES，不转义；@ONLY，只替换@，不替换$；NEWLINE_STYLE，指定Output换行风格。需要先include(CheckCXXCompilerFlag)check_cxx_compiler_flag(&lt;flag&gt; &lt;var&gt;) 检测编译器是否支持CXX，结果在var里mark_as_advanced([CLEAR|FORCE] &lt;var1&gt; ...) #清除或者标记var变量为advanced变量，advance变量不会显示在GUI中，除非advanced选项开启source_group(&lt;name&gt; [FILES &lt;src&gt;...] [REGULAR_EXPRESSION &lt;regex&gt;])source_group(TREE &lt;root&gt; [PREFIX &lt;prefix&gt;] [FILES &lt;src&gt;...]) #给IDE的源码分组，TREE，会根据root路径将src转为相对路径，自动的将文件结构分出来。PREFIX，TREE会放在该group里，可以使用\\指定子group。REGULAR_EXPRESSION，一个文件只会加入最后一个符合条件的group，如果没有则优先与最后一个组。set_property(&lt;GLOBAL | DIRECTORY [&lt;dir&gt;] | TARGET [&lt;target1&gt; ...] | SOURCE [&lt;src1&gt; ...] [DIRECTORY &lt;dirs&gt; ...] [TARGET_DIRECTORY &lt;targets&gt; ...] | INSTALL [&lt;file1&gt; ...] | TEST [&lt;test1&gt; ...] | CACHE [&lt;entry1&gt; ...] &gt; [APPEND] [APPEND_STRING] PROPERTY &lt;name&gt; [&lt;value1&gt; ...]) #GLOBAL，属性全局有效；DIRECTORY，在指定目录有效，类似set_directory_proerties；TARGET，设置target属性，类似set_target_properties；SOURCE，指定属性对应多个源文件，默认仅对同一目录中的目标可见，类似set_source_files_properties，DIRECTORY，源文件在每个dirs有效，dirs必须已知，TARGET_DIRECTORY在指定的targets中有效，targets必须有效；INSTALL，属性对应多个安装文件路径；TEST，对应多个测试，类似set_tests_properties；CACHE，对应缓存条目。APPEND，以列表形式附加到属性后面。APPEND_STRING，以字符串形式添加到属性后面。get_property(&lt;variable&gt; &lt;GLOBAL | DIRECTORY [&lt;dir&gt;] | TARGET &lt;target&gt; | SOURCE &lt;source&gt; [DIRECTORY &lt;dir&gt; | TARGET_DIRECTORY &lt;target&gt;] | INSTALL &lt;file&gt; | TEST &lt;test&gt; | CACHE &lt;entry&gt; | VARIABLE &gt; PROPERTY &lt;name&gt; [SET | DEFINED | BRIEF_DOCS | FULL_DOCS]) #VARIABLE，范围内唯一，不接收名字。SET，变量设为布尔，表示是否设置了属性；DEFINED，变量设置为布尔，表示属性是否定义；BRIEF_DOCS | FULL_DOCS，设置为字符串，包含请示的属性，没有会写NOTFOUND。set_target_properties(target1 target2 ... PROPERTIES prop1 value1 prop2 value2 ...) #同时设置多个target的多个属性get_target_property(&lt;VAR&gt; target property) #获取target属性add_subdirectory(source_dir [binary_dir] [EXCLUDE_FROM_ALL]) #添加子目录进行构建，source_dir，子目录CMakeList.txt的位置；binary_dir，输出目录；EXCLUDE_FROM_ALL，是否排除自动构建add_compile_options(&lt;option&gt; ...) #添加选项到编译源文件，对当前目录的targets和向下有效target_compile_options(&lt;target&gt; [BEFORE] &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #给target添加编译参数，BEFORE，放到所有属性前，默认是追加add_definitions(-DFOO -DBAR ...) #将定义添加到编译器命令行，不管写在前后都生效，并向下目录传递，相当于-Dadd_dependencies(&lt;target&gt; [&lt;target-dependency&gt;]...) #确保依赖的target在自己前生成message([&lt;mode&gt;] "message text" ...) #FATAL_ERROR，会中断编译；SEND_ERROR，继续处理，但是会跳过生成；WARNING，发出警告，继续处理。AUTHOR_WARNING，警告dev，继续处理；DEPRECATION，根据CMAKE_ERROR_DEPRECATED或者CMAKE_WARN_DEPRECATED状态决定是警告还是错误；(none) or NOTICE，重要标准错误；STATUS，信息；VERBOSE，更详细的信息；DEBUG，项目开发人员；TRACE，临时信息。message(&lt;checkState&gt; "message text" ...) #CHECK_START，记录将要执行检查的消息；CHECK_PASS，记录一个成功结果；CHECK_FAIL，记录一个失败结果。project(&lt;PROJECT-NAME&gt; [&lt;language-name&gt;...]) #指定cmake工程名，&lt;language-name&gt; 语言project(&lt;PROJECT-NAME&gt; [VERSION &lt;major&gt;[.&lt;minor&gt;[.&lt;patch&gt;[.&lt;tweak&gt;]]]] [DESCRIPTION &lt;project-description-string&gt;] [HOMEPAGE_URL &lt;url-string&gt;] [LANGUAGES &lt;language-name&gt;...]) #VERSION，版本；DESCRIPTION，描述；HOMEPAGE_URL，主页URL；LANGUAGES，语言。当指定了project，会自动定义如下变量，则PROJECT_NAME工程名；PROJECT_SOURCE_DIR源码路径；&lt;PROJECT-NAME&gt;_SOURCE_DIR源码路径，与前者区别就是后者是指定工程的，前者是当前工程的；PROJECT_BINARY_DIR二进制路径；&lt;PROJECT-NAME&gt;_BINARY_DIR同意思；CMAKE_PROJECT_NAME顶层工程名。 指定了VERSION，会定义出一堆PROJECT_VERSION*和&lt;PROJECT-NAME&gt;_VERSION*。其它两个也一样。目前支持C、CXX、CUDA、OBJC、OBJCXX、Fortran、ASM，不指定则是C和CXX，指定为NONE或者LANGUAGES则表示不支持任何语言。检测CMAKE_&lt;LANGUAGES&gt;_COMPILER指定编译器是否存在。多次调用，则以最近一次为准。add_custom_target(Name [ALL] [command1 [args1...]] [COMMAND command2 [args2...] ...] [DEPENDS depend depend depend ... ] [BYPRODUCTS [files...]] [WORKING_DIRECTORY dir] [COMMENT comment] [JOB_POOL job_pool] [VERBATIM] [USES_TERMINAL] [COMMAND_EXPAND_LISTS] [SOURCES src1 [src2...]]) #根据命令生成一个target，且默认不在all target中，目标没有输出文件。ALL，加入all target；DEPENDS，依赖其它target或者文件；COMMAND，执行的命令，可以使用configure_file或者GENERATE生成脚本再执行；BYPRODUCTS，声明target随之生成的文件，需要有COMMAND命令否则报错；WORKING_DIRECTORY，修改当前COMMAND执行命令的目录；COMMENT，构建时执行COMMAND前的消息；JOB_POOL，指定一个池给Ninja生成器，VERBATIM，所有参数都根据构建工具转义，以保证COMMAND正确接收参数，否则行为依赖平台行为；USES_TERMINAL，直接访问终端的权限；COMMAND_EXPAND_LISTS，参数列表将展开，包括生成器表达式列表；SOURCES，将文件附加到目标中，在IDE中显示。add_custom_command(OUTPUT output1 [output2 ...] COMMAND command1 [ARGS] [args1...] [COMMAND command2 [ARGS] [args2...] ...] [MAIN_DEPENDENCY depend] [DEPENDS [depends...]] [BYPRODUCTS [files...]] [IMPLICIT_DEPENDS &lt;lang1&gt; depend1 [&lt;lang2&gt; depend2] ...] [WORKING_DIRECTORY dir] [COMMENT comment] [DEPFILE depfile] [JOB_POOL job_pool] [VERBATIM] [APPEND] [USES_TERMINAL] [COMMAND_EXPAND_LISTS]) #在生成的构建系统中添加自定义构建规则，当没有output1或者DEPENDS的东西发生变化时，则生成；MAIN_DEPENDENCY，指定主要输入文件，源文件只能作为一个命令的主依赖项；IMPLICIT_DEPENDS，请求扫描输入文件的隐式依赖关系；DEPFILE，为Ninja生成器制定一个depfile文件；APPEND将其追加到第一个自定义输出命令；add_custom_command(TARGET &lt;target&gt; PRE_BUILD | PRE_LINK | POST_BUILD COMMAND command1 [ARGS] [args1...] [COMMAND command2 [ARGS] [args2...] ...] [BYPRODUCTS [files...]] [WORKING_DIRECTORY dir] [COMMENT comment] [VERBATIM] [USES_TERMINAL] [COMMAND_EXPAND_LISTS]) #为目标添加自定义命令，目标构建时执行，PRE_BUILD | PRE_LINK | POST_BUILD表示命令执行相对构建的时机&gt; 当add_custom_target所要生成的target依赖add_custom_command所生成的文件时，这个文件就是一个纽带；add_custom_command命令输出的OUTPUT文件和命令里的command之间的关系是：每当这个文件需要被重新生成时，都会执行这段command；开始构建target，依赖add_custom_command的输出文件，再查看其是否构建，其构建就会执行COMMAND。execute_process(COMMAND &lt;cmd1&gt; [&lt;arguments&gt;] [COMMAND &lt;cmd2&gt; [&lt;arguments&gt;]]... [WORKING_DIRECTORY &lt;directory&gt;] [TIMEOUT &lt;seconds&gt;] [RESULT_VARIABLE &lt;variable&gt;] [RESULTS_VARIABLE &lt;variable&gt;] [OUTPUT_VARIABLE &lt;variable&gt;] [ERROR_VARIABLE &lt;variable&gt;] [INPUT_FILE &lt;file&gt;] [OUTPUT_FILE &lt;file&gt;] [ERROR_FILE &lt;file&gt;] [OUTPUT_QUIET] [ERROR_QUIET] [COMMAND_ECHO &lt;where&gt;] [OUTPUT_STRIP_TRAILING_WHITESPACE] [ERROR_STRIP_TRAILING_WHITESPACE] [ENCODING &lt;name&gt;] [ECHO_OUTPUT_VARIABLE] [ECHO_ERROR_VARIABLE] [COMMAND_ERROR_IS_FATAL &lt;ANY|LAST&gt;]) #命令作为管道同时执行，其输出管道作为下个管道的输入，共享一个错误管道。COMMAND，子进程命令行，CMake使用API直接执行子进程，中间不能使用shell脚本，像重定义等操作符都当普通参数；WORKING_DIRECTORY，指定子进程的工作目录；TIMEOUT，超时时间；RESULT_VARIABLE，执行进程的返回结果，最后一个子进程整数或者错误描述字符串；RESULTS_VARIABLE，接收第条命令返回结果；OUTPUT_VARIABLE，ERROR_VARIABLE，设置为输出管道和错误管道的内容，若命名相同，则输出将按生成的顺序合并；INPUT_FILE, OUTPUT_FILE, ERROR_FILE，第一个标准输入名，最后一个标准输出名，所有的标准错误名；OUTPUT_QUIET, ERROR_QUIET，输出和错误将忽略；COMMAND_ECHO &lt;where&gt;重置命令到指定标准输出，如STDERR、STDOUT、NONE；OUTPUT_STRIP_TRAILING_WHITESPACE、ERROR_STRIP_TRAILING_WHITESPACE删除输出空白符；ENCODING &lt;name&gt;，在win上指定解码方式，NONE、AUTO、ANSI、OEM、UTF8、UTF-8；ECHO_OUTPUT_VARIABLE, ECHO_ERROR_VARIABLE，不会专门重定向到配置的变量，将发送到配置的变量中和标准输出或错误中；COMMAND_ERROR_IS_FATAL &lt;ANY|LAST&gt;，决定出错时的行为ANY出错则停止报错，LAST则只看最后一个find_package目的是帮助我们调用对应的cmake文件，导入某个库，这个cmake文件是官方、安装、自行编写的，其格式为Find&lt;lib_name&gt;.cmake、。一般会产生&lt;lib_name&gt;_FOUND、&lt;lib_name&gt;_INCLUDE_DIR、&lt;lib_name&gt;_INCLUDES、&lt;lib_name&gt;_LIBRARY、&lt;lib_name&gt;_LIBRARIES，需要根据cmake文件中实现决定，并不统一。其引入模式分为两种，Module和Config，其中Module是从CMAKE_MODULE_PATH和cmake安装路径/Modules中，找的是Find&lt;lib_name&gt;.cmake；Config找的是&lt;lib_name&gt;Config.cmake或&lt;lib_name&gt;-config.cmake，其一般是通过安装添加到/usr/local/lib/cmake/...目录的。find_package(&lt;PackageName&gt; [version] [EXACT] [QUIET] [MODULE] [REQUIRED] [[COMPONENTS] [components...]] [OPTIONAL_COMPONENTS components...] [REGISTRY_VIEW (64|32|64_32|32_64|HOST|TARGET|BOTH)] [GLOBAL] [NO_POLICY_SCOPE] [BYPASS_PROVIDER]) #MODULE，只在该模式找；version，找的版本；EXACT，查找的版本要精确匹配；QUIET，找到包时，不输出信息；REQUIRED，找不到会终止；COMPONENTS，要查找的子组件；OPTIONAL_COMPONENTS，可选组件；REGISTRY_VIEW，在win中怎么查询注册表；GLOBAL，将找到的目标设为全局可见；NO_POLICY_SCOPE；BYPASS_PROVIDER，可以直接调用find_package内置的实现，防止自调用； CONFIG|NO_MODULE，指定搜索模式；NAMES使用该名为lib_name名；PATHS/HINTS，Config模式下，搜索的路径；NO_XXX_PATH，Config模式下，忽略的路径。默认优先用MODULE模式，CMAKE_FIND_PACKAGE_PREFER_CONFIG可以更换。]]></content>
+      <categories>
+        <category>无处安放</category>
+      </categories>
+      <tags>
+        <tag>CMake</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Git小结]]></title>
@@ -14,6 +147,127 @@
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL视图]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E8%A7%86%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[视图含义：理解成一张虚拟的表，通过表动态生成的数据 视图和表的区别： 使用方式 占用物理空间 视图 完全相同 不占用，仅仅保存的是sql逻辑 表 完全相同 占用 视图的好处： 1、sql语句提高重用性，效率高 2、和表实现了分离，提高了安全性 视图的创建语法： CREATE VIEW 视图名 AS 查询语句; 视图的增删改查对视图增删改，也会修改原表 1、查看视图的数据 ★ SELECT * FROM my_v4; SELECT * FROM my_v1 WHERE last_name=&apos;Partners&apos;; 2、插入视图的数据 INSERT INTO my_v4(last_name,department_id) VALUES(&apos;虚竹&apos;,90); 3、修改视图的数据 UPDATE my_v4 SET last_name =&apos;梦姑&apos; WHERE last_name=&apos;虚竹&apos;; 4、删除视图的数据 DELETE FROM my_v4; 某些视图不能更新包含以下关键字的 sql语句：分组函数、distinct、group by、having、union或者union all 常量视图 Select中包含子查询 join from一个不能更新的视图 where子句的子查询引用了from子句中的表 视图逻辑的更新#方式一： CREATE OR REPLACE VIEW test_v7 AS SELECT last_name FROM employees WHERE employee_id&gt;100; #方式二: ALTER VIEW test_v7 AS SELECT employee_id FROM employees; SELECT * FROM test_v7; 视图的删除DROP VIEW test_v1,test_v2,test_v3; 视图结构的查看DESC test_v7; SHOW CREATE VIEW test_v7;]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL流量控制]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[流程控制结构分支一、if函数 语法： if(表达式1，表达式2，表达式3) 1成立则返回2，否则返回3 特点： 可以用在任何位置 二、case语句 语法： 情况一：类似于switch-case case 变量|表达式|字段 when 值1 then 值1|表达式1; when 值2 then 值2|表达式2; ... else 值n|表达式n; end [case]（如果是放在begin end中需要加上case，如果放在select后面不需要） 情况二：类似于多重if case when 条件1 then 值1|表达式1; when 条件2 then 值2|表达式2; ... else 值n|表达式n; end [case]（如果是放在begin end中需要加上case，如果放在select后面不需要） 特点： 可以作为表达式，嵌套在其他语句中使用，可以放在任何地方，可以放在任何地方；可以作为独立语句去使用，只能放begin end中 所有条件不满足有ELSE则执行，无ELSE则返回NULL 三、if elseif语句 语法： if 条件1 then 语句1; elseif 条件2 then 语句2; ... else 语句n; end if; 特点： 只能用在begin end中！！！！！！！！！！！！！！！ 三者比较 应用场合 if函数 简单双分支 case结构 等值判断 的多分支 if结构 区间判断 的多分支 循环语法： [标签：]WHILE 循环条件DO 循环体 END WHILE [标签]; leave 标签; //像break iterate 标签; //像continue 特点： 只能放在BEGIN END里面 如果要搭配leave跳转语句，需要使用标签，否则可以不用标签 [标签：]loop 循环体 END loop [标签]; [标签：]repeat 循环体 untile 结束循环的条件 END repeat [标签]; //像do while]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL数据库概念]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[数据库的好处1.持久化数据到本地 2.可以实现结构化查询，方便管理 数据库相关概念1、DB：Database数据库，保存一组有组织的数据的容器 2、DBMS：Database Management System数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据 3、SQL：Structure Query Language结构化查询语言，用于和DBMS通信的语言 数据库存储数据的特点1、将数据放到表中，表再放到库中 2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。 3、表具有一些特性，这些特性定义了数据在表中如何存储。 4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的。 5、表中的数据是按行存储的。 MySQL产品的介绍和安装MySQL服务的启动和停止1、计算机——右击管理——服务 2、通过管理员身份运行 net start 服务名（启动服务） net stop 服务名（停止服务） MySQL服务的登录和退出1、通过mysql自带的客户端 只限于root用户 2、通过windows自带的客户端 登录： mysql 【-h主机名 -P端口号 】-u用户名 -p密码 退出： exit或ctrl+C MySQL的常见命令1.查看当前所有的数据库 show databases; 2.打开指定的库 use 库名 3.查看当前库的所有表 show tables; 4.查看其它库的所有表 show tables from 库名; 5.创建表 create table 表名( 列名 列类型, 列名 列类型， ... ); 6.查看表结构 desc 表名; 7.显示表中的所有数据 select * from 表名; 7.查看服务器的版本 登录到mysql服务端 select version(); 没有登录到mysql服务端 mysql --version 或 mysql --V MySQL的语法规范1.不区分大小写,但建议关键字大写，表名、列名小写 2.每条命令最好用分号结尾 3.每条命令根据需要，可以进行缩进 或换行 4.注释 单行注释：#注释文字 单行注释：-- 注释文字 多行注释：/* 注释文字 */ SQL的语言分类DQL（Data Query Language）：数据查询语言 select DML(Data Manipulate Language):数据操作语言 insert 、update、delete DDL（Data Define Languge）：数据定义语言 create、drop、alter TCL（Transaction Control Language）：事务控制语言 commit、rollback]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL常用函数]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[常见函数一、单行函数 1、字符函数 concat拼接 substr截取子串 索引从1开始 upper转换成大写 lower转换成小写 trim去前后指定的空格和字符 trim(&apos;a&apos; from &apos;aaababbaaa&apos;) 输出babb ltrim去左边空格 rtrim去右边空格 replace替换 lpad左填充 rpad右填充 instr返回子串第一次出现的索引 length 获取字节个数 2、数学函数 round 四舍五入 rand 随机数 floor向下取整 ceil向上取整 mod取余 truncate截断 3、日期函数 now()当前系统日期+时间 year(now()) 截取年 month() curdate()当前系统日期 curtime()当前系统时间 str_to_date(&apos;时间&apos;,&apos;如何解析&apos;) 返回合规的时间 date_format(&apos;时间&apos;,&apos;如何输出&apos;) 返回想要的时间 4、流程控制函数 1. if(条件,true_ret,false_ret) 2. case key when val then 处理 when val then 处理 ... else 处理 end * key可以不写，有时val与key要合规，无时则val为条件 5、其他函数 version版本 database当前库 user当前连接用户 二、分组函数 sum 求和 max 最大值 min 最小值 avg 平均值 count 计数 特点： 1、以上五个分组函数都忽略null值，除了count(*) 2、sum和avg一般用于处理数值型 max、min、count可以处理任何数据类型 3、都可以搭配distinct使用，用于统计去重后的结果 4、count的参数可以支持： 字段、*、常量值，一般放1，都是求表中有多少行 建议使用 count(*)，在MYISAM中，count(*)有缓存，效率高，INNODB中，count(*)和count(1)类似 5、分组函数一般要求是group by后的字段，否则没有意义]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL常用类型与约束]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%9E%8B%E4%B8%8E%E7%BA%A6%E6%9D%9F%2F</url>
+    <content type="text"><![CDATA[常见类型整型：Tinyint 1Byte Smallint 2B Mediumint 3B Int、integer 4B Bigint 8B * 加上unsigned会表示无符号 * 超过会报out of range value，但是会插入边界值 不设置长度，那会有默认的长度，表示显示宽度，加上ZEROFILL约束后，自动变成unsigned，显示时不够长用0补充 小数：浮点型 float(M,D) 4B double(M,D) 8B 定点型，下面两者是一样的 DEC(M,D) M+2 DECIMAL(M,D) M+2 * D表示小数点位数，M表示小数+整数一共多少位，但是都可以省略不写，DECIMAL(10,0)默认，float和double会根据精度决定 * 精度要求高的用DEC 字符型：较短 char(M) 0~255 比varchara效率高 varchar(M) 0~65535 会根据实际给内存 binary 类似上面的，保存二进制 varbinary 较长 text blob(较长的二进制数据) ENUM v的值只能是a或者b，不然为空 CREATE TABLE T ( v ENUM(&apos;a&apos;,&apos;b&apos;) ); SET v的值由set内容组成，不分大小写，多个用逗号分开a,B CREATE TABLE T ( v SET(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;) ); * M表示字符数，中文也只算个，char可以省略，为1，varchar不可以 日期型：data 4 只有日期 datatime 8 有日期和时间 timestamp 4 时刻 受时区影响 time 3 只有时间 year 1 只有年 Blob类型：常见约束一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性 CREATE TABLE 表名( 字段名 字段类型 约束 ) NOT NULL 非空，用于保证该字段的值不能为空 DEFAULT 默认，用于保证该字段有默认值 UNIQUE 唯一，值具有唯一性，可以为空 CHECK 检查约束【mysql中不支持，但是不报错】 PRIMARY KEY 主键，值具有唯一性且非空 FOREIGN KEY 外键，用于限制两个表的关系，保证该字段的值必须来自于主表的关联列的值。就是该值能在别的表中找到。在从表添加外键约束，用于引用主表中某列的值。（数据在主表中，从表只有个编号） 如 员工表的部门编号，学生表的专业编号 主键和唯一： 都有唯一性 唯一只可以有一个null，主键不可以有；一个表只能有一个主键 **可使用多个值共同作为主键**，唯一也可以由多个值组成 外键 在从表中设置外键关系 从表的外键列的类型和主表的关联列类型一致或兼容 主表的关联列必须唯一性（主键或者唯一） 插入数据时，先插入主表，再插入从表，删除则相反 约束的类型： CREATE TABLE 表名( 名 类型 列级约束, 表级约束 ) 列级约束 六大约束语法上都支持，但外键约束没有效果 CREATE TABLE 表名( id int primary key, stuname varchar(20) not null, gender char(1) check(gender=&apos;b&apos; or gender=&apos;g&apos;), seat int unique, age int default 18, majorid int references major(id) //无效 ) CREATE TABLE major( id int primary key, majorname varchar(20) ) 表级约束 除了非空、默认，其它都支持 [CONSTRAINT name] 这是可选的 CREATE TABLE 表名( id int, stuname varchar(20), gender char(1) , seat int, age int, majorid int， CONSTRAINT pk primary key(id), CONSTRAINT uq unique(seat), CONSTRAINT ck CHECK(gender=&apos;b&apos; or gender=&apos;g&apos;), CONSTRAINT fk_表名_major foreign key(majorid) references major(id) ) 添加约束的时机： 创建表时 修改表时 ALTER TABLE T MODIFY COLUMN 字段名 字段类型 新约束 只要支持列级约束 ALTER TABLE T ADD COLUMN [constraint 约束名] 约束 只要支持表级约束 ALTER TABLE T DROP PRIMARY KEY ALTER TABLE T DROP INDEX 唯一键名 ALTER TABLE T DROP FOREIGN KEY 外键名 标识列又称自增长列，可以不用手动的插入值，系统提供默认的序列值 创建表时 CREATE TABLE T( id int primary key auto_increment, name varchar(20) ) 插入时，id这一位传入null就行，或者直接省略 必须配合唯一性的键使用 一个表只能有一个标识列，一个auto_increment关键字 标识列只能是数字型 auto_increment_increment 步行 这是系统的值 用SET ...=n 修改 auto_increment_offset 起始 也可以插入一行，修改offset当前值 修改表时 ALTER TABLE T MODIFY COLUMN 字段名 字段类型 约束 auto_increment;]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL存储过程和函数]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[存储过程含义：一组经过预先编译的sql语句的集合好处： 1、提高了sql语句的重用性，减少了开发程序员的压力 2、提高了效率，简化操作 3、减少编译次数和连接次数 分类： 1、无返回无参 2、仅仅带in类型，无返回有参 3、仅仅带out类型，有返回无参 4、既带in又带out，有返回有参 5、带inout，有返回有参 注意：in、out、inout都可以在一个存储过程中带多个 创建存储过程语法： create procedure 存储过程名(in|out|inout 参数名 参数类型,...) begin 存储过程体 end 注意 1、需要设置新的结束标记 delimiter 新的结束标记 示例： delimiter $ CREATE PROCEDURE 存储过程名(IN|OUT|INOUT 参数名 参数类型,...) BEGIN sql语句1; sql语句2; END $ 2、存储过程体中可以有多条sql语句，如果仅仅一条sql语句，则可以省略begin end 3、参数前面的符号的意思 in：该参数只能作为输入（该参数不能做返回值） out：该参数只能作为输出（该参数只能做返回值） inout：既能做输入又能做输出 调用存储过程call 存储过程名(实参列表) 删除存储过程drop procedure 存储过程名 查看存储过程show create procedure 存储过程名 函数创建函数学过的函数：LENGTH、SUBSTR、CONCAT等语法： CREATE FUNCTION 函数名(参数名 参数类型,...) RETURNS 返回类型 BEGIN 函数体 END 调用函数SELECT 函数名（实参列表） 删除函数drop function 存储过程名 查看函数show create function 存储过程名 函数和存储过程的区别 关键字 调用语法 返回值 应用场景 函数 FUNCTION SELECT 函数() 有且仅有一个 一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个 存储过程 PROCEDURE CALL 存储过程() 可以有0个或多个 一般用于增删改、批量操作]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL变量概念]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%8F%98%E9%87%8F%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[系统变量一、全局变量 作用域：针对于所有会话（连接）有效，但不能跨重启 查看所有全局变量 SHOW GLOBAL VARIABLES; 查看满足条件的部分系统变量 SHOW GLOBAL VARIABLES LIKE &apos;%char%&apos;; 查看指定的系统变量的值 SELECT @@global.autocommit; 为某个系统变量赋值 SET @@global.autocommit=0; SET GLOBAL autocommit=0; 二、会话变量 作用域：针对于当前会话（连接）有效 查看所有会话变量 SHOW SESSION VARIABLES; 查看满足条件的部分会话变量 SHOW SESSION VARIABLES LIKE &apos;%char%&apos;; 查看指定的会话变量的值 SELECT @@autocommit; SELECT @@session.tx_isolation; 为某个会话变量赋值 SET @@session.tx_isolation=&apos;read-uncommitted&apos;; SET SESSION tx_isolation=&apos;read-committed&apos;; show 模糊或者多个 selece 指定 不写global默认是session 自定义变量一、用户变量 声明并初始化： SET @变量名=值; SET @变量名:=值; SELECT @变量名:=值; 赋值： 方式一：一般用于赋简单的值 SET 变量名=值; SET 变量名:=值; SELECT 变量名:=值; 方式二：一般用于赋表 中的字段值 SELECT 字段名或表达式 INTO 变量 FROM 表; 使用： select @变量名; 二、局部变量 仅仅在定义它的begin和end中有效 声明： declare 变量名 类型 【default 值】; 赋值和使用，与用户变量一样 二者的区别： 作用域 定义位置 语法 用户变量 当前会话 会话的任何地方 加@符号，不用指定类型 局部变量 定义它的BEGIN END中 BEGIN END的第一句话 一般不用加@,需要指定类型]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL DQL数据查询语言]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-dql%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[DQL语言的学习基础查询语法： SELECT 要查询的东西【FROM 表名】; 特点： * 通过select查询完的结果 ，是一个虚拟的表格，不是真实存在 * 要查询的东西 可以是常量值、可以是表达式、可以是字段、可以是函数 起别名* SELECT last_name AS 姓 FROM info; * SELECT last_name 姓 FROM info; 便于理解 查询字段第一名情况，使用别名可以区分开来 字符串连接SELECT CONCAT(last_name,first_name) AS 姓名 FROM info; +会把字符串转数字，不成功则为0，然后相加 若其中一方为NULL，则结果为NULL，可以使用IFNULL(name,default)，若name为NULL，则返回default 去重SELECT DISTINCT last_name 姓 FROM info; 条件查询条件查询：根据条件过滤原始表的数据，查询到想要的数据 语法： select 要查询的字段|表达式（计算+-*/%等）|常量值|函数（输出函数返回值） from 表 where 条件 ; 关键字名作字段使用``包装 分类： 一、条件表达式 示例：salary&gt;10000 条件运算符： &gt; &lt; &gt;= &lt;= = != &lt;&gt; **&lt;=&gt; 安全等于，可以用在NULL，上面的不行** 二、逻辑表达式 示例：salary&gt;10000 &amp;&amp; salary&lt;20000 逻辑运算符： and（&amp;&amp;）:两个条件如果同时成立，结果为true，否则为false or(||)：两个条件只要有一个成立，结果为true，否则为false not(!)：如果条件成立，则not后为false，否则为true 三、模糊查询 like： where last_name like &apos;a%&apos; ESCAPE &apos;#&apos;; 字符形要加引号，%表示任意多个字符，_表示一个，默认是\转义，可以使用ESCAPE指定 between and： where a BETWEEN 20 AND 30; 包含两端，不可交换位置 in： where last_name IN(&apos;&apos;,&apos;&apos;,...); 不支持通配符 is null： where lastt_name IS [NOT] NULL; 排序查询语法： select 要查询的东西 from 表 where 条件 order by 排序的字段|表达式|函数|别名 【asc|desc】，... * 可以用,进行多个条件复合 分组查询语法： select 分组函数,查询的字段 from 表 【where】 group by 查询的字段 【order by】 【having】 特点： 1、可以按单个字段分组 2、和分组函数一同查询的字段最好是分组后的字段 3、分组筛选针对的表位置关键字 分组前筛选： 原始表 group by的前面 where 分组后筛选： 分组后的结果集 group by的后面 having 4、可以按多个字段分组，字段之间用逗号隔开 5、可以支持排序 6、having后可以支持别名 多表连接查询笛卡尔乘积：如果连接条件省略或无效则会出现 解决办法：添加上连接条件 一、传统模式下的连接 ：等值连接、非等值连接 1.等值连接的结果 = 多个表的交集 2.n表连接，至少需要n-1个连接条件 3.多个表不分主次，没有顺序要求 4.一般为表起别名，提高阅读性和性能，用了原表名就不能用了 二、sql99语法：通过join关键字实现连接 含义：1999年推出的sql语法 支持： 等值连接、非等值连接 （内连接） 外连接 左外 右外 全外 交叉连接 语法： select 字段，... from 表1 【inner|left outer|right outer|full outer|cross】 join 表2 别名 on 连接条件 【inner|left outer|right outer|full outer|cross】 join 表3 别名 on 连接条件 【where 筛选条件】 【group by 分组字段】 【having 分组后的筛选条件】 【order by 排序的字段或表达式】 outer和inner可以省略 1. 内连接，找不到对应的，就不显示 2. 外连接，查询结果为主表中的所有记录。用于一个表有，另外一个表找不到对应的情况。主表中每行都显示出来，若找不到匹配的值用null。等于内连接结果+没匹配到的行和null 3. 左右连接，左连接表示左边是主表，右连接表示右边是主表 4. 全外连接，等于内连结果+主表没匹配到的行和null+从表没匹配到的行和null 5. 交叉连接，等于笛卡尔乘积 三、自连接 同一个表有多个意义，如员工表也可以表示为领导表，但是又不能用一个表就完成，需要自连接自己 案例：查询员工名和直接上级的名称sql99 SELECT e.last_name,m.last_name FROM employees e JOIN employees m ON e.`manager_id`=m.`employee_id`; sql92 SELECT e.last_name,m.last_name FROM employees e,employees m WHERE e.`manager_id`=m.`employee_id`; 子查询含义： 一条查询语句中又嵌套了另一条完整的select语句，其中被嵌套的select语句，称为子查询或内查询 在外面的查询语句，称为主查询或外查询 特点： 1、子查询都放在小括号内，一般放在条件的右侧 2、子查询优先于主查询执行，主查询使用了子查询的执行结果 非法使用子查询的情况： a、子查询的结果与对应的操作符不符 b、子查询的结果为空 3、子查询可以放在 select后面 仅标量子查询 from后面 支持表子查询，需要给查询一个表名 where、having后面 标量、列、行子查询 exists后面 表子查询，结果是1或0，表示子查询是否有结果集 4、子查询根据结果集不同分为以下几类： * 标量子查询 结果集只有一行一列 一般搭配单行操作符使用：&gt; &lt; = &lt;&gt; &gt;= &lt;= * 列子查询 结果集只有一列多行 一般搭配多行操作符使用：any、all、in、not in in： 属于子查询结果中的任意一个就行 any和all往往可以用其他查询代替 * 行子查询 结果集有一行多列，或多行多列（较少） 例 where (name,age) = ( selece name,age from info; ) * 表子查询 结果集一般为多行多列 分页查询应用场景： 实际的web项目中需要根据用户的需求提交对应的分页查询的sql语句 语法： select 字段|表达式,... from 表 【where 条件】 【group by 分组字段】 【having 条件】 【order by 排序的字段】 limit 【offset】size; 特点： 1.offset从0开始 2.limit子句放在查询语句的最后 3.公式：select * from 表 limit （page-1）*sizePerPage,sizePerPage 假如: 每页显示条目数sizePerPage 要显示的页数 page 联合查询引入： union 联合、合并。将多条查询语句的结果合并成一个结果。要查询的结果来自多个表，且多个表没有直接的关联，且查询的信息类似。 语法： select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】 select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】 select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】 ..... select 字段|常量|表达式|函数 【from 表】 【where 条件】 特点： 1、多条查询语句的查询的列数必须是一致的 2、多条查询语句的查询的列的类型和顺序几乎相同 3、union代表去重，union all代表不去重]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL TCL事务控制语言]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-tcl%E4%BA%8B%E5%8A%A1%E6%8E%A7%E5%88%B6%E8%AF%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[数据库事务含义通过一组逻辑操作单元（一组sql语句），将数据从一种状态切换到另外一种状态。事务中操作的数据，需要根据隔离级别进行体现 特点（ACID） 原子性：要么都执行，要么都回滚。事务不可分割的工作单元。 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一组逻辑操作单元（多条sql语句） 3、提交事务或回滚事务 事务的分类：隐式事务，没有明显的开启和结束事务的标志 比如insert、update、delete语句本身就是一个事务 显式事务，具有明显的开启和结束事务的标志 1、开启事务 取消自动提交事务的功能 set autocommit=0; 2、编写事务的一组逻辑操作单元（多条sql语句） select insert update delete //DDL语言不具有事务性 3、提交事务或回滚事务 使用到的关键字set autocommit=0; start transaction; commit; rollback; savepoint 断点 commit to 断点 rollback to 断点 事务的隔离级别:事务并发问题如何发生？ 当多个事务同时操作同一个数据库的相同数据时 事务的并发问题有哪些？ 脏读：一个事务读取到了另外一个事务未提交的数据 不可重复读：同一个事务中，多次读取到的数据不一致 幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据，一般是别的事务插入数据提交后 如何避免事务的并发问题？ 通过设置事务的隔离级别 1、READ UNCOMMITTED 允许事务读取未被其它事物提交的变更 2、READ COMMITTED 可以避免脏读 3、REPEATABLE READ 可以避免脏读、不可重复读和一部分幻读 4、SERIALIZABLE 可以避免脏读、不可重复读和幻读 Oracle只支持2和4，默认是2，而Myql都支持，默认是3 设置隔离级别： set session|global transaction isolation level 隔离级别名; 查看隔离级别： select @@tx_isolation;]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL DML数据操作语言]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-dml%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[DML语言插入语法一：支持多列、子查询 insert into 表名(字段名，…) values(值1，…);语法二： inset into 表名 set 列名=值,列名=值…特点： 1、字段类型和值类型一致或兼容，而且一一对应 2、可以为空的字段，可以不用插入值，或用null填充 3、不可以为空的字段，必须插入值 4、字段个数和值的个数必须一致 5、字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致 修改修改单表语法： update 表名 set 字段=新值,字段=新值 【where 条件】 修改多表语法： update 表1 别名1,表2 别名2 set 字段=新值，字段=新值 where 连接条件 and 筛选条件 删除方式1：delete语句 单表的删除： ★ delete from 表名 【where 筛选条件】 多表的删除： delete 别名1，别名2 from 表1 别名1，表2 别名2 where 连接条件 and 筛选条件; 方式2：truncate语句 清空数据 truncate table 表名 两种方式的区别【面试题】 #1.truncate不能加where条件，而delete可以加where条件 #2.truncate的效率高一丢丢 #3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始 #delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始 #4.truncate删除不能回滚，delete删除可以回滚]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL DDL数据定义语言]]></title>
+    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-ddl%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[DDL语句库和表的管理库的管理： 一、创建库 create database 库名 二、删除库 drop database 库名 表的管理： #1.创建表 CREATE TABLE IF NOT EXISTS stuinfo( stuId INT, stuName VARCHAR(20), gender CHAR, bornDate DATETIME ); DESC studentinfo;查看表结构 SHOW INDEX FORM info;查看表索引、主键、外键、唯一 #2.修改表 alter 语法：ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型 约束】; #①修改字段名 ALTER TABLE studentinfo CHANGE [COLUMN] 原名 新名 类型; #②修改表名 ALTER TABLE stuinfo RENAME [TO] studentinfo; #③修改字段类型和列级约束 ALTER TABLE studentinfo MODIFY COLUMN borndate DATE; #④添加字段 ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first; #⑤删除字段 ALTER TABLE studentinfo DROP COLUMN email; #3.删除表 DROP TABLE [IF EXISTS] studentinfo; #4.表复制 仅复制表结构 CREATE TABLE newTable LIKE oldTable; 复制结构+数据 CREATE TABLE newTAble SELECT * FORM oldTable WHERE ..;]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -119,260 +373,6 @@
       </categories>
       <tags>
         <tag>Cpp基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[什么是微服务架构]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%2F</url>
-    <content type="text"><![CDATA[微服务架构微服务架构是一种架构模式或者架构风格，它提倡将单一应用程序划分成一组小的服务，每个服务运行在其独立的进程中，服务间互相协调、互相配合，为用户提供最终价值。服务间采用轻量级通信机制（通常基于HTTP的RESTful API）。每个服务都围绕着具体业务进行构建，并且能独立部署到生产环境。应尽量避免统一的、集中式的服务管理机制，对具体的服务而言，应根据业务上下文，选择合适的语言、工具对其进行构建，可以有非常轻量的集中式管理来协调这些服务，可以使用不同的语言，也可以使用不同的数据存储。 由All in one，拆分成不同的模块（进程），一个服务做一件事，进行解耦。]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[集线器与交换机基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[总线型使用大量机械接头和无源电缆并不可靠 可以使用集线器HUB在物理层扩展以太网，将多个碰撞域（冲突域）合并成一个更大的冲突域，在一系中的一台主机要发送给二系中一台主机，该帧信号会传输到整个网络的各个主机。 交换机会把单播帧转发到目的主机（忽略ARP过程，假设交换机的帧交换表已“学习好了”） 集线器一般使用CSMA/CD争取总线资源，只能半双工，而交换机可以进行全双工，同时进行收发工作。 交换机工作在数据链路层（也包括物理层—），集线器工作在物理层，前者性能快 以太网交换机收到帧后，在帧交换表中查找帧的目的MAC地址所对应的接口号，然后通过该接口转发帧。是即插即用设备，刚上电内部帧交换表是空的，随通信进行处学习算法，自动逐渐建立起帧交换表。 盲目泛洪类似广播，登录会在发送方时登记，每条记录都有时效，到期自动删除，MAC与交换机接口关系不是永久性的，更换主机、更换网卡。ARP高速缓存表中IP与MAC对应关系同样会到期自动删除。 使用生成树协议，保证没有环路网络 当交换机以太网足够大时，进行广播会有很大的开销路由器工作在网络层，一般不转发广播，可以将交换机以太网分割成小的广播域 交换机端口类型有以下三种：Access Trunk Hybrid交换机各端口的缺少VLAN ID 思科上称为Native VLAN 即本征VLAN 华为上称Port VLAN ID即端口VLAN ID,PVID]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[网络层基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E7%BD%91%E7%BB%9C%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[32比特的IPV4地址不便阅读、记录、输入，因此采用点分十进制表示方法，8个一组，用.分开 增加子网时候，需要申请新的网络号，等待时间和钱，增加路由路中路由表记录数量，浪费原网络中剩余的IP。此时需要引入子网掩码，通过与运算，取出IPV4地址所在子网的网络地址 定长即使用同一个子网掩码来划分子网，只能划分出2^n个子网，从主机号借用的。容易造成IP地址浪费。使用不同的子网掩码来划分子网，更灵活，按需分配，子网数量可以不同，减少浪费。 路由器收到出错的数据报，丢弃后，向源主机发送ICMP数据报。 产生环路，会使用TTL进行计算，为零时抛弃，或者加入黑洞路由，使用默认路由后，当不知道转发给哪里就会转发到默认路由 在两个自治系统中，内部使用的是IGP或IRP内部网关（路由）协议，之间使用的是EGP或ERP外部网关（路由）协议，仅表示协议，不表示实际使用什么算法路由器会定期发送自己的路由信息 减少信息洪泛，一个区域一般最多200个路由 BGP-4报文封装在TCP报文段中 R1与R2之间类似点对点，也称IP隧道技术]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[运输层基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E8%BF%90%E8%BE%93%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[UDP无连接，TCP三次握手、四次挥手TCP规定，即使接收窗口为0，也要接收零窗口探测报文、确认报文、带有紧急数据的报文 慢开始会以2倍数增长拥塞窗口，拥塞避免是线性增加1不等超时，就进行重传，需要接收连续三个确认 不推荐发送窗口前沿收缩，有可能这些数据已经发送了 建立连接前，服务器会先创建传输控制块（TCP连接表、指向发送和接收缓存的指针、指向重传队列的指针、当前的发送和接收序号、。。。），然后进行LISTEN客户端要发起连接时，也先创建传输控制块第三次握手是为了防止多连接，而消耗掉服务器资源SYN=1的报文段不能携带数据，但要消耗一个序号、普通确认报文如果不带数据，则不消耗序号x客户端选择作为初始序号，y为服务端选择的初始序号 FIN=1的报文段不能携带数据，但要消耗一个序号。v等于TCP客户进程之前收到的最后一个字节序号+1。u等于TCP客户进程之前已传送过数据的最后一个字节序号+1。]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[应用层基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E5%BA%94%E7%94%A8%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[请求中会带有《事务ID》，用带确保是自己发出而得到的回应路由器不会转发广播，需要在上面配置DHCP服务器IP，才能进行单播传送 DNS服务器，用于查找域名-&gt;IP 使用UDP 端口53 控制连接会保持打开，数据连接传输完成就关闭 基于TCPSTMP只能传输ASCII，因而引进了MIME，将图片、文件转为ASCII或者将ASCII进行逆转换。MIME同样应用于HTTP]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[数据链路层基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[封装成帧：在链路层会对IP数据报文添加帧头和帧尾 帧头和帧尾包含重要的控制信息 帧头和帧尾作为帧定界，可以通过物理层交付的比特流中提取一个个的帧（PPP帧），并不是所有都包含帧定界标志（以太网V2 MAC帧），而物理层会在传输前增加8字节前导码（前7位是同步码，作为时钟同步，之后一字节作为定界符）再转为电信号发送，以太网规定帧间间隔（96比特时间） 透明传输，指数据链路层对上层交付的传输数据没有任何限制，若数据中存在帧尾字段，链路层会在该位置做字符标记（在前增加esc ascill=27）做比特处理（每5位1后插入1个0）等，以防止在解析时提前结束帧（字符填充或者零比特填充） 差错检测：比特在实际传输过程中可能会产生差错，称为比特差错或误码。一段时间内，传输错误的比特占总传输比特的比率为误码率BER。检错后一般进行重传来纠正传输中的差错或者仅仅是德育检测到差错的帧，取决于是可靠传输还是不可靠传输 在以太网V2 MAC帧中，帧尾包含4字节的帧检验序列FCS字段，检测是否有误码 在PPP帧中，帧尾包含2字节FCS 奇偶校验，在待发送数据后面添加1位奇偶校验，使整个数据（包括校验位）中1的个数为奇数或者偶数，漏检率高 循环冗余校验，约定一个生成多项式，基于数据和多项式计算出冗余码，添加到数据后面一起传输，漏检率非常低，易于硬件实现，广泛用于数据链路层 检测码只能检测出是否出错，不能定位，无法纠正错误，可以使用冗余信息更多的纠错码进行前向纠错，开销较大 可靠传输：根据数据链路层向上层提供的服务类型，其可靠性不一定由数据链路层实现，其它各层均可选择实现可靠传输 不可靠传输服务：仅仅丢弃有误码的帧 可靠传输服务：想办法实现发送端发送什么，接收端就收到什么 有线误码率低，不要求数据链路层向上提供可靠传输。即使出现误码，可靠传输的问题由其上层处理。 无线链路易受干扰，误码率比较高，因此要求数据链路层必须向上层提供可靠传输服务。 传输差错类型，比特差错、分组丢失、分组失序、分组重复，分组表示的是帧 可靠传输实现机制的原理，不仅限于数据链路层 停止-等待协议SW（自动请求重传ARQ） 回退N帧协议GBN（连续ARQ，滑动窗口协议） 制定比特给分组编号，发送窗口尺寸，表示一次发多个组，尺寸不能大于分组号-1，接收窗口尺寸为1，（若发送尺寸==分组数，则会接口窗口检测不到错误，依然把0号放置于0号，认为正确，实际是忽略了一个组），接收窗口只能等于1，只能按序接收，数据分组内出现误码后面的分组都会丢弃。 由停止-等待发送1个改为多个，串行改并行 累积确认，在接收到前N组时，可以直接发送ACKn表示已经接收到N组数据，减少资源占用 当多个到达接收方时，出现误码，不仅会丢弃该帧，还会把序号不匹配的丢弃，重新发送多个已经接收到最大序号的ACKn 选择重传协议SR 对回退N帧进行扩展，发送滑动窗口&gt;=接收窗口&gt;=1，可进行多组分别确认，但是取消累积确认 点对点协议PPP：目前使用最广泛的点对点数据链路层协议，向上不提供可靠传输 实现透明传输，面向字节的异步链路，字节填充法，对特殊字符前插入转义字符，转义字符再插入转义字符。面向比特的同步链路，比特填充法，对于连续5位1的后面插入一个0。 信道复用： 频分复用FDM：根据频带划分出多个了频带（信道），频带间需要有隔离频带 时分复用TDM：将传输带宽资源按时隙轮流分配给不同用户，用户只能在对应的时隙进行通信，周期性出现，一周期就是一个TDM帧 波分复用WDM：即光的频分复用，将每路（1310nm波长，2.5Gb/s）变换到1550~1561.2nm，共8路，相隔1.6nm，在同一根光纤传输，光传输会损失，中间需要掺铒光纤放大器EDFA。 码分复用CDM： 动态接入控制：CSMA-CD适用于有线CSMA/CA适用于无线等待DIFS表示有高优先级让其先传。等待SIFS表示最短帧间间隔，用来分隔属于一次对话的各帧。请求发送RTS:帧包括源地址、目的地址及所需要时间 允许发送CTS:也包括此次通信时间解决A C互为隐蔽站的问题，C通过CTS知道B被占用的时间]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MAC、IP、ARP基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2Fmac%E3%80%81ip%E3%80%81arp%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[单播：表示只传给指定MAC地址，多播：表示该网络接口所在的多播地址，一个接口可以在多个多播地址，与帧的目的MAC地址符合，即接收该帧，广播：地址为FF:FF:FF:FF:FF:FF，所有人都接收 ARP只能在同一个链路或者同一个网络上使用]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[物理层基本概念]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E7%89%A9%E7%90%86%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[物理层考虑的是怎样才能在连接各种计算机的传输媒体上传输数据比特流物理层为数据链路层屏蔽了各种传输媒体的差异，使数据链路层只需要考虑如何完成本层的协议和服务，而不必考虑网络具体的传输媒体是什么 物理层协议主要任务：机械特性：指明接口所用接线器的形状和尺寸、引脚数目和排列、固定和锁定装置电气特性：指明在接口电缆的各条线上出现的电压范围功能特性：指明某条线上出现的某一电平的电压表示何种意义过程特性：指明对于不同功能的各种可能事的出现顺序 传输媒体（不同媒体对应不同的物理层协议）：1、导引型：双绞线（网线）、同轴电缆、光纤、电力线2、非导引型：微波通信（2~40GHz)、无线电波、红外线、可见光 传输方式1、串行（远距离传输，如计算机网络）。并行（CPU与内存之间，通过总线进行传输）2、同步：以稳定的比特流传输，字节间没有间隔，接收端在中间时刻进行检测0或1，此时会有时钟累计误差。需要保持时钟同步。外同步：在收发双方间添加一条单独的时钟信号线。内同步：发送端将时钟同步信号编码到发送数据中一起传输（曼彻斯特编码）。异步：以一个字节为单位传输，字节间异步，在字节前后增加头和尾作为判断。3、单工：单向通信（收音机）。半双工：双向交替通信，可以相互通信但不能同时（对讲机）。全双工：双向同时通信（电话） 常用编码：不归零编码（存在同步问题，需要额外传输时钟，不常用），归零编码（自同步，编码效率低，用零电频做隔断），曼彻斯特编码（用码元间跳变表示时钟，又表示数据），差分曼彻斯特编码 频率和相位是相关的，即频率是相位随时间的变化率。所以一次只能调制频率和相位中的一个。相位和振幅可以结合起来一起调制，称为正交振幅调制QAM。 信号在信道中传输会存在失帧的可能，其中因素娄：码元传输速率，信号传输距离，噪声干扰，传输媒体质量。]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[计算机网络基础]]></title>
-    <url>%2F%E7%BD%91%E7%BB%9C%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%2F</url>
-    <content type="text"><![CDATA[三种电路交换优缺点对比：电路交换（比特流直达）优点：通信时延小、有序、没有冲突、适用范围广、实时性强、控制简单缺点：建立连接时间长、线路独占，使用效率低、灵活性差、难以规格化报文交换（整组报文转发）优点：无需建立连接、动态分配线路、线路可靠性、线路利用率高、多目标服务缺点：转发时延、较大存储缓存空间、传输额外的信息量分组交换优点：无需建立连接、线路利用率高、简化存储管理、加速传输、减少出错和重发数据量缺点：转发时延、传输额外的信息量、采用数据报服务时存在失序、丢失或者重复分组的问题；对于虚电路服务，存在呼叫建立、数据传输和虚电路释放三个过程。 时延=发送时延（分组长度/发送数率）+传播时延（信道长度/电磁波传播速率）+处理时延（硬件相关） 时延带宽积=传播时延*带宽 利用率：信道利用率 用来表示信道百分之几的时间是有数据通过网络利用率 全网络的信道利用率的加权平均当前时延=空闲时延/(1-利用率) 当得用率达到50%以上时，则时延会增大，可以考虑扩容，增大线路的带宽。尽量动态控制通信量，保持在合理范围内。 丢包：接口、结点、链路、路径、网络丢包。分组丢失：分组在传输过程中出现误码，被结点丢弃；到达一台队列已满的分组交换机时被丢弃。 OSI体系结构，七层协议物理、数据链路、网络、运输、会话、表示、应用层TCP/IP体系结构、四层协议网络接口 网络接口网际 IP将网络接口互联、向TCP、UDP提供网络互联服务(IP over everythins、Everything over IP)运输 TCP(在IP服务的基础上，向应用层提供可靠性传输服务) UDP(…不可靠传输服务)应用层 HTTP SMTP DNS RTP 原理体系结构（适用教学）应用 解决通过应用进程的交互来实现特定网络应用的问题 应用进程间交互来完成特定的网络应用运输 解决进程之间基于网络的通信问题 解决进程间、传输错误处理网络 解决分组在多个网络上传输（路由）的问题 路由功能，如使用IP数据链路 解决分组在一个网络（或链路）上传输的问题 如使用MAC标记主机物理层 解决使用何种信号来传输比特的问题 硬件如网络网口、传输方式 由应用层向物理层转变 http（报文） -&gt; http+TCP（TCP报文段） -&gt; http+TCP+IP（IP数据报） -&gt; ETH+http+TCP+IP+ETH（帧） -&gt; ….+前导码（比特流） 协议的三要素语法 定义所交换信息的格式语义 定义收发双方所要完成的操作同步 定义收发双方的时序关系 协议数据单元PDU 对等层次之间传送的数据包称为该层的协议数据单元服务数据单元SDU 同一系统内，层与层之间交换的数据包称为服务数据单元多个SDU可以合成一个PDU，一个SDU可以划分为几个PDU]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>网络知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[设计模式]]></title>
-    <url>%2F%E6%97%A0%E5%A4%84%E5%AE%89%E6%94%BE%2F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[设计模式总结创建型1.简单工厂根据参数，如字符串、枚举等，反回创建的类。不属于Gof所说的。 2.工厂模式抽象一层，选择一个需要的工厂，工厂有一个获取产品的方法，再从工厂取要的东西。 3.抽象工厂对工厂抽象和产品抽象，创建一个产品族工厂，从产品族工厂中取东西。理论上每个工厂都能取到同类型的东西，但是属性不一样。 4.构建者模式抽象一个item做衍生，以此做为产品，里面有公共的方法。使用一个builder，选装Item，把东西存起来。产品可以动态增删。 5.原型模式使用当前已经存在的类，给予一个clone接口，用于克隆一份一样的、独立存在的类。 6.单例模式一个对象，只有一个实例，私有创建的方法。大家共用同一个。懒汉式，在第一次使用时才创建饿汉式，编译构建时就创建,static成员 结构型7.适配器模式由底部根据需求实现匹配，自动返回适应的类型或者执行某些动作。 8.桥接模式根据不同的上层产品，给入不同的内部数据，通过上层产品操作间接使用数据，展示的效果会不一样。 9.组合模式把东西按关系进行划分，构成一棵树级结构。 10.装饰者模式大家都会一个动作，但是又可以相互包装，A会画圆，B会画方，C的画画方法可以是让A、B一起来画，还可以加别的。 11.外观模式使用一个上层包装，把多个具有某个关系的类放到一起。 12.享元模式大家共享某部分数据，在没有的时候进行创建，下次再要这个类型时返回该值，减少创建。 13.代理模式给一个类做一层包装，做一层扩展，做为代理人进行控制。 行为型14.职责链模式根据类关系，构建一条关系链，在上层需要处理数据时，可能需要和下层进行交互，可以达到相互传递，以完成处理。 15.命令模式把需要做的事情包装成一个事件，通过一个中心控制，命令事件执行。 16.解释器模式通过特定的功能分类，拆成一个一个解析器，使用不同的解析器去处理对应的数据，达到整体划分。 17.迭代器模式常见于Stl中，用于高效遍历内容。 18.中介者模式大家根据某个关系，注册在一个中心。然后都可以通过中心给的接口，查询到别人的信息和被别人找到。 19.备忘录模式处理一个事件，在需要的时候保存一下（新建一份数据）存起来，使用者后面可以根据索引去找到这份保存的数据。 20.观察者模式大家往一个地方注册，当发生事件时，注册了的类会收到需要的信息。参考QT信号槽。 21.状态模式给一个物体塑造多个外表，根据需要设置外表，用该外表做为当前的状态，可随时切换。 22.策略模式当前有一组数据，但是可以有多个处理的方法，其方法可能可以进行组合，把方法单独做为策略。组合出需要的场景。 23.模板模式抽象一个模板，模板会有很多动作调用。实体可以选择实现某些动作，不需要的可以空实现。 24.访问者模式每个事物关注同一个东西的角度都不同。通过元素的回调或者访问者主动查看，可以做不同的动作。 以上为Gof(Gang of Four)四人组提出的 25.pimplqt源码实现方式，将成员藏在cpp，不对外暴露。 26.业务代表其中包含client、Delegate、lookup、service。使用者通过代理缓存，查找需要的服务。通过这样将业务进行分层解耦。 27.组合实体模式 组合实体太学术化了，不通俗。组合实体是个对象，是个管理者，管家，掌柜的，经理，它是直接面向客户的。组合实体下面是几个小组，也就是假如说它是个经理的话，那么它下面管理着几个小组长。小组长下面就是组员了呗，也就是真正干活的人了。所以组合实体是个层层管理的机制，并且下层的生命周期决定于上层的生命周期。就这么简单。我想它的作用只不过是简化了每一环的复杂程度而已。 https://www.it610.com/article/1177358433989488640.htm 28.过滤器模式字面意思，通过一个过滤器，把输入的数据过滤掉不合理的，然后得到结果。 29.空模式对于不些不合理的数据，给予一个空的对象，而不是空值。 30.mvcmodel，存数据，更新时告诉C,view将数据做显示，controller作为中间传递数据和中间处理的一方。Qt中是MVD D是代理，包括C的功能，还有告诉V怎么去定制和绘制。 31.数据访问对象模式将一些不好使用的接口包装进来，通过更上一层封装，使用时更便捷。 32.前端控制器模式通过一个前端，把请求进行汇总再分发给特定的处理器。 33.拦截过滤器模式通过实现多个过滤器，在发生事件时，使用注册了的过滤器对事件进行处理，通过后再去做相应的操作，否则拦截。 34.服务定位器模式根据一个中心缓存，去查找或者说定位之前使用过的东西。 35.传输对象模式把对象打包传送与接收。]]></content>
-      <categories>
-        <category>无处安放</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[GTest接口测试]]></title>
-    <url>%2F%E6%97%A0%E5%A4%84%E5%AE%89%E6%94%BE%2Fgtest%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%2F</url>
-    <content type="text"><![CDATA[Gtest运行参数可以通过系统环境变量设置GTEST_FLAG，可以通过内部代码testing::GTEST_FLAG(output)=””设定，后设置的生效。 –gtest_list_tests 输出所有用例 –gtest_filter 过滤用例，支持通配符 ?*-:(:”是或) –gtest_repeat=[COUNT] 用例执行次数 -1为一直执行，默认出错依然执行，但是增加 –gtest_color=(yes/no/auto) 输出颜色 –gtest_print_time 打印执行时间 –gtest_output=后缀:路径\文件名 –gtest_break_on_failure 则出错后停止 –gtest_throw_on_failure 失败抛异常 –gtest_catch_exceptions 是否捕捉异常，只在Win有效 Gtest断言ASSERT_系列：如果当前点检测失败则退出当前测试EXPECT_系列：如果当前点检测失败则继续往下执行 *_TRUE(condition) 条件为true则通过 *_FALSE(condition) 条件为false则通过 *_EQ(expected, actual) == *_NE(val1, val2) != *_LT(val1, val2) &lt; *_LE(val1, val2) &lt;= *_GT(val1, val2) &gt; *_GE(val1, val2) &gt;= _STREQ(expected_str, actual_str) == 接收char wchar * *_STRNE(str1, str2) != _STRCASEEQ(expected_str, actual_str) 忽略大小写== ,只接收char _STRCASENE(str1, str2) 忽略大小写!= ,只接收char *_THROW(statement, exception_type) 语句抛出指定类型的异常 *_ANY_THROW(statement) 抛出任何异常 *_NO_THROW(statement) 不抛出 *_FLOAT_EQ(expected, actual) 浮点对比 *_DOUBLE_EQ(expected, actual) *_NEAR(val1, val2, abs_error) 近似对比 *_PRED1(pred1, val1) pred1表示函数名，val1是参数，验证返回值，最多可以到5，传5个参数。 *_PRED_FORMAT1(pred_format1, val1) 错误时可自定义输出，函数返回值 return testing::AssertionFailure(testring::Message()) *_HRESULT_SUCCEEDED(expression) 表达式是成功的 *_HRESULT_FAILED(expression) SUCCEED() 用例成功，不往下走 FAIL() 用例失败，不往下走 ADD_FAILURE() 失败，但是往下走 testing::StaticAssertTypeEq&lt;int, T&gt; 判断模板是否为int _DEATH(statement, regex) 语句crash，其regex匹配stderr中内容，实现其实就是调用了 _EXIT *_DEATH_IF_SUPPORTED 系统不支持则不执行 *_EXIT(statement, predicate, regex) 其中predicate必须是接收int返回bool，可用系统 testing::ExitedWithCode(exit_code)如果程序正常退出并且退出码与exit_code相同则返回true testing::KilledBySignal(signal_number) 被signal_number杀掉则为true _DEBUG_DEATH(statement, regex) 在Debug中 实际是调用 _DEATH，否则只是执行statement 死亡测试注意 可以在main中设置，也可以在用例中设置，用例完成会复原。 testing::FLAGS_gtest_death_test_style = “fast”; testing::FLAGS_gtest_death_test_style = “threadsafe”; 不要在死亡测试用例释放内存，在父进程释放内存，不要在程序中使用内存堆检查 Gtest事件 全局事件 全局事件需要继承testing::Environment类，实现SetUp和TearDown，类似构造与析构，然后在main中使用testing::AddGlobalTestEnvironment进行注册 TestSuite 每一组用例前后 需要继承testing::Test类，实现SetUpTestCase和TearDownTestCase，在该组用例前和结束执行 TestCase 每个用例前后 同上，实现SetUp()和TearDown()即可，在每个用例前后执行 Gtest测试宏TEST(test_suite_name,test_name)宏一个测试特例，套件名和样例名，构成一个测试用例，不能有_,因为会将其设置为专有的类名 TEST_F(test_fixture,test_name)宏结合testing::Test使用 TEST_P宏配合继承testing::TestWithParam的类使用,其中1234567891011121314template&lt;typename T&gt;class TestWithParam:public Test,public WithParamInterface&lt;T&gt;&#123;&#125;;static const T&amp; GetParam()&#123;&#125;//内部的参数由友元类修改，所以Getparam()可以获得新属性template&lt;class TestClass&gt; friend class internal::ParameterizedTestFactor;INSTANTIATE_TEST_CASE_P(test_pre_name,继承TestWithParam的类名,testing::Values());//其中第三个可以使用Range(begin,end[,step])//Values(v1,v2...,vN)//ValuesIn(container) and ValuesIn(begin,end) 从容器或者迭代器取//Bool() true和false//Combine(g1,g2,...,gN) 排列组合传入，参数是Tuple 模板参数化123456789101112template &lt;typename T&gt;class TemplateClass : public testing::Test &#123;&#125;typedef testing::Types&lt;char, int, unsigned int&gt; MyTypes;TYPED_TEST_SUITE(TemplateClass, MyTypes);//验证TemplateClass是否支持MyTypes这些类型TYPED_TEST(TemplateClass,TestName)//或者TYPED_TEST_CASE_P(TemplateClass)TYPED_TEST_P(TemplateClass,TestName)REGISTER_TYPED_TEST_CASE_P(TemplateClass,TestName,...)INSTANTIATE_TYPED_TEST_CASE_P(test_pre_name, TemplateClass, MyTypes)]]></content>
-      <categories>
-        <category>无处安放</category>
-      </categories>
-      <tags>
-        <tag>Library</tag>
-        <tag>Cpp基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[CMake小结]]></title>
-    <url>%2F%E6%97%A0%E5%A4%84%E5%AE%89%E6%94%BE%2Fcmake%E5%B0%8F%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899cmake -B build -DCMAKE_BUILD_TYPE=Releasecmake --build build -j4cmake --build build --target install如上设置了-D 当不清除Cache时，下次不加-D，也是Release-G 指定构建系统生成器 在cmake --help里面可以看到动态库链接静态库，需要开启PIC set(CMAKE_POSITION_INDEPENDENT_CODE ON)或者 set_property(TRGET lib PROPERTY POSITION_INDEPENDENT_CODE ON)设定find_package路径，把路径加入CMAKE_MODULE_PATH、查看包搜索路径，如Qt会找Qt5_DIR，把路径放这里也好使、环境变量的Qt5_DIR也行生成器表达式语法：$&lt;$&lt;类型:值&gt;:为真时的表达式&gt;比如 $&lt;$&lt;PLATFORM_ID:Windows,ABC&gt;:MY_NAME="Bill Gates"&gt;在 Windows或者ABC 平台上会变为 MY_NAME="Bill Gates"set(abc HELLO)set(HELLO ccc)if(abc MATCH HELLO) doneif($&#123;abc&#125; MATCH HELLO) no 其会展开为HELLO变量 再变成cccif("$&#123;abc&#125;" MATCH HELLO) done__declspec(dllexport) 导出__declspec(dllimport) 导入aux_source_directory(&lt;dir&gt; &lt;variable&gt;) #搜索dir目录内文件所有源文件，将列表写到var里list() #对列表操作include(&lt;file|module&gt; [OPTIONAL] [RESULT_VARIABLE &lt;var&gt;] [NO_POLICY_SCOPE]) #导入CMake代码。OPTIONAL，文件不存在不报错，RESULT_VARIABLE &lt;var&gt;，var将设置为完整文件名，失败为NOTFOUND。 # 若指定为module则在CMAKE_MODULE_PATH中找&lt;modulename&gt;.cmake，再去CMake模块路径找。除非文件在CMake内置模块路径中。set(&lt;variable&gt; &lt;value&gt;... [PARENT_SCOPE]) #value可以是0或多个，0即unset，多个时使用；分割。PARENT_SCOPE会向上一层传递，当在function中时，会向调用者传递，但是在当前层不生效，不加则会取时生效并向下传递。set(&lt;variable&gt; &lt;value&gt;... CACHE &lt;type&gt; &lt;docstring&gt; [FORCE]) #默认情况下值不会被覆盖，除非使用了FORCE。可以通过GUI界面add entry添加，类似环境变量。 #BOOL复选框、FILEPATH文件选择框、PATH目录选择框、STRING文本框、STRINGS下拉框、INTERNAL不对外呈现，主要用于运行过程存储，该type意味着使用FORCE #docstring文本表示选项摘要 #缓存值是无法覆盖已经存同名的，除非设置了FORCE。如果条目是通过-Dvar=val创建，则会给其指定类型，而set命令会给予类型。若val是相对路径，set会将其转为绝对路径。set(ENV&#123;&lt;variable&gt;&#125; [&lt;value&gt;]) #设置环境变量，只影响当前进程，不修改调用者进程和系统变量。CMake中的 [环境变量](https://cmake.org/cmake/help/latest/manual/cmake-env-variables.7.html) 也可以修改。file(read &lt;filename&gt; &lt;variable&gt; [OFFSET &lt;offset&gt;] [LIMIT &lt;max-in&gt;] [HEX]) #将文件读到var变量中，偏移量、读取长度、16进度读。file(STRINGS &lt;filename&gt; &lt;variable&gt; [&lt;options&gt; ...]) #以ASCII读取到var中，将忽略二进度、回车和\r。LENGTH_MAXMUN &lt;max-len&gt;、LENGTH_MINIMUN &lt;min-len&gt;、LIMIT_COUNT &lt;max-num&gt;限制字符串数量、LIMIT_OUTPUT &lt;max-out&gt;限制var总长度、NEWLINE_CONSUME不忽略换行、NO_HEX_CONVERSION不对16进度转换、REGX &lt;regex&gt;、ENCODING &lt;encoding-type&gt;。file(&lt;HASH&gt; &lt;filename&gt; &lt;variable&gt;) #将文件加密读入到var，HASH支持MD5、SHA!、SHA224、SHA256、SHA384、SHA512、SHA3_224、SHA3_256、SHA3_384、SHA3_512等。file(TIMESTAMP &lt;filename&gt; &lt;variable&gt; [&lt;format&gt;] [UTC]) #读取文件最后修改时间搓，format指定格式。file(WRITE &lt;filename&gt; &lt;content&gt; ... ) #可创建，覆盖定入file(APPEND &lt;filename&gt; &lt;content&gt; ... ) #可创建，追加file(TOUCH [&lt;files&gt; ...]) #创建空白文件，文件存在只刷新修改时间file(TOUCH_NOCREATE [&lt;files&gt; ...]) #文件不存在，不创建file（GENERATE OUTPUT output-file &lt;INPUT input-file|CONTENT content&gt; [CONDITION expression]) #在构建时将信息写到文件中，保证是本次构建的内容，仅当CONDITION &lt;expression&gt;为true时，才输出到文件 file(GLOB &lt;variable&gt; [LIST_DIRECTORIES true|false] [RELATIVE &lt;path&gt;] [&lt;globbing-expressions&gt;...]) #将当前目录内符合expressions的写到var里，LIST_D...表示是否输出文件夹名，RELATIVE &lt;path&gt;表示是否以相对path为相对路径输出file(GLOB_RECURSE &lt;variable&gt; [FOLLOW_SYMLINKS] [LIST_DIRECTORIES true|false] [RELATIVE &lt;path&gt;] [&lt;globbing-expressions&gt;...]) #FOLLOW_SYMLINKS设定和LIST_DIRECTORIES为true可以遍历子文件夹file(RENAME &lt;oldname&gt; &lt;newname&gt; [RESULT &lt;result&gt;] [NO_REPLACE]) #重命名file(REMOVE [&lt;files&gt;...]) #删除文件file(REMOVE_RECURSE [&lt;files&gt;...]) #会删除指定的文件及子目录，包括非空文件夹file(MAKE_DIRECTORY [&lt;directories&gt; ...]) #创建目录file(COPY_FILE &lt;oldname&gt; &lt;newname&gt; [RESULT &lt;result&gt;] [ONLY_IF_DIFFERENT])file(&lt;COPY|INSTALL&gt; &lt;files&gt;... DESTINATION &lt;dir&gt; [FILE_PERMISSIONS &lt;permissions&gt;...] [DIRECTORY_PERMISSIONS &lt;permissions&gt;...] [NO_SOURCE_PERMISSIONS] [USE_SOURCE_PERMISSIONS] [FILES_MATCHING] [[PATTERN &lt;pattern&gt; | REGEX &lt;regex&gt;] [EXCLUDE] [PERMISSIONS &lt;permissions&gt;...]] [...]) #OWNER_READO、WNER_WRITE、OWNER_EXECUTE、GROUP_READ、GROUP_WRITE、GROUP_EXECUTE、WORLD_READ、WORLD_WRITE、WORLD_EXECUTEfile(SIZE &lt;filename&gt; &lt;variable&gt;)file(READ_SYMLINK &lt;linkname&gt; &lt;variable&gt;) #获取符号文件的路径file(CREATE_LINK &lt;original&gt; &lt;linkname&gt; [RESULT &lt;result&gt;] [COPY_ON_ERROR] [SYMBOLIC]) #创建符号链接，默认是硬连接file(CHMOD|CHMOD_RECURSE &lt;files&gt;... &lt;directories&gt;... [PERMISSIONS &lt;permissions&gt;...] [FILE_PERMISSIONS &lt;permissions&gt;...] [DIRECTORY_PERMISSIONS &lt;permissions&gt;...]) #设置权限file(REAL_PATH &lt;path&gt; &lt;out-var&gt; [BASE_DIRECTORY &lt;dir&gt;] [EXPAND_TILDE]) #计算已解析符号链接的现有文件或目录的绝对路径file(RELATIVE_PATH &lt;variable&gt; &lt;directory&gt; &lt;file&gt;) #根据file推出相对dir的相对路径file(TO_CMAKE_PATH "&lt;path&gt;" &lt;variable&gt;) #转为CMake格式的路径file(TO_NATIVE_PATH "&lt;path&gt;" &lt;variable&gt;) #转换为特定平台格式的路径file(DOWNLOAD &lt;url&gt; [&lt;file&gt;] [&lt;options&gt;...]) #从指定URL下载文件file(UPLOAD &lt;file&gt; &lt;url&gt; [&lt;options&gt;...]) #上传file(LOCK &lt;path&gt; [DIRECTORY] [RELEASE] [GUARD &lt;FUNCTION|FILE|PROCESS&gt;] [RESULT_VARIABLE &lt;variable&gt;] [TIMEOUT &lt;seconds&gt;]) #对指定文件上锁file(ARCHIVE_CREATE OUTPUT &lt;archive&gt; PATHS &lt;paths&gt;... [FORMAT &lt;format&gt;] [COMPRESSION &lt;compression&gt; [COMPRESSION_LEVEL &lt;compression-level&gt;]] [MTIME &lt;mtime&gt;] [VERBOSE]) #根据 &lt;paths&gt; 中的文件或目录 创建归档文件 &lt;archive&gt;。FORMAT 指定归档格式，支持的值为 7zip、gnutar、pax、paxr、raw 和 zip，默认格式为 paxrfile(ARCHIVE_EXTRACT INPUT &lt;archive&gt; [DESTINATION &lt;dir&gt;] [PATTERNS &lt;patterns&gt;...] [LIST_ONLY] [VERBOSE] [TOUCH]) #提取归档文件 &lt;archive&gt;，并输出到 DESTINATION 目录中，如果目录不存在，它将被创建，默认情况下输出目录为 CMAKE_CURRENT_BINARY_DIR 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182add_library(&lt;name&gt; [STATIC | SHARED | MODULE] [EXCLUED_FROM_ALL] [&lt;source&gt;...]) #使用指定的source生成对应平台的库。static、shared、module则表示类型，module则是在使用时使用dlopen动态加载的模块。add_library(&lt;name&gt; OBJECT [&lt;source&gt;...]) #添加OBJECT库，可以使用$&lt;TARGET_OBJECTS:objlib&gt;方式使用，感觉就是一个集合add_library(&lt;name&gt; INTERFACE) #其不编译也不生成东西，一般用于携带属性传递add_library(&lt;name&gt; &lt;type&gt; IMPORTED [GLOBAL]) #导入一个已经存在的库，type为STATIC, SHARED, MODULE, UNKNOWN其一，通过IMPORTED导入的类，其属性以IMPORTED_开头，否则为INTERFACE_开头。IMPORTED_LOCATION标明library硬盘位置，可加DEBUG/RELEASE进行具体；IMPORTED_OBJECTS标明对象Library在硬盘的位置，也可加...。PUBLIC_HEADER保存install头文件目录add_library(&lt;name&gt; ALIAS &lt;target&gt;) #设置别名add_executable(&lt;name&gt; [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] [source1] [source2 ...]) #WIN32将WIN32_EXECUTABLE设置为true，其会创建一个使用WinMain()入口的GUI可执行文件，而不是控制台应用程序。MACOSX_BUNDLE将在macOS或者iOS设置为true，使其可以在Finder启动GUI可执行文件。EXCLUDE_FORM_ALL表示可执行文件会排除在alltarget列表外，当执行默认的make或者nmake时，不会编译，需要make name手动指明才会编译。add_executable(&lt;name&gt; IMPORTED [GLOBAL]) #从外部导入可执行文件，不指定GLOBAL则只向下传递，其属性IMPORTED会设置为true。add_executable(&lt;name&gt; ALIAS &lt;target&gt;)target_sources(&lt;target&gt; &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #给target添加编译文件 按执行顺序添加文件target_sources(&lt;target&gt; [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [FILE_SET &lt;set&gt; [TYPE &lt;type&gt;] [BASE_DIRS &lt;dirs&gt;...] [FILES &lt;files&gt;...]]... ]...) #每个target有多个文件集，文件集有自己的属性。会给PRIVATE和PUBLIC的文件设置为源文件，HEADERS文件设置HEADER_FILE_ONLY为true。FILE_SET &lt;set&gt;，文件集名，有预留的是HEADERS，然后不能以_和大写字母开头。TYPE &lt;type&gt;，若为HEADERS则可省，否则加。BASE_DIRS &lt;dirs&gt;...，文件集目录列表，首次创建可填CMAKE_CURRENT_SOURCE_DIR。FILES &lt;files&gt;...，文件列表，文件要位于目录列表中。target_compile_definitions(&lt;target&gt; &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #给target添加编译定义target_include_directories(&lt;target&gt; [SYSTEM] [AFTER|BEFORE] &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #AFTER、BEFORE 添加到列表的前面或者后面，默认后面，CMAKE_INCLUDE_DIRECTORIES_BEFORE可以修改默认值；SYSTEM则表示指定目录为系统目录，仅当前CMakeList.txt生效 #INTERFACE、PUBLIC填充INTERFACE_INCLUDE_DIRECTORIES属性，而PRIVATE和PUBLIC填充填充INCLUDE_DIRECTORIES属性include_directories([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...]) #添加头文件搜索目录 相当于-l 从当前文件开始向下传递link_directories([AFTER|BEFORE] directory1 [directory2 ...]) #添加库搜索目录 相当于-L 用在add_executable之前link_libraries([item1 [item2 [...]]] [[debug|optimized|general] &lt;item&gt;] ...) #添加库文件路径 全路径包括库名target_link_libraries(&lt;target&gt; ... &lt;item&gt;... ...) #用在add_executable之后#item 可能是library target name、full path to a library file、plain library name、link flag、generator expression、A debug, optimized, or general keyword immediately followed by another &lt;item&gt;。 ex: hello libhello.a libhello.so -lhelloget_filename_component(&lt;var&gt; &lt;FileName&gt; &lt;mode&gt; [CACHE]) #根据mode获取文件路径中指定项到var中 3.20以后被cmake_path取代option(&lt;variable&gt; "&lt;help_text&gt;" [value]) #提供用户可选的布尔选项，若var已经定义或者在CACHE里，则不生效configure_file(&lt;input&gt; &lt;output&gt; [NO_SOURCE_PERMISSIONS | USE_SOURCE_PERMISSIONS | FILE_PERMISSIONS &lt;permissions&gt;...] [COPYONLY] [ESCAPE_QUOTES] [@ONLY] [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF] ]) 将文件复制到其它位置并修改内容，将input文件中@var@或者$&#123;var&#125;替换为cmake指定的值，#cmakedefine var关键字替换成#define var或者#undef var，取决是否定义了var；input，一定是要文件；output，可以是路径，那就会使用intput的名字；COPYONLY，直接拷贝，啥也不干；ESCAPE_QUOTES，不转义；@ONLY，只替换@，不替换$；NEWLINE_STYLE，指定Output换行风格。需要先include(CheckCXXCompilerFlag)check_cxx_compiler_flag(&lt;flag&gt; &lt;var&gt;) 检测编译器是否支持CXX，结果在var里mark_as_advanced([CLEAR|FORCE] &lt;var1&gt; ...) #清除或者标记var变量为advanced变量，advance变量不会显示在GUI中，除非advanced选项开启source_group(&lt;name&gt; [FILES &lt;src&gt;...] [REGULAR_EXPRESSION &lt;regex&gt;])source_group(TREE &lt;root&gt; [PREFIX &lt;prefix&gt;] [FILES &lt;src&gt;...]) #给IDE的源码分组，TREE，会根据root路径将src转为相对路径，自动的将文件结构分出来。PREFIX，TREE会放在该group里，可以使用\\指定子group。REGULAR_EXPRESSION，一个文件只会加入最后一个符合条件的group，如果没有则优先与最后一个组。set_property(&lt;GLOBAL | DIRECTORY [&lt;dir&gt;] | TARGET [&lt;target1&gt; ...] | SOURCE [&lt;src1&gt; ...] [DIRECTORY &lt;dirs&gt; ...] [TARGET_DIRECTORY &lt;targets&gt; ...] | INSTALL [&lt;file1&gt; ...] | TEST [&lt;test1&gt; ...] | CACHE [&lt;entry1&gt; ...] &gt; [APPEND] [APPEND_STRING] PROPERTY &lt;name&gt; [&lt;value1&gt; ...]) #GLOBAL，属性全局有效；DIRECTORY，在指定目录有效，类似set_directory_proerties；TARGET，设置target属性，类似set_target_properties；SOURCE，指定属性对应多个源文件，默认仅对同一目录中的目标可见，类似set_source_files_properties，DIRECTORY，源文件在每个dirs有效，dirs必须已知，TARGET_DIRECTORY在指定的targets中有效，targets必须有效；INSTALL，属性对应多个安装文件路径；TEST，对应多个测试，类似set_tests_properties；CACHE，对应缓存条目。APPEND，以列表形式附加到属性后面。APPEND_STRING，以字符串形式添加到属性后面。get_property(&lt;variable&gt; &lt;GLOBAL | DIRECTORY [&lt;dir&gt;] | TARGET &lt;target&gt; | SOURCE &lt;source&gt; [DIRECTORY &lt;dir&gt; | TARGET_DIRECTORY &lt;target&gt;] | INSTALL &lt;file&gt; | TEST &lt;test&gt; | CACHE &lt;entry&gt; | VARIABLE &gt; PROPERTY &lt;name&gt; [SET | DEFINED | BRIEF_DOCS | FULL_DOCS]) #VARIABLE，范围内唯一，不接收名字。SET，变量设为布尔，表示是否设置了属性；DEFINED，变量设置为布尔，表示属性是否定义；BRIEF_DOCS | FULL_DOCS，设置为字符串，包含请示的属性，没有会写NOTFOUND。set_target_properties(target1 target2 ... PROPERTIES prop1 value1 prop2 value2 ...) #同时设置多个target的多个属性get_target_property(&lt;VAR&gt; target property) #获取target属性add_subdirectory(source_dir [binary_dir] [EXCLUDE_FROM_ALL]) #添加子目录进行构建，source_dir，子目录CMakeList.txt的位置；binary_dir，输出目录；EXCLUDE_FROM_ALL，是否排除自动构建add_compile_options(&lt;option&gt; ...) #添加选项到编译源文件，对当前目录的targets和向下有效target_compile_options(&lt;target&gt; [BEFORE] &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...] [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...]) #给target添加编译参数，BEFORE，放到所有属性前，默认是追加add_definitions(-DFOO -DBAR ...) #将定义添加到编译器命令行，不管写在前后都生效，并向下目录传递，相当于-Dadd_dependencies(&lt;target&gt; [&lt;target-dependency&gt;]...) #确保依赖的target在自己前生成message([&lt;mode&gt;] "message text" ...) #FATAL_ERROR，会中断编译；SEND_ERROR，继续处理，但是会跳过生成；WARNING，发出警告，继续处理。AUTHOR_WARNING，警告dev，继续处理；DEPRECATION，根据CMAKE_ERROR_DEPRECATED或者CMAKE_WARN_DEPRECATED状态决定是警告还是错误；(none) or NOTICE，重要标准错误；STATUS，信息；VERBOSE，更详细的信息；DEBUG，项目开发人员；TRACE，临时信息。message(&lt;checkState&gt; "message text" ...) #CHECK_START，记录将要执行检查的消息；CHECK_PASS，记录一个成功结果；CHECK_FAIL，记录一个失败结果。project(&lt;PROJECT-NAME&gt; [&lt;language-name&gt;...]) #指定cmake工程名，&lt;language-name&gt; 语言project(&lt;PROJECT-NAME&gt; [VERSION &lt;major&gt;[.&lt;minor&gt;[.&lt;patch&gt;[.&lt;tweak&gt;]]]] [DESCRIPTION &lt;project-description-string&gt;] [HOMEPAGE_URL &lt;url-string&gt;] [LANGUAGES &lt;language-name&gt;...]) #VERSION，版本；DESCRIPTION，描述；HOMEPAGE_URL，主页URL；LANGUAGES，语言。当指定了project，会自动定义如下变量，则PROJECT_NAME工程名；PROJECT_SOURCE_DIR源码路径；&lt;PROJECT-NAME&gt;_SOURCE_DIR源码路径，与前者区别就是后者是指定工程的，前者是当前工程的；PROJECT_BINARY_DIR二进制路径；&lt;PROJECT-NAME&gt;_BINARY_DIR同意思；CMAKE_PROJECT_NAME顶层工程名。 指定了VERSION，会定义出一堆PROJECT_VERSION*和&lt;PROJECT-NAME&gt;_VERSION*。其它两个也一样。目前支持C、CXX、CUDA、OBJC、OBJCXX、Fortran、ASM，不指定则是C和CXX，指定为NONE或者LANGUAGES则表示不支持任何语言。检测CMAKE_&lt;LANGUAGES&gt;_COMPILER指定编译器是否存在。多次调用，则以最近一次为准。add_custom_target(Name [ALL] [command1 [args1...]] [COMMAND command2 [args2...] ...] [DEPENDS depend depend depend ... ] [BYPRODUCTS [files...]] [WORKING_DIRECTORY dir] [COMMENT comment] [JOB_POOL job_pool] [VERBATIM] [USES_TERMINAL] [COMMAND_EXPAND_LISTS] [SOURCES src1 [src2...]]) #根据命令生成一个target，且默认不在all target中，目标没有输出文件。ALL，加入all target；DEPENDS，依赖其它target或者文件；COMMAND，执行的命令，可以使用configure_file或者GENERATE生成脚本再执行；BYPRODUCTS，声明target随之生成的文件，需要有COMMAND命令否则报错；WORKING_DIRECTORY，修改当前COMMAND执行命令的目录；COMMENT，构建时执行COMMAND前的消息；JOB_POOL，指定一个池给Ninja生成器，VERBATIM，所有参数都根据构建工具转义，以保证COMMAND正确接收参数，否则行为依赖平台行为；USES_TERMINAL，直接访问终端的权限；COMMAND_EXPAND_LISTS，参数列表将展开，包括生成器表达式列表；SOURCES，将文件附加到目标中，在IDE中显示。add_custom_command(OUTPUT output1 [output2 ...] COMMAND command1 [ARGS] [args1...] [COMMAND command2 [ARGS] [args2...] ...] [MAIN_DEPENDENCY depend] [DEPENDS [depends...]] [BYPRODUCTS [files...]] [IMPLICIT_DEPENDS &lt;lang1&gt; depend1 [&lt;lang2&gt; depend2] ...] [WORKING_DIRECTORY dir] [COMMENT comment] [DEPFILE depfile] [JOB_POOL job_pool] [VERBATIM] [APPEND] [USES_TERMINAL] [COMMAND_EXPAND_LISTS]) #在生成的构建系统中添加自定义构建规则，当没有output1或者DEPENDS的东西发生变化时，则生成；MAIN_DEPENDENCY，指定主要输入文件，源文件只能作为一个命令的主依赖项；IMPLICIT_DEPENDS，请求扫描输入文件的隐式依赖关系；DEPFILE，为Ninja生成器制定一个depfile文件；APPEND将其追加到第一个自定义输出命令；add_custom_command(TARGET &lt;target&gt; PRE_BUILD | PRE_LINK | POST_BUILD COMMAND command1 [ARGS] [args1...] [COMMAND command2 [ARGS] [args2...] ...] [BYPRODUCTS [files...]] [WORKING_DIRECTORY dir] [COMMENT comment] [VERBATIM] [USES_TERMINAL] [COMMAND_EXPAND_LISTS]) #为目标添加自定义命令，目标构建时执行，PRE_BUILD | PRE_LINK | POST_BUILD表示命令执行相对构建的时机&gt; 当add_custom_target所要生成的target依赖add_custom_command所生成的文件时，这个文件就是一个纽带；add_custom_command命令输出的OUTPUT文件和命令里的command之间的关系是：每当这个文件需要被重新生成时，都会执行这段command；开始构建target，依赖add_custom_command的输出文件，再查看其是否构建，其构建就会执行COMMAND。execute_process(COMMAND &lt;cmd1&gt; [&lt;arguments&gt;] [COMMAND &lt;cmd2&gt; [&lt;arguments&gt;]]... [WORKING_DIRECTORY &lt;directory&gt;] [TIMEOUT &lt;seconds&gt;] [RESULT_VARIABLE &lt;variable&gt;] [RESULTS_VARIABLE &lt;variable&gt;] [OUTPUT_VARIABLE &lt;variable&gt;] [ERROR_VARIABLE &lt;variable&gt;] [INPUT_FILE &lt;file&gt;] [OUTPUT_FILE &lt;file&gt;] [ERROR_FILE &lt;file&gt;] [OUTPUT_QUIET] [ERROR_QUIET] [COMMAND_ECHO &lt;where&gt;] [OUTPUT_STRIP_TRAILING_WHITESPACE] [ERROR_STRIP_TRAILING_WHITESPACE] [ENCODING &lt;name&gt;] [ECHO_OUTPUT_VARIABLE] [ECHO_ERROR_VARIABLE] [COMMAND_ERROR_IS_FATAL &lt;ANY|LAST&gt;]) #命令作为管道同时执行，其输出管道作为下个管道的输入，共享一个错误管道。COMMAND，子进程命令行，CMake使用API直接执行子进程，中间不能使用shell脚本，像重定义等操作符都当普通参数；WORKING_DIRECTORY，指定子进程的工作目录；TIMEOUT，超时时间；RESULT_VARIABLE，执行进程的返回结果，最后一个子进程整数或者错误描述字符串；RESULTS_VARIABLE，接收第条命令返回结果；OUTPUT_VARIABLE，ERROR_VARIABLE，设置为输出管道和错误管道的内容，若命名相同，则输出将按生成的顺序合并；INPUT_FILE, OUTPUT_FILE, ERROR_FILE，第一个标准输入名，最后一个标准输出名，所有的标准错误名；OUTPUT_QUIET, ERROR_QUIET，输出和错误将忽略；COMMAND_ECHO &lt;where&gt;重置命令到指定标准输出，如STDERR、STDOUT、NONE；OUTPUT_STRIP_TRAILING_WHITESPACE、ERROR_STRIP_TRAILING_WHITESPACE删除输出空白符；ENCODING &lt;name&gt;，在win上指定解码方式，NONE、AUTO、ANSI、OEM、UTF8、UTF-8；ECHO_OUTPUT_VARIABLE, ECHO_ERROR_VARIABLE，不会专门重定向到配置的变量，将发送到配置的变量中和标准输出或错误中；COMMAND_ERROR_IS_FATAL &lt;ANY|LAST&gt;，决定出错时的行为ANY出错则停止报错，LAST则只看最后一个find_package目的是帮助我们调用对应的cmake文件，导入某个库，这个cmake文件是官方、安装、自行编写的，其格式为Find&lt;lib_name&gt;.cmake、。一般会产生&lt;lib_name&gt;_FOUND、&lt;lib_name&gt;_INCLUDE_DIR、&lt;lib_name&gt;_INCLUDES、&lt;lib_name&gt;_LIBRARY、&lt;lib_name&gt;_LIBRARIES，需要根据cmake文件中实现决定，并不统一。其引入模式分为两种，Module和Config，其中Module是从CMAKE_MODULE_PATH和cmake安装路径/Modules中，找的是Find&lt;lib_name&gt;.cmake；Config找的是&lt;lib_name&gt;Config.cmake或&lt;lib_name&gt;-config.cmake，其一般是通过安装添加到/usr/local/lib/cmake/...目录的。find_package(&lt;PackageName&gt; [version] [EXACT] [QUIET] [MODULE] [REQUIRED] [[COMPONENTS] [components...]] [OPTIONAL_COMPONENTS components...] [REGISTRY_VIEW (64|32|64_32|32_64|HOST|TARGET|BOTH)] [GLOBAL] [NO_POLICY_SCOPE] [BYPASS_PROVIDER]) #MODULE，只在该模式找；version，找的版本；EXACT，查找的版本要精确匹配；QUIET，找到包时，不输出信息；REQUIRED，找不到会终止；COMPONENTS，要查找的子组件；OPTIONAL_COMPONENTS，可选组件；REGISTRY_VIEW，在win中怎么查询注册表；GLOBAL，将找到的目标设为全局可见；NO_POLICY_SCOPE；BYPASS_PROVIDER，可以直接调用find_package内置的实现，防止自调用； CONFIG|NO_MODULE，指定搜索模式；NAMES使用该名为lib_name名；PATHS/HINTS，Config模式下，搜索的路径；NO_XXX_PATH，Config模式下，忽略的路径。默认优先用MODULE模式，CMAKE_FIND_PACKAGE_PREFER_CONFIG可以更换。]]></content>
-      <categories>
-        <category>无处安放</category>
-      </categories>
-      <tags>
-        <tag>CMake</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL流量控制]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[流程控制结构分支一、if函数 语法： if(表达式1，表达式2，表达式3) 1成立则返回2，否则返回3 特点： 可以用在任何位置 二、case语句 语法： 情况一：类似于switch-case case 变量|表达式|字段 when 值1 then 值1|表达式1; when 值2 then 值2|表达式2; ... else 值n|表达式n; end [case]（如果是放在begin end中需要加上case，如果放在select后面不需要） 情况二：类似于多重if case when 条件1 then 值1|表达式1; when 条件2 then 值2|表达式2; ... else 值n|表达式n; end [case]（如果是放在begin end中需要加上case，如果放在select后面不需要） 特点： 可以作为表达式，嵌套在其他语句中使用，可以放在任何地方，可以放在任何地方；可以作为独立语句去使用，只能放begin end中 所有条件不满足有ELSE则执行，无ELSE则返回NULL 三、if elseif语句 语法： if 条件1 then 语句1; elseif 条件2 then 语句2; ... else 语句n; end if; 特点： 只能用在begin end中！！！！！！！！！！！！！！！ 三者比较 应用场合 if函数 简单双分支 case结构 等值判断 的多分支 if结构 区间判断 的多分支 循环语法： [标签：]WHILE 循环条件DO 循环体 END WHILE [标签]; leave 标签; //像break iterate 标签; //像continue 特点： 只能放在BEGIN END里面 如果要搭配leave跳转语句，需要使用标签，否则可以不用标签 [标签：]loop 循环体 END loop [标签]; [标签：]repeat 循环体 untile 结束循环的条件 END repeat [标签]; //像do while]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL视图]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E8%A7%86%E5%9B%BE%2F</url>
-    <content type="text"><![CDATA[视图含义：理解成一张虚拟的表，通过表动态生成的数据 视图和表的区别： 使用方式 占用物理空间 视图 完全相同 不占用，仅仅保存的是sql逻辑 表 完全相同 占用 视图的好处： 1、sql语句提高重用性，效率高 2、和表实现了分离，提高了安全性 视图的创建语法： CREATE VIEW 视图名 AS 查询语句; 视图的增删改查对视图增删改，也会修改原表 1、查看视图的数据 ★ SELECT * FROM my_v4; SELECT * FROM my_v1 WHERE last_name=&apos;Partners&apos;; 2、插入视图的数据 INSERT INTO my_v4(last_name,department_id) VALUES(&apos;虚竹&apos;,90); 3、修改视图的数据 UPDATE my_v4 SET last_name =&apos;梦姑&apos; WHERE last_name=&apos;虚竹&apos;; 4、删除视图的数据 DELETE FROM my_v4; 某些视图不能更新包含以下关键字的 sql语句：分组函数、distinct、group by、having、union或者union all 常量视图 Select中包含子查询 join from一个不能更新的视图 where子句的子查询引用了from子句中的表 视图逻辑的更新#方式一： CREATE OR REPLACE VIEW test_v7 AS SELECT last_name FROM employees WHERE employee_id&gt;100; #方式二: ALTER VIEW test_v7 AS SELECT employee_id FROM employees; SELECT * FROM test_v7; 视图的删除DROP VIEW test_v1,test_v2,test_v3; 视图结构的查看DESC test_v7; SHOW CREATE VIEW test_v7;]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL常用函数]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[常见函数一、单行函数 1、字符函数 concat拼接 substr截取子串 索引从1开始 upper转换成大写 lower转换成小写 trim去前后指定的空格和字符 trim(&apos;a&apos; from &apos;aaababbaaa&apos;) 输出babb ltrim去左边空格 rtrim去右边空格 replace替换 lpad左填充 rpad右填充 instr返回子串第一次出现的索引 length 获取字节个数 2、数学函数 round 四舍五入 rand 随机数 floor向下取整 ceil向上取整 mod取余 truncate截断 3、日期函数 now()当前系统日期+时间 year(now()) 截取年 month() curdate()当前系统日期 curtime()当前系统时间 str_to_date(&apos;时间&apos;,&apos;如何解析&apos;) 返回合规的时间 date_format(&apos;时间&apos;,&apos;如何输出&apos;) 返回想要的时间 4、流程控制函数 1. if(条件,true_ret,false_ret) 2. case key when val then 处理 when val then 处理 ... else 处理 end * key可以不写，有时val与key要合规，无时则val为条件 5、其他函数 version版本 database当前库 user当前连接用户 二、分组函数 sum 求和 max 最大值 min 最小值 avg 平均值 count 计数 特点： 1、以上五个分组函数都忽略null值，除了count(*) 2、sum和avg一般用于处理数值型 max、min、count可以处理任何数据类型 3、都可以搭配distinct使用，用于统计去重后的结果 4、count的参数可以支持： 字段、*、常量值，一般放1，都是求表中有多少行 建议使用 count(*)，在MYISAM中，count(*)有缓存，效率高，INNODB中，count(*)和count(1)类似 5、分组函数一般要求是group by后的字段，否则没有意义]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL常用类型与约束]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%9E%8B%E4%B8%8E%E7%BA%A6%E6%9D%9F%2F</url>
-    <content type="text"><![CDATA[常见类型整型：Tinyint 1Byte Smallint 2B Mediumint 3B Int、integer 4B Bigint 8B * 加上unsigned会表示无符号 * 超过会报out of range value，但是会插入边界值 不设置长度，那会有默认的长度，表示显示宽度，加上ZEROFILL约束后，自动变成unsigned，显示时不够长用0补充 小数：浮点型 float(M,D) 4B double(M,D) 8B 定点型，下面两者是一样的 DEC(M,D) M+2 DECIMAL(M,D) M+2 * D表示小数点位数，M表示小数+整数一共多少位，但是都可以省略不写，DECIMAL(10,0)默认，float和double会根据精度决定 * 精度要求高的用DEC 字符型：较短 char(M) 0~255 比varchara效率高 varchar(M) 0~65535 会根据实际给内存 binary 类似上面的，保存二进制 varbinary 较长 text blob(较长的二进制数据) ENUM v的值只能是a或者b，不然为空 CREATE TABLE T ( v ENUM(&apos;a&apos;,&apos;b&apos;) ); SET v的值由set内容组成，不分大小写，多个用逗号分开a,B CREATE TABLE T ( v SET(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;) ); * M表示字符数，中文也只算个，char可以省略，为1，varchar不可以 日期型：data 4 只有日期 datatime 8 有日期和时间 timestamp 4 时刻 受时区影响 time 3 只有时间 year 1 只有年 Blob类型：常见约束一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性 CREATE TABLE 表名( 字段名 字段类型 约束 ) NOT NULL 非空，用于保证该字段的值不能为空 DEFAULT 默认，用于保证该字段有默认值 UNIQUE 唯一，值具有唯一性，可以为空 CHECK 检查约束【mysql中不支持，但是不报错】 PRIMARY KEY 主键，值具有唯一性且非空 FOREIGN KEY 外键，用于限制两个表的关系，保证该字段的值必须来自于主表的关联列的值。就是该值能在别的表中找到。在从表添加外键约束，用于引用主表中某列的值。（数据在主表中，从表只有个编号） 如 员工表的部门编号，学生表的专业编号 主键和唯一： 都有唯一性 唯一只可以有一个null，主键不可以有；一个表只能有一个主键 **可使用多个值共同作为主键**，唯一也可以由多个值组成 外键 在从表中设置外键关系 从表的外键列的类型和主表的关联列类型一致或兼容 主表的关联列必须唯一性（主键或者唯一） 插入数据时，先插入主表，再插入从表，删除则相反 约束的类型： CREATE TABLE 表名( 名 类型 列级约束, 表级约束 ) 列级约束 六大约束语法上都支持，但外键约束没有效果 CREATE TABLE 表名( id int primary key, stuname varchar(20) not null, gender char(1) check(gender=&apos;b&apos; or gender=&apos;g&apos;), seat int unique, age int default 18, majorid int references major(id) //无效 ) CREATE TABLE major( id int primary key, majorname varchar(20) ) 表级约束 除了非空、默认，其它都支持 [CONSTRAINT name] 这是可选的 CREATE TABLE 表名( id int, stuname varchar(20), gender char(1) , seat int, age int, majorid int， CONSTRAINT pk primary key(id), CONSTRAINT uq unique(seat), CONSTRAINT ck CHECK(gender=&apos;b&apos; or gender=&apos;g&apos;), CONSTRAINT fk_表名_major foreign key(majorid) references major(id) ) 添加约束的时机： 创建表时 修改表时 ALTER TABLE T MODIFY COLUMN 字段名 字段类型 新约束 只要支持列级约束 ALTER TABLE T ADD COLUMN [constraint 约束名] 约束 只要支持表级约束 ALTER TABLE T DROP PRIMARY KEY ALTER TABLE T DROP INDEX 唯一键名 ALTER TABLE T DROP FOREIGN KEY 外键名 标识列又称自增长列，可以不用手动的插入值，系统提供默认的序列值 创建表时 CREATE TABLE T( id int primary key auto_increment, name varchar(20) ) 插入时，id这一位传入null就行，或者直接省略 必须配合唯一性的键使用 一个表只能有一个标识列，一个auto_increment关键字 标识列只能是数字型 auto_increment_increment 步行 这是系统的值 用SET ...=n 修改 auto_increment_offset 起始 也可以插入一行，修改offset当前值 修改表时 ALTER TABLE T MODIFY COLUMN 字段名 字段类型 约束 auto_increment;]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL数据库概念]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[数据库的好处1.持久化数据到本地 2.可以实现结构化查询，方便管理 数据库相关概念1、DB：Database数据库，保存一组有组织的数据的容器 2、DBMS：Database Management System数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据 3、SQL：Structure Query Language结构化查询语言，用于和DBMS通信的语言 数据库存储数据的特点1、将数据放到表中，表再放到库中 2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。 3、表具有一些特性，这些特性定义了数据在表中如何存储。 4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的。 5、表中的数据是按行存储的。 MySQL产品的介绍和安装MySQL服务的启动和停止1、计算机——右击管理——服务 2、通过管理员身份运行 net start 服务名（启动服务） net stop 服务名（停止服务） MySQL服务的登录和退出1、通过mysql自带的客户端 只限于root用户 2、通过windows自带的客户端 登录： mysql 【-h主机名 -P端口号 】-u用户名 -p密码 退出： exit或ctrl+C MySQL的常见命令1.查看当前所有的数据库 show databases; 2.打开指定的库 use 库名 3.查看当前库的所有表 show tables; 4.查看其它库的所有表 show tables from 库名; 5.创建表 create table 表名( 列名 列类型, 列名 列类型， ... ); 6.查看表结构 desc 表名; 7.显示表中的所有数据 select * from 表名; 7.查看服务器的版本 登录到mysql服务端 select version(); 没有登录到mysql服务端 mysql --version 或 mysql --V MySQL的语法规范1.不区分大小写,但建议关键字大写，表名、列名小写 2.每条命令最好用分号结尾 3.每条命令根据需要，可以进行缩进 或换行 4.注释 单行注释：#注释文字 单行注释：-- 注释文字 多行注释：/* 注释文字 */ SQL的语言分类DQL（Data Query Language）：数据查询语言 select DML(Data Manipulate Language):数据操作语言 insert 、update、delete DDL（Data Define Languge）：数据定义语言 create、drop、alter TCL（Transaction Control Language）：事务控制语言 commit、rollback]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL变量概念]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%8F%98%E9%87%8F%E6%A6%82%E5%BF%B5%2F</url>
-    <content type="text"><![CDATA[系统变量一、全局变量 作用域：针对于所有会话（连接）有效，但不能跨重启 查看所有全局变量 SHOW GLOBAL VARIABLES; 查看满足条件的部分系统变量 SHOW GLOBAL VARIABLES LIKE &apos;%char%&apos;; 查看指定的系统变量的值 SELECT @@global.autocommit; 为某个系统变量赋值 SET @@global.autocommit=0; SET GLOBAL autocommit=0; 二、会话变量 作用域：针对于当前会话（连接）有效 查看所有会话变量 SHOW SESSION VARIABLES; 查看满足条件的部分会话变量 SHOW SESSION VARIABLES LIKE &apos;%char%&apos;; 查看指定的会话变量的值 SELECT @@autocommit; SELECT @@session.tx_isolation; 为某个会话变量赋值 SET @@session.tx_isolation=&apos;read-uncommitted&apos;; SET SESSION tx_isolation=&apos;read-committed&apos;; show 模糊或者多个 selece 指定 不写global默认是session 自定义变量一、用户变量 声明并初始化： SET @变量名=值; SET @变量名:=值; SELECT @变量名:=值; 赋值： 方式一：一般用于赋简单的值 SET 变量名=值; SET 变量名:=值; SELECT 变量名:=值; 方式二：一般用于赋表 中的字段值 SELECT 字段名或表达式 INTO 变量 FROM 表; 使用： select @变量名; 二、局部变量 仅仅在定义它的begin和end中有效 声明： declare 变量名 类型 【default 值】; 赋值和使用，与用户变量一样 二者的区别： 作用域 定义位置 语法 用户变量 当前会话 会话的任何地方 加@符号，不用指定类型 局部变量 定义它的BEGIN END中 BEGIN END的第一句话 一般不用加@,需要指定类型]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL存储过程和函数]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[存储过程含义：一组经过预先编译的sql语句的集合好处： 1、提高了sql语句的重用性，减少了开发程序员的压力 2、提高了效率，简化操作 3、减少编译次数和连接次数 分类： 1、无返回无参 2、仅仅带in类型，无返回有参 3、仅仅带out类型，有返回无参 4、既带in又带out，有返回有参 5、带inout，有返回有参 注意：in、out、inout都可以在一个存储过程中带多个 创建存储过程语法： create procedure 存储过程名(in|out|inout 参数名 参数类型,...) begin 存储过程体 end 注意 1、需要设置新的结束标记 delimiter 新的结束标记 示例： delimiter $ CREATE PROCEDURE 存储过程名(IN|OUT|INOUT 参数名 参数类型,...) BEGIN sql语句1; sql语句2; END $ 2、存储过程体中可以有多条sql语句，如果仅仅一条sql语句，则可以省略begin end 3、参数前面的符号的意思 in：该参数只能作为输入（该参数不能做返回值） out：该参数只能作为输出（该参数只能做返回值） inout：既能做输入又能做输出 调用存储过程call 存储过程名(实参列表) 删除存储过程drop procedure 存储过程名 查看存储过程show create procedure 存储过程名 函数创建函数学过的函数：LENGTH、SUBSTR、CONCAT等语法： CREATE FUNCTION 函数名(参数名 参数类型,...) RETURNS 返回类型 BEGIN 函数体 END 调用函数SELECT 函数名（实参列表） 删除函数drop function 存储过程名 查看函数show create function 存储过程名 函数和存储过程的区别 关键字 调用语法 返回值 应用场景 函数 FUNCTION SELECT 函数() 有且仅有一个 一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个 存储过程 PROCEDURE CALL 存储过程() 可以有0个或多个 一般用于增删改、批量操作]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL DML数据操作语言]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-dml%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80%2F</url>
-    <content type="text"><![CDATA[DML语言插入语法一：支持多列、子查询 insert into 表名(字段名，…) values(值1，…);语法二： inset into 表名 set 列名=值,列名=值…特点： 1、字段类型和值类型一致或兼容，而且一一对应 2、可以为空的字段，可以不用插入值，或用null填充 3、不可以为空的字段，必须插入值 4、字段个数和值的个数必须一致 5、字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致 修改修改单表语法： update 表名 set 字段=新值,字段=新值 【where 条件】 修改多表语法： update 表1 别名1,表2 别名2 set 字段=新值，字段=新值 where 连接条件 and 筛选条件 删除方式1：delete语句 单表的删除： ★ delete from 表名 【where 筛选条件】 多表的删除： delete 别名1，别名2 from 表1 别名1，表2 别名2 where 连接条件 and 筛选条件; 方式2：truncate语句 清空数据 truncate table 表名 两种方式的区别【面试题】 #1.truncate不能加where条件，而delete可以加where条件 #2.truncate的效率高一丢丢 #3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始 #delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始 #4.truncate删除不能回滚，delete删除可以回滚]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL TCL事务控制语言]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-tcl%E4%BA%8B%E5%8A%A1%E6%8E%A7%E5%88%B6%E8%AF%AD%E8%A8%80%2F</url>
-    <content type="text"><![CDATA[数据库事务含义通过一组逻辑操作单元（一组sql语句），将数据从一种状态切换到另外一种状态。事务中操作的数据，需要根据隔离级别进行体现 特点（ACID） 原子性：要么都执行，要么都回滚。事务不可分割的工作单元。 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一组逻辑操作单元（多条sql语句） 3、提交事务或回滚事务 事务的分类：隐式事务，没有明显的开启和结束事务的标志 比如insert、update、delete语句本身就是一个事务 显式事务，具有明显的开启和结束事务的标志 1、开启事务 取消自动提交事务的功能 set autocommit=0; 2、编写事务的一组逻辑操作单元（多条sql语句） select insert update delete //DDL语言不具有事务性 3、提交事务或回滚事务 使用到的关键字set autocommit=0; start transaction; commit; rollback; savepoint 断点 commit to 断点 rollback to 断点 事务的隔离级别:事务并发问题如何发生？ 当多个事务同时操作同一个数据库的相同数据时 事务的并发问题有哪些？ 脏读：一个事务读取到了另外一个事务未提交的数据 不可重复读：同一个事务中，多次读取到的数据不一致 幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据，一般是别的事务插入数据提交后 如何避免事务的并发问题？ 通过设置事务的隔离级别 1、READ UNCOMMITTED 允许事务读取未被其它事物提交的变更 2、READ COMMITTED 可以避免脏读 3、REPEATABLE READ 可以避免脏读、不可重复读和一部分幻读 4、SERIALIZABLE 可以避免脏读、不可重复读和幻读 Oracle只支持2和4，默认是2，而Myql都支持，默认是3 设置隔离级别： set session|global transaction isolation level 隔离级别名; 查看隔离级别： select @@tx_isolation;]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL DQL数据查询语言]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-dql%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80%2F</url>
-    <content type="text"><![CDATA[DQL语言的学习基础查询语法： SELECT 要查询的东西【FROM 表名】; 特点： * 通过select查询完的结果 ，是一个虚拟的表格，不是真实存在 * 要查询的东西 可以是常量值、可以是表达式、可以是字段、可以是函数 起别名* SELECT last_name AS 姓 FROM info; * SELECT last_name 姓 FROM info; 便于理解 查询字段第一名情况，使用别名可以区分开来 字符串连接SELECT CONCAT(last_name,first_name) AS 姓名 FROM info; +会把字符串转数字，不成功则为0，然后相加 若其中一方为NULL，则结果为NULL，可以使用IFNULL(name,default)，若name为NULL，则返回default 去重SELECT DISTINCT last_name 姓 FROM info; 条件查询条件查询：根据条件过滤原始表的数据，查询到想要的数据 语法： select 要查询的字段|表达式（计算+-*/%等）|常量值|函数（输出函数返回值） from 表 where 条件 ; 关键字名作字段使用``包装 分类： 一、条件表达式 示例：salary&gt;10000 条件运算符： &gt; &lt; &gt;= &lt;= = != &lt;&gt; **&lt;=&gt; 安全等于，可以用在NULL，上面的不行** 二、逻辑表达式 示例：salary&gt;10000 &amp;&amp; salary&lt;20000 逻辑运算符： and（&amp;&amp;）:两个条件如果同时成立，结果为true，否则为false or(||)：两个条件只要有一个成立，结果为true，否则为false not(!)：如果条件成立，则not后为false，否则为true 三、模糊查询 like： where last_name like &apos;a%&apos; ESCAPE &apos;#&apos;; 字符形要加引号，%表示任意多个字符，_表示一个，默认是\转义，可以使用ESCAPE指定 between and： where a BETWEEN 20 AND 30; 包含两端，不可交换位置 in： where last_name IN(&apos;&apos;,&apos;&apos;,...); 不支持通配符 is null： where lastt_name IS [NOT] NULL; 排序查询语法： select 要查询的东西 from 表 where 条件 order by 排序的字段|表达式|函数|别名 【asc|desc】，... * 可以用,进行多个条件复合 分组查询语法： select 分组函数,查询的字段 from 表 【where】 group by 查询的字段 【order by】 【having】 特点： 1、可以按单个字段分组 2、和分组函数一同查询的字段最好是分组后的字段 3、分组筛选针对的表位置关键字 分组前筛选： 原始表 group by的前面 where 分组后筛选： 分组后的结果集 group by的后面 having 4、可以按多个字段分组，字段之间用逗号隔开 5、可以支持排序 6、having后可以支持别名 多表连接查询笛卡尔乘积：如果连接条件省略或无效则会出现 解决办法：添加上连接条件 一、传统模式下的连接 ：等值连接、非等值连接 1.等值连接的结果 = 多个表的交集 2.n表连接，至少需要n-1个连接条件 3.多个表不分主次，没有顺序要求 4.一般为表起别名，提高阅读性和性能，用了原表名就不能用了 二、sql99语法：通过join关键字实现连接 含义：1999年推出的sql语法 支持： 等值连接、非等值连接 （内连接） 外连接 左外 右外 全外 交叉连接 语法： select 字段，... from 表1 【inner|left outer|right outer|full outer|cross】 join 表2 别名 on 连接条件 【inner|left outer|right outer|full outer|cross】 join 表3 别名 on 连接条件 【where 筛选条件】 【group by 分组字段】 【having 分组后的筛选条件】 【order by 排序的字段或表达式】 outer和inner可以省略 1. 内连接，找不到对应的，就不显示 2. 外连接，查询结果为主表中的所有记录。用于一个表有，另外一个表找不到对应的情况。主表中每行都显示出来，若找不到匹配的值用null。等于内连接结果+没匹配到的行和null 3. 左右连接，左连接表示左边是主表，右连接表示右边是主表 4. 全外连接，等于内连结果+主表没匹配到的行和null+从表没匹配到的行和null 5. 交叉连接，等于笛卡尔乘积 三、自连接 同一个表有多个意义，如员工表也可以表示为领导表，但是又不能用一个表就完成，需要自连接自己 案例：查询员工名和直接上级的名称sql99 SELECT e.last_name,m.last_name FROM employees e JOIN employees m ON e.`manager_id`=m.`employee_id`; sql92 SELECT e.last_name,m.last_name FROM employees e,employees m WHERE e.`manager_id`=m.`employee_id`; 子查询含义： 一条查询语句中又嵌套了另一条完整的select语句，其中被嵌套的select语句，称为子查询或内查询 在外面的查询语句，称为主查询或外查询 特点： 1、子查询都放在小括号内，一般放在条件的右侧 2、子查询优先于主查询执行，主查询使用了子查询的执行结果 非法使用子查询的情况： a、子查询的结果与对应的操作符不符 b、子查询的结果为空 3、子查询可以放在 select后面 仅标量子查询 from后面 支持表子查询，需要给查询一个表名 where、having后面 标量、列、行子查询 exists后面 表子查询，结果是1或0，表示子查询是否有结果集 4、子查询根据结果集不同分为以下几类： * 标量子查询 结果集只有一行一列 一般搭配单行操作符使用：&gt; &lt; = &lt;&gt; &gt;= &lt;= * 列子查询 结果集只有一列多行 一般搭配多行操作符使用：any、all、in、not in in： 属于子查询结果中的任意一个就行 any和all往往可以用其他查询代替 * 行子查询 结果集有一行多列，或多行多列（较少） 例 where (name,age) = ( selece name,age from info; ) * 表子查询 结果集一般为多行多列 分页查询应用场景： 实际的web项目中需要根据用户的需求提交对应的分页查询的sql语句 语法： select 字段|表达式,... from 表 【where 条件】 【group by 分组字段】 【having 条件】 【order by 排序的字段】 limit 【offset】size; 特点： 1.offset从0开始 2.limit子句放在查询语句的最后 3.公式：select * from 表 limit （page-1）*sizePerPage,sizePerPage 假如: 每页显示条目数sizePerPage 要显示的页数 page 联合查询引入： union 联合、合并。将多条查询语句的结果合并成一个结果。要查询的结果来自多个表，且多个表没有直接的关联，且查询的信息类似。 语法： select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】 select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】 select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】 ..... select 字段|常量|表达式|函数 【from 表】 【where 条件】 特点： 1、多条查询语句的查询的列数必须是一致的 2、多条查询语句的查询的列的类型和顺序几乎相同 3、union代表去重，union all代表不去重]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[MySQL DDL数据定义语言]]></title>
-    <url>%2F%E6%95%B0%E6%8D%AE%E5%BA%93%2Fmysql-ddl%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%2F</url>
-    <content type="text"><![CDATA[DDL语句库和表的管理库的管理： 一、创建库 create database 库名 二、删除库 drop database 库名 表的管理： #1.创建表 CREATE TABLE IF NOT EXISTS stuinfo( stuId INT, stuName VARCHAR(20), gender CHAR, bornDate DATETIME ); DESC studentinfo;查看表结构 SHOW INDEX FORM info;查看表索引、主键、外键、唯一 #2.修改表 alter 语法：ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型 约束】; #①修改字段名 ALTER TABLE studentinfo CHANGE [COLUMN] 原名 新名 类型; #②修改表名 ALTER TABLE stuinfo RENAME [TO] studentinfo; #③修改字段类型和列级约束 ALTER TABLE studentinfo MODIFY COLUMN borndate DATE; #④添加字段 ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first; #⑤删除字段 ALTER TABLE studentinfo DROP COLUMN email; #3.删除表 DROP TABLE [IF EXISTS] studentinfo; #4.表复制 仅复制表结构 CREATE TABLE newTable LIKE oldTable; 复制结构+数据 CREATE TABLE newTAble SELECT * FORM oldTable WHERE ..;]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -993,8 +993,8 @@
         <category>C++</category>
       </categories>
       <tags>
-        <tag>QT基础</tag>
         <tag>Cpp基础</tag>
+        <tag>QT基础</tag>
       </tags>
   </entry>
   <entry>
